@@ -8,7 +8,7 @@ import logo from '../logo.svg';
 export default class NavDrawer extends Component {
     constructor(props) {
         super(props);
-        this.state = {open: false};
+        this.state = {open: true};
     }
 
     render() {
