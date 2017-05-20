@@ -1,0 +1,15 @@
+.BudgetDetailsPanel {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.BudgetTable {
+  width: 100%;
+  flex: 5 1 auto;
+}
+
+.InfoPanel {
+  width: 100%;
+  flex: 1 1 auto;
+}

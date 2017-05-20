@@ -8,4 +8,6 @@
 
 .main-content {
   margin: 0 0 0 $sidebar-width;
+  height: 100% - $topbar-height;
+  width: 100% - $sidebar-width;
 }
