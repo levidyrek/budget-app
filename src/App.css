@@ -1,5 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
-
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
 .App {
   font-family: 'Roboto', sans-serif;
-}
+  height: 100%; }
+
+.main-content {
+  margin: 0 0 0 25%; }
