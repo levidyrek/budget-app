@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './stylesheets/TopBar.css';
-
+import ActionToday from 'material-ui/svg-icons/action/today';
 
 export default class TopBar extends Component {
     constructor(props) {
@@ -12,7 +12,7 @@ export default class TopBar extends Component {
         return (
             <div className="TopBar">
                 <div>
-
+                    <ActionToday/>
                 </div>
             </div>
         );
