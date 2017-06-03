@@ -4,8 +4,20 @@
   height: 75px;
   width: 100%;
   background-color: $primary-color;
+  display: flex;
+  align-items: center;
 
-  div {
-    width: 100%;
+  > * {
+    vertical-align: middle;
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+
+    li {
+      list-style: none;
+    }
   }
 }
+

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './stylesheets/TopBar.css';
-import ActionToday from 'material-ui/svg-icons/action/today';
+import MonthPicker from "./MonthPicker";
 
 export default class TopBar extends Component {
     constructor(props) {
@@ -11,9 +11,9 @@ export default class TopBar extends Component {
     render() {
         return (
             <div className="TopBar">
-                <div>
-                    <ActionToday/>
-                </div>
+                <ul>
+                    <li><MonthPicker/></li>
+                </ul>
             </div>
         );
     }

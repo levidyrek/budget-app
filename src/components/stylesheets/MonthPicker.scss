@@ -1,0 +1,19 @@
+.MonthPicker {
+  display: inline-block;
+  width: auto;
+
+  * {
+    display: inline-block;
+    color: white;
+    vertical-align: middle;
+  }
+}
+
+.dateText {
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+#month {
+  margin-right: 5px;
+}
