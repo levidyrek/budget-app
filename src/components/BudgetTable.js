@@ -7,7 +7,7 @@ import {TableBody, TableRow} from "material-ui/Table/index";
 export default class BudgetTable extends Component {
     render() {
         return (
-            <div className='BudgetTable'>
+            <div className="BudgetTable">
                 <Table>
                     <TableHeader>
                         <TableRow>

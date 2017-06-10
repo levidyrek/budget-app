@@ -5,7 +5,10 @@ import './stylesheets/InfoPanel.css';
 export default class InfoPanel extends Component {
     render() {
         return (
-            <div className='InfoPanel'>
+            <div className="InfoPanel"
+                 style={{
+                     display: this.props.visible ? "" : "none"
+                 }}>
             </div>
         );
     }

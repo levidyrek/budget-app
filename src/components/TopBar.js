@@ -1,18 +1,30 @@
 import React, {Component} from 'react';
 import './stylesheets/TopBar.css';
 import MonthPicker from "./MonthPicker";
+import IconButton from "material-ui/IconButton";
+import NavigationMoreVert from "material-ui/svg-icons/navigation/more-vert";
+import MenuButton from "./MenuButton";
 
 export default class TopBar extends Component {
     constructor(props) {
         super(props);
-        this.state = {open: true};
     }
 
     render() {
         return (
             <div className="TopBar">
-                <ul>
+                <ul className="left">
+                    <li>
+                        {this.props.mobileMode &&
+                            <MenuButton clickHandler={this.props.menuButtonClickHandler} />
+                        }
+                    </li>
                     <li><MonthPicker/></li>
+                </ul>
+                <ul className="right">
+                    <IconButton>
+                        <NavigationMoreVert/>
+                    </IconButton>
                 </ul>
             </div>
         );

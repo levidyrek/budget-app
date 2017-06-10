@@ -9,7 +9,7 @@ import IconButton from 'material-ui/IconButton';
 export default class MonthPicker extends Component {
     render() {
         return (
-            <div className='MonthPicker'>
+            <div className="MonthPicker">
                 <IconButton>
                     <HardwareKeyboardArrowLeft/>
                 </IconButton>

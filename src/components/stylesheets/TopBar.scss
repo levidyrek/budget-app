@@ -7,13 +7,13 @@
   display: flex;
   align-items: center;
 
-  > * {
+  * {
     vertical-align: middle;
+    color: white;
   }
 
   ul {
     padding: 0;
-    margin: 0;
 
     li {
       list-style: none;
@@ -21,3 +21,22 @@
   }
 }
 
+.left {
+  margin: 0;
+}
+
+.right {
+  margin: 0 0 0 auto;
+}
+
+.left, .right {
+  display: inline;
+
+  * {
+    display: inline;
+  }
+}
+
+.MenuButton {
+  margin-left: 10px !important;
+}
