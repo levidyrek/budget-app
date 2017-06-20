@@ -11,12 +11,13 @@ export default class DetailsPanel extends Component {
         return (
             <div className="DetailsPanel">
                 <div className="tableView">
-                    <Tabs className="Tabs">
-                        <Tab label="Budget">
-                            <BudgetTable/>
-                        </Tab>
-                        <Tab label="Transactions" />
+                    <Tabs className="Tabs" >
+                        <Tab label="Budget"/>
+                        <Tab label="Transactions"/>
                     </Tabs>
+                    <div className="currentTable">
+                        <BudgetTable/>
+                    </div>
                 </div>
                 <InfoPanel visible={!this.props.mobileMode} />
             </div>

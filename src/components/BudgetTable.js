@@ -1,50 +1,59 @@
 import React, {Component} from 'react';
 import './stylesheets/BudgetTable.css';
-import {Table, TableHeader, TableHeaderColumn, TableRowColumn} from "material-ui";
-import {TableBody, TableRow} from "material-ui/Table/index";
+import BaseTable from "./table/BaseTable";
+
+
+function createRows(numberOfRows) {
+    let rows = [];
+    for (let i = 1; i < numberOfRows; i++) {
+        rows.push({
+            group: ['Mandatory', 'Living Expenses', 'Misc', 'Entertainment'][Math.floor((Math.random() * 3) + 1)],
+            category: 'Category ' + i,
+            limit: Math.floor((Math.random() * 1200) + 1),
+            spent: 0
+        });
+    }
+    return rows;
+}
 
 
 export default class BudgetTable extends Component {
+    columns = [
+        {
+            key: 'group',
+            name: 'Group',
+            editable: true
+        },
+        {
+            key: 'category',
+            name: 'Category',
+            editable: true
+        },
+        {
+            key: 'limit',
+            name: 'Limit',
+            editable: true
+        },
+        {
+            key: 'spent',
+            name: 'Spent'
+        }
+    ];
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            columns: this.columns,
+            rows: createRows(100)
+        };
+    }
+
     render() {
         return (
-            <div className="BudgetTable">
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHeaderColumn>Category</TableHeaderColumn>
-                            <TableHeaderColumn>Spent</TableHeaderColumn>
-                            <TableHeaderColumn>Limit</TableHeaderColumn>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        <TableRow>
-                            <TableRowColumn>Groceries</TableRowColumn>
-                            <TableRowColumn>100</TableRowColumn>
-                            <TableRowColumn>500</TableRowColumn>
-                        </TableRow>
-                        <TableRow>
-                            <TableRowColumn>Dining Out</TableRowColumn>
-                            <TableRowColumn>150</TableRowColumn>
-                            <TableRowColumn>250</TableRowColumn>
-                        </TableRow>
-                        <TableRow>
-                            <TableRowColumn>Shopping</TableRowColumn>
-                            <TableRowColumn>50</TableRowColumn>
-                            <TableRowColumn>100</TableRowColumn>
-                        </TableRow>
-                        <TableRow>
-                            <TableRowColumn>Rent</TableRowColumn>
-                            <TableRowColumn>0</TableRowColumn>
-                            <TableRowColumn>1000</TableRowColumn>
-                        </TableRow>
-                        <TableRow>
-                            <TableRowColumn>Misc</TableRowColumn>
-                            <TableRowColumn>150</TableRowColumn>
-                            <TableRowColumn>150</TableRowColumn>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-            </div>
+            <BaseTable
+                columns={this.state.columns}
+                rows={this.state.rows} />
         );
     }
 }

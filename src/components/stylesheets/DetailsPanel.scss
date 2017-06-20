@@ -10,13 +10,25 @@
   width: 100%;
   height: 100%;
   flex: 3 1 auto;
+  display: flex;
+  flex-direction: column;
 }
 
-.Tabs {
-  background-color: $secondary-color !important;
+.currentTable {
+  display: flex;
+  flex-direction: column;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .InfoPanel {
   width: 100%;
+  flex: 1 1 auto;
+}
+
+.BudgetTable {
   flex: 1 1 auto;
 }
