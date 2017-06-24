@@ -1,6 +1,5 @@
-import React, {Component} from 'react';
-import './stylesheets/BudgetTable.css';
-import BaseTable from "./table/BaseTable";
+import { connect } from 'react-redux';
+import BaseTable from '../components/table/BaseTable';
 
 
 function createRows(numberOfRows) {
@@ -16,9 +15,7 @@ function createRows(numberOfRows) {
     return rows;
 }
 
-
-export default class BudgetTable extends Component {
-    columns = [
+const columns = [
         {
             key: 'group',
             name: 'Group',
@@ -38,22 +35,13 @@ export default class BudgetTable extends Component {
             key: 'spent',
             name: 'Spent'
         }
-    ];
+];
 
-    constructor(props) {
-        super(props);
+const mapStateToProps = state => {
+    return {
+        rows: createRows(100),
+        columns
+    };
+};
 
-        this.state = {
-            columns: this.columns,
-            rows: createRows(100)
-        };
-    }
-
-    render() {
-        return (
-            <BaseTable
-                columns={this.state.columns}
-                rows={this.state.rows} />
-        );
-    }
-}
+export default connect(mapStateToProps)(BaseTable);

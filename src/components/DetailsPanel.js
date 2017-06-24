@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './stylesheets/DetailsPanel.css';
 import InfoPanel from "./InfoPanel";
-import BudgetTable from "./BudgetTable";
+import BudgetTable from "../containers/BudgetTable";
 import {Tabs, Tab} from 'material-ui/Tabs';
 import FontIcon from 'material-ui/FontIcon';
 
@@ -19,7 +19,9 @@ export default class DetailsPanel extends Component {
                         <BudgetTable/>
                     </div>
                 </div>
-                <InfoPanel visible={!this.props.mobileMode} />
+                {!this.props.mobileMode &&
+                    <InfoPanel />
+                }
             </div>
         );
     }

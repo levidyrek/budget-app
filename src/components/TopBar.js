@@ -3,7 +3,7 @@ import './stylesheets/TopBar.css';
 import MonthPicker from "./MonthPicker";
 import IconButton from "material-ui/IconButton";
 import NavigationMoreVert from "material-ui/svg-icons/navigation/more-vert";
-import MenuButton from "./MenuButton";
+import MenuButton from "../containers/MenuButton";
 
 export default class TopBar extends Component {
     constructor(props) {
@@ -16,7 +16,7 @@ export default class TopBar extends Component {
                 <ul className="left">
                     <li>
                         {this.props.mobileMode &&
-                            <MenuButton clickHandler={this.props.menuButtonClickHandler} />
+                            <MenuButton />
                         }
                     </li>
                     <li><MonthPicker/></li>

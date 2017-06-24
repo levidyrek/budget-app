@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import NavBar from './components/NavBar';
-import TopBar from './components/TopBar';
-import DetailsPanel from "./components/DetailsPanel";
+import NavBar from './containers/NavBar';
+import TopBar from './containers/TopBar';
+import DetailsPanel from "./containers/DetailsPanel";
+import { enableMobileMode } from './actions/responsive';
+import { connect } from 'react-redux';
 
 
 const MOBILE_WIDTH_BREAKPOINT = 800;
@@ -13,22 +15,22 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            mobileMode: window.innerWidth < MOBILE_WIDTH_BREAKPOINT,
             navbarEnabled: false
         };
+
+        this.updateWindowDimensions()
     }
 
     render() {
         return (
             <MuiThemeProvider>
                 <div className="App">
-                    {(!this.state.mobileMode || this.state.navbarEnabled) &&
-                        <NavBar floating={this.state.mobileMode} />
+                    {(!this.props.mobileMode || this.props.navbarEnabled) &&
+                        <NavBar />
                     }
                     <div className="main-content">
-                        <TopBar mobileMode={this.state.mobileMode}
-                                menuButtonClickHandler={this.handleMenuButtonClick} />
-                        <DetailsPanel mobileMode={this.state.mobileMode} />
+                        <TopBar />
+                        <DetailsPanel />
                     </div>
                 </div>
             </MuiThemeProvider>
@@ -44,18 +46,15 @@ class App extends Component {
     }
 
     updateWindowDimensions = () => {
-        this.setState({
-            mobileMode: window.innerWidth < MOBILE_WIDTH_BREAKPOINT
-        });
-    };
-
-    handleMenuButtonClick = () => {
-        this.setState((prevState, props) => {
-            return {
-                navbarEnabled: !prevState.navbarEnabled
-            };
-        });
+        this.props.dispatch(enableMobileMode(window.innerWidth < MOBILE_WIDTH_BREAKPOINT));
     };
 }
 
-export default App;
+const mapStateToProps = state => {
+    return {
+        mobileMode: state.mobileMode,
+        navbarEnabled: state.navbarEnabled
+    };
+};
+
+export default connect(mapStateToProps)(App);
