@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './stylesheets/TopBar.css';
-import MonthPicker from "./MonthPicker";
+import MonthPicker from "../containers/MonthPicker";
 import IconButton from "material-ui/IconButton";
 import NavigationMoreVert from "material-ui/svg-icons/navigation/more-vert";
 import MenuButton from "../containers/MenuButton";
