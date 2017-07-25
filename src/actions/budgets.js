@@ -1,8 +1,7 @@
+import {BUDGETS_ENDPOINT, BUDGET_CATEGORIES_ENDPOINT} from '../constants';
+
 export const REQUEST_BUDGETS = "REQUEST_BUDGETS";
 export const RECEIVE_BUDGETS = "RECEIVE_BUDGETS";
-
-export const REQUEST_SELECTED_BUDGET = "REQUEST_SELECTED_BUDGET";
-export const RECEIVE_SELECTED_BUDGET = "RECEIVE_SELECTED_BUDGET";
 
 function requestBudgets() {
     return {
@@ -20,7 +19,7 @@ function receiveBudgets(data) {
 export function fetchBudgets() {
     return dispatch => {
         dispatch(requestBudgets());
-        return fetch('http://localhost:8000/budgets/', {
+        return fetch(BUDGETS_ENDPOINT, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -34,8 +33,12 @@ export function fetchBudgets() {
         }, error => {
             console.log(error.message);
         });
-    }
+    };
 }
+
+export const REQUEST_SELECTED_BUDGET = "REQUEST_SELECTED_BUDGET";
+export const RECEIVE_SELECTED_BUDGET = "RECEIVE_SELECTED_BUDGET";
+export const INVALIDATE_SELECTED_BUDGET = "INVALIDATE_SELECTED_BUDGET";
 
 function requestSelectedBudget(month) {
     return {
@@ -68,5 +71,37 @@ export function fetchSelectedBudget(month, url) {
         }, error => {
             console.log(error.message);
         });
-    }
+    };
+}
+
+function invalidateSelectedBudget() {
+    return {
+        type: INVALIDATE_SELECTED_BUDGET
+    };
+}
+
+export const ADD_BUDGET_CATEGORY = "ADD_BUDGET_CATEGORY";
+
+export function addBudgetCategory(budgetCategory) {
+    return dispatch => {
+        return fetch(BUDGET_CATEGORIES_ENDPOINT, {
+            method: "POST",
+            body: JSON.stringify(budgetCategory),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "token 3384913acd115ebec9ec26c0db656a6b634e0f71"
+            },
+            credentials: "same-origin"
+        }).then(function(response) {
+            if (response.ok) {
+                return response.json();
+            }
+            let json = response.json();
+            throw Error(ADD_BUDGET_CATEGORY + ' failed: ' + json.detail);
+        }).then(function(json) {
+            dispatch(invalidateSelectedBudget());
+        }, error => {
+            console.log(error.message);
+        });
+    };
 }

@@ -65,18 +65,18 @@ class App extends Component {
     checkIfLoading() {
         const { budgets, selectedBudget } = this.props;
 
-        return budgets.fetching || selectedBudget.fetching;
+        return budgets.fetching || !budgets.items
+            || selectedBudget.fetching || !selectedBudget.budget;
     }
 
     fetchDataIfNeeded() {
         const { budgets, selectedBudget, dispatch } = this.props;
 
-        // Fetch budgets if not already fetching and none exist
         if (!budgets.fetching && !budgets.items) {
             dispatch(fetchBudgets());
-        } else if (!selectedBudget.fetching && !selectedBudget.budget && budgets.items) {
-            // Fetch selected budget if not fetching/doesn't exist and we have
-            // the budgets to get a url (if one exists)
+        } else if (((!selectedBudget.fetching && !selectedBudget.budget)
+                  || selectedBudget.invalidated)
+                  && budgets.items) {
             let url = budgets.items[selectedBudget.month].url;
             dispatch(fetchSelectedBudget(selectedBudget.month, url));
         }

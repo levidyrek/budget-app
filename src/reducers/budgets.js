@@ -5,6 +5,7 @@ import { REQUEST_BUDGETS, RECEIVE_BUDGETS, REQUEST_SELECTED_BUDGET,
 export function budgets(
     state = {
         fetching: false,
+        invalidated: false,
         items: null
     }, action) {
     switch (action.type) {
@@ -25,6 +26,7 @@ export function budgets(
 export function selectedBudget(
     state = {
         fetching: false,
+        invalidated: false,
         month: 'JAN2000',
         budget: null
     }, action) {

@@ -15,6 +15,23 @@ function createRows(numberOfRows) {
     return rows;
 }
 
+function convertToCategoryRows(budget) {
+    let rows = [];
+    let budgetCategories = budget.budget_categories;
+    for (let pk in budgetCategories) {
+        if (budgetCategories.hasOwnProperty(pk)) {
+            let category = budgetCategories[pk];
+            rows.push({
+                group: budget.budget_category_groups[category.group].name,
+                category: category.category,
+                limit: category.limit,
+                spent: category.spent
+            });
+        }
+    }
+    return rows;
+}
+
 const columns = [
         {
             key: 'group',
@@ -39,7 +56,7 @@ const columns = [
 
 const mapStateToProps = state => {
     return {
-        rows: createRows(100),
+        rows: convertToCategoryRows(state.selectedBudget.budget),
         columns
     };
 };

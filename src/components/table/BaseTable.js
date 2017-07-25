@@ -13,7 +13,7 @@ import {
 export default class BaseTable extends Component {
     onClickCell = (event) => {
 
-    }
+    };
 
     render() {
         const headers = this.props.columns.map((column, index) => {
