@@ -8,6 +8,7 @@ import { enableMobileMode } from './actions/responsive';
 import { fetchBudgets, fetchSelectedBudget } from './actions/budgets';
 import { connect } from 'react-redux';
 import ReactLoading from 'react-loading';
+import DialogController from './containers/DialogController';
 
 
 const MOBILE_WIDTH_BREAKPOINT = 800;
@@ -37,6 +38,7 @@ class App extends Component {
                             || <ReactLoading type="bars" color="#444" />
                         }
                     </div>
+                    <DialogController/>
                 </div>
             </MuiThemeProvider>
         );
@@ -74,9 +76,8 @@ class App extends Component {
 
         if (!budgets.fetching && !budgets.items) {
             dispatch(fetchBudgets());
-        } else if (((!selectedBudget.fetching && !selectedBudget.budget)
-                  || selectedBudget.invalidated)
-                  && budgets.items) {
+        } else if ((!selectedBudget.fetching && selectedBudget.invalidated)
+                && budgets.items) {
             let url = budgets.items[selectedBudget.month].url;
             dispatch(fetchSelectedBudget(selectedBudget.month, url));
         }

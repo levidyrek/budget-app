@@ -1,4 +1,6 @@
 import {BUDGETS_ENDPOINT, BUDGET_CATEGORIES_ENDPOINT} from '../constants';
+import { toggleDialog } from './dialogs';
+import { ADD_BUDGET_CATEGORY_DIALOG } from '../components/AddBudgetCategoryDialog';
 
 export const REQUEST_BUDGETS = "REQUEST_BUDGETS";
 export const RECEIVE_BUDGETS = "RECEIVE_BUDGETS";
@@ -82,7 +84,9 @@ function invalidateSelectedBudget() {
 
 export const ADD_BUDGET_CATEGORY = "ADD_BUDGET_CATEGORY";
 
-export function addBudgetCategory(budgetCategory) {
+export function addBudgetCategory(budgetCategory,
+                                  successCallback,
+                                  errorCallback) {
     return dispatch => {
         return fetch(BUDGET_CATEGORIES_ENDPOINT, {
             method: "POST",
@@ -97,10 +101,13 @@ export function addBudgetCategory(budgetCategory) {
                 return response.json();
             }
             let json = response.json();
-            throw Error(ADD_BUDGET_CATEGORY + ' failed: ' + json.detail);
+            let userMsg = json.detail ? json.detail : 'Unexpected error occurred.';
+            throw Error(userMsg);
         }).then(function(json) {
+            successCallback();
             dispatch(invalidateSelectedBudget());
         }, error => {
+            errorCallback(error.message);
             console.log(error.message);
         });
     };

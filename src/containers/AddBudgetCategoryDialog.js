@@ -8,8 +8,7 @@ import { addBudgetCategory } from '../actions/budgets';
 
 const mapStateToProps = state => {
     return {
-        budget: state.selectedBudget.budget,
-        open: state.dialogs[ADD_BUDGET_CATEGORY_DIALOG]
+        budget: state.selectedBudget.budget
     };
 };
 
@@ -18,8 +17,8 @@ const mapDispatchToProps = dispatch => {
         handleClose: () => {
             dispatch(toggleDialog(ADD_BUDGET_CATEGORY_DIALOG));
         },
-        handleSubmit: (data) => {
-            dispatch(addBudgetCategory(data));
+        handleSubmit: (data, successCallback, errorCallback) => {
+            dispatch(addBudgetCategory(data, successCallback, errorCallback));
         }
     };
 };

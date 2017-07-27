@@ -48,7 +48,6 @@ export default class DetailsPanel extends Component {
                     >
                         <ContentAdd />
                     </FloatingActionButton>
-                    <AddBudgetCategoryDialog />
                 </div>
                 {!this.props.mobileMode &&
                     <InfoPanel />

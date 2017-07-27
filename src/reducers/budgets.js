@@ -1,5 +1,6 @@
 import { REQUEST_BUDGETS, RECEIVE_BUDGETS, REQUEST_SELECTED_BUDGET,
-         RECEIVE_SELECTED_BUDGET, CHANGE_SELECTED_BUDGET} from '../actions/budgets';
+         RECEIVE_SELECTED_BUDGET, CHANGE_SELECTED_BUDGET,
+         INVALIDATE_SELECTED_BUDGET} from '../actions/budgets';
 
 
 export function budgets(
@@ -26,7 +27,7 @@ export function budgets(
 export function selectedBudget(
     state = {
         fetching: false,
-        invalidated: false,
+        invalidated: true,
         month: 'JAN2000',
         budget: null
     }, action) {
@@ -41,7 +42,12 @@ export function selectedBudget(
         case RECEIVE_SELECTED_BUDGET:
             return Object.assign({}, state, {
                 fetching: false,
+                invalidated: false,
                 budget: action.data
+            });
+        case INVALIDATE_SELECTED_BUDGET:
+            return Object.assign({}, state, {
+                invalidated: true
             });
         default:
             return state;

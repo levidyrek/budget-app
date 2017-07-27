@@ -17,12 +17,13 @@ export default class AddBudgetCategoryDialog extends Component {
         validate: {
             group: false,
             name: false,
-            limit: false
+            limit: true
         },
         error: {
             name: '',
             limit: ''
-        }
+        },
+        apiError: ''
     };
 
     constructor(props) {
@@ -107,7 +108,7 @@ export default class AddBudgetCategoryDialog extends Component {
         const values = this.state.validate;
         for (let key in values) {
             if (values.hasOwnProperty(key)) {
-                if (!values[key]) {
+                if (!values[key] && values[key] !== 0) {
                     return false;
                 }
             }
@@ -129,6 +130,16 @@ export default class AddBudgetCategoryDialog extends Component {
             category: this.state.name,
             group: this.state.group,
             limit: this.state.limit
+        }, this.onCallSuccess, this.onCallFailure);
+    };
+
+    onCallSuccess = () => {
+        this.handleClose();
+    };
+
+    onCallFailure = (error) => {
+        this.setState({
+            apiError: error
         });
     };
 
@@ -162,13 +173,14 @@ export default class AddBudgetCategoryDialog extends Component {
                 title='New Budget Category'
                 actions={actions}
                 modal={true}
-                open={this.props.open}
+                open={true}
                 contentStyle={this.dialogStyle}
             >
                 <TextField
                     hintText='Category'
                     errorText={this.state.error.name}
                     onChange={this.handleNameChange}
+                    value={this.state.name}
                 />
                 <br />
                 <SelectField
@@ -185,7 +197,9 @@ export default class AddBudgetCategoryDialog extends Component {
                     step='.01'
                     errorText={this.state.error.limit}
                     onChange={this.handleLimitChange}
+                    value={this.state.limit}
                 />
+                <div className='msg'>{this.state.apiError}</div>
             </Dialog>
         );
     }
