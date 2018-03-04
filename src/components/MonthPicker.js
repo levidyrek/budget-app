@@ -4,6 +4,7 @@ import ActionToday from 'material-ui/svg-icons/action/today';
 import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
 import HardwareKeyboardArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right';
 import IconButton from 'material-ui/IconButton';
+import {white} from 'material-ui/styles/colors';
 
 
 export default class MonthPicker extends Component {
@@ -11,15 +12,15 @@ export default class MonthPicker extends Component {
         return (
             <div className="MonthPicker">
                 <IconButton>
-                    <HardwareKeyboardArrowLeft/>
+                    <HardwareKeyboardArrowLeft color={white} />
                 </IconButton>
-                <ActionToday/>
+                <ActionToday color={white} />
                 <span className="dateText">
                     <span id="month">Jan</span>
                     <span id="year">2018</span>
                 </span>
                 <IconButton>
-                    <HardwareKeyboardArrowRight/>
+                    <HardwareKeyboardArrowRight color={white} />
                 </IconButton>
             </div>
         );

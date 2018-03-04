@@ -5,9 +5,6 @@ import NavigationMenu from "material-ui/svg-icons/navigation/menu";
 
 
 export default class MenuButton extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (

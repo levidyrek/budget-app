@@ -1,7 +1,7 @@
 import { REQUEST_AUTH_TOKEN, RECEIVE_AUTH_TOKEN } from '../actions/auth';
 
 
-function token(state = {
+export function token(state = {
         fetching: false,
         token: ''
     }, action) {

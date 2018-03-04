@@ -16,17 +16,15 @@ export default class NavBar extends Component {
         }
     };
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className="NavBar"
                  style={this.props.floating ? this.styles.floating : this.styles.default}>
                 <img src={logo} alt="" id="logo"/>
                 <div className="menu">
-                    <MenuItem>Budgets</MenuItem>
+                    <MenuItem focusState="focused">Expenses</MenuItem>
+                    <MenuItem>Transactions</MenuItem>
+                    <MenuItem>Income</MenuItem>
                     <MenuItem>Goals</MenuItem>
                 </div>
             </div>

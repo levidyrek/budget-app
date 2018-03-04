@@ -1,6 +1,5 @@
 import { REQUEST_BUDGETS, RECEIVE_BUDGETS, REQUEST_SELECTED_BUDGET,
-         RECEIVE_SELECTED_BUDGET, CHANGE_SELECTED_BUDGET,
-         INVALIDATE_SELECTED_BUDGET} from '../actions/budgets';
+         RECEIVE_SELECTED_BUDGET, INVALIDATE_SELECTED_BUDGET} from '../actions/budgets';
 
 
 export function budgets(

@@ -1,6 +1,4 @@
 import { BUDGETS_ENDPOINT, BUDGET_CATEGORIES_ENDPOINT } from '../constants';
-import { toggleDialog } from './dialogs';
-import { ADD_BUDGET_CATEGORY_DIALOG } from '../components/AddBudgetCategoryDialog';
 
 export const REQUEST_BUDGETS = "REQUEST_BUDGETS";
 export const RECEIVE_BUDGETS = "RECEIVE_BUDGETS";

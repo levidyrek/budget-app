@@ -2,10 +2,8 @@ import React, {Component} from 'react';
 import './stylesheets/DetailsPanel.css';
 import InfoPanel from "./InfoPanel";
 import BudgetTable from "../containers/BudgetTable";
-import {Tabs, Tab} from 'material-ui/Tabs';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import AddBudgetCategoryDialog from '../containers/AddBudgetCategoryDialog';
 import { ADD_BUDGET_CATEGORY_DIALOG } from '../components/AddBudgetCategoryDialog';
 import { toggleDialog } from '../actions/dialogs';
 
@@ -35,12 +33,8 @@ export default class DetailsPanel extends Component {
         return (
             <div className="DetailsPanel">
                 <div className="tableView">
-                    <Tabs className="Tabs" >
-                        <Tab label="Budget"/>
-                        <Tab label="Transactions"/>
-                    </Tabs>
                     <div className="currentTable">
-                        <BudgetTable/>
+                        <BudgetTable />
                     </div>
                     <FloatingActionButton
                         style={this.addButtonStyle}

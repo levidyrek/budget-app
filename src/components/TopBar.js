@@ -4,11 +4,9 @@ import MonthPicker from "../containers/MonthPicker";
 import IconButton from "material-ui/IconButton";
 import NavigationMoreVert from "material-ui/svg-icons/navigation/more-vert";
 import MenuButton from "../containers/MenuButton";
+import {white} from 'material-ui/styles/colors';
 
 export default class TopBar extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (
@@ -23,7 +21,7 @@ export default class TopBar extends Component {
                 </ul>
                 <ul className="right">
                     <IconButton>
-                        <NavigationMoreVert/>
+                        <NavigationMoreVert color={white} />
                     </IconButton>
                 </ul>
             </div>
