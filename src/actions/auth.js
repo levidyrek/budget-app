@@ -19,7 +19,7 @@ function receiveAuthToken(data) {
 export function fetchAuthToken(username, password) {
     return dispatch => {
         dispatch(requestAuthToken());
-        return fetch('http://localhost:8000/users/get-auth-token/')
+        return fetch('http://localhost:8000/users/obtain-auth-token/')
             .then(response => response.json())
             .then(json => dispatch(receiveAuthToken(json)))
     }

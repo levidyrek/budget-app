@@ -74,12 +74,13 @@ class App extends Component {
     fetchDataIfNeeded() {
         const { budgets, selectedBudget, dispatch } = this.props;
 
+        // If budgets are have not been fetched or are being fetched, fetch them.
         if (!budgets.fetching && !budgets.items) {
             dispatch(fetchBudgets());
-        } else if ((!selectedBudget.fetching && selectedBudget.invalidated)
-                && budgets.items) {
-            let url = budgets.items[selectedBudget.month].url;
-            dispatch(fetchSelectedBudget(selectedBudget.month, url));
+        } else if (budgets.items && !selectedBudget.fetching && selectedBudget.invalidated) {
+
+            // If budgets have been fetched, but selected budget hasn't been, fetch it.
+            dispatch(fetchSelectedBudget(selectedBudget.month, selectedBudget.year));
         }
     }
 }

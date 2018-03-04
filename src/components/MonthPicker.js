@@ -15,8 +15,8 @@ export default class MonthPicker extends Component {
                 </IconButton>
                 <ActionToday/>
                 <span className="dateText">
-                    <span id="month">July</span>
-                    <span id="year">2017</span>
+                    <span id="month">Jan</span>
+                    <span id="year">2018</span>
                 </span>
                 <IconButton>
                     <HardwareKeyboardArrowRight/>

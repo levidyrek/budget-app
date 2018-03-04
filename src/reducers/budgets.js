@@ -24,11 +24,20 @@ export function budgets(
     }
 }
 
+var empty_budget = {
+    budget_categories: {},
+    budget_category_groups: {},
+    budget_goals: [],
+    month: "",
+    year: ""
+};
+
 export function selectedBudget(
     state = {
         fetching: false,
         invalidated: true,
-        month: 'JAN2000',
+        month: 'JAN',
+        year: 2018,
         budget: null
     }, action) {
 
@@ -43,7 +52,7 @@ export function selectedBudget(
             return Object.assign({}, state, {
                 fetching: false,
                 invalidated: false,
-                budget: action.data
+                budget: action.data.length > 0 ? action.data[0] : empty_budget
             });
         case INVALIDATE_SELECTED_BUDGET:
             return Object.assign({}, state, {

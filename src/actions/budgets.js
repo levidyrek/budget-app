@@ -1,4 +1,4 @@
-import {BUDGETS_ENDPOINT, BUDGET_CATEGORIES_ENDPOINT} from '../constants';
+import { BUDGETS_ENDPOINT, BUDGET_CATEGORIES_ENDPOINT } from '../constants';
 import { toggleDialog } from './dialogs';
 import { ADD_BUDGET_CATEGORY_DIALOG } from '../components/AddBudgetCategoryDialog';
 
@@ -25,7 +25,7 @@ export function fetchBudgets() {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "token 3384913acd115ebec9ec26c0db656a6b634e0f71"
+                "Authorization": "token d0d900d9b17e8d26653c42ea62629d030afc15c9"
             },
             credentials: "same-origin"
         }).then(response => {
@@ -42,10 +42,11 @@ export const REQUEST_SELECTED_BUDGET = "REQUEST_SELECTED_BUDGET";
 export const RECEIVE_SELECTED_BUDGET = "RECEIVE_SELECTED_BUDGET";
 export const INVALIDATE_SELECTED_BUDGET = "INVALIDATE_SELECTED_BUDGET";
 
-function requestSelectedBudget(month) {
+function requestSelectedBudget(month, year) {
     return {
         type: REQUEST_SELECTED_BUDGET,
-        month
+        month,
+        year
     };
 }
 
@@ -56,14 +57,14 @@ function receiveSelectedBudget(data) {
     };
 }
 
-export function fetchSelectedBudget(month, url) {
+export function fetchSelectedBudget(month, year) {
     return dispatch => {
-        dispatch(requestSelectedBudget(month));
-        return fetch(url, {
+        dispatch(requestSelectedBudget(month, year));
+        return fetch(BUDGETS_ENDPOINT + "?month=" + month + "&year=" + year, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "token 3384913acd115ebec9ec26c0db656a6b634e0f71"
+                "Authorization": "token d0d900d9b17e8d26653c42ea62629d030afc15c9"
             },
             credentials: "same-origin"
         }).then(response => {
@@ -93,7 +94,7 @@ export function addBudgetCategory(budgetCategory,
             body: JSON.stringify(budgetCategory),
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "token 3384913acd115ebec9ec26c0db656a6b634e0f71"
+                "Authorization": "token d0d900d9b17e8d26653c42ea62629d030afc15c9"
             },
             credentials: "same-origin"
         }).then(function(response) {
