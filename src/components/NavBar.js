@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './stylesheets/NavBar.css';
 import MenuItem from 'material-ui/MenuItem';
 import logo from '../logo.svg';
+import { Link } from 'react-router-dom';
 
 
 export default class NavBar extends Component {
@@ -22,7 +23,9 @@ export default class NavBar extends Component {
                  style={this.props.floating ? this.styles.floating : this.styles.default}>
                 <img src={logo} alt="" id="logo"/>
                 <div className="menu">
-                    <MenuItem focusState="focused">Expenses</MenuItem>
+                    <Link to='/budget/expenses'>
+                        <MenuItem>Expenses</MenuItem>
+                    </Link>
                     <MenuItem>Transactions</MenuItem>
                     <MenuItem>Income</MenuItem>
                     <MenuItem>Goals</MenuItem>

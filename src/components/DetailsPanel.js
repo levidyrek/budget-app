@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import './stylesheets/DetailsPanel.css';
 import InfoPanel from "./InfoPanel";
-import BudgetTable from "../containers/BudgetTable";
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import { ADD_BUDGET_CATEGORY_DIALOG } from '../components/AddBudgetCategoryDialog';
-import { toggleDialog } from '../actions/dialogs';
 
 
 export default class DetailsPanel extends Component {
@@ -25,20 +22,16 @@ export default class DetailsPanel extends Component {
         marginBottom: '20px'
     };
 
-    handleClickAdd = event => {
-        this.props.dispatch(toggleDialog(ADD_BUDGET_CATEGORY_DIALOG));
-    };
-
     render() {
         return (
             <div className="DetailsPanel">
                 <div className="tableView">
                     <div className="currentTable">
-                        <BudgetTable />
+                        {this.props.table}
                     </div>
                     <FloatingActionButton
                         style={this.addButtonStyle}
-                        onTouchTap={this.handleClickAdd}
+                        onTouchTap={this.props.handleClickAdd}
                     >
                         <ContentAdd />
                     </FloatingActionButton>
