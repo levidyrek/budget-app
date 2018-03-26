@@ -1,22 +1,23 @@
-import { connect } from 'react-redux';
-import BaseTable from '../components/table/BaseTable';
+import { connect } from 'react-redux'
+import BaseTable from '../components/table/BaseTable'
+import { withRouter } from 'react-router-dom'
 
 
 function convertToCategoryRows(budget) {
-    let rows = [];
-    let budgetCategories = budget.budget_categories;
+    let rows = []
+    let budgetCategories = budget.budget_categories
     for (let pk in budgetCategories) {
         if (budgetCategories.hasOwnProperty(pk)) {
-            let category = budgetCategories[pk];
+            let category = budgetCategories[pk]
             rows.push({
                 group: budget.budget_category_groups[category.group].name,
                 category: category.category,
                 limit: category.limit,
                 spent: category.spent
-            });
+            })
         }
     }
-    return rows;
+    return rows
 }
 
 const columns = [
@@ -36,13 +37,13 @@ const columns = [
             accessor: 'spent',
             Header: 'Spent'
         }
-];
+]
 
 const mapStateToProps = state => {
     return {
         rows: convertToCategoryRows(state.selectedBudget.budget),
         columns
-    };
-};
+    }
+}
 
-export default connect(mapStateToProps)(BaseTable);
+export default withRouter(connect(mapStateToProps)(BaseTable))

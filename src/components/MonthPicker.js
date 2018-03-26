@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import './stylesheets/MonthPicker.css';
-import ActionToday from 'material-ui/svg-icons/action/today';
-import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
-import HardwareKeyboardArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right';
-import IconButton from 'material-ui/IconButton';
-import {white} from 'material-ui/styles/colors';
+import React, {Component} from 'react'
+import './stylesheets/MonthPicker.css'
+import ActionToday from 'material-ui/svg-icons/action/today'
+import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left'
+import HardwareKeyboardArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
+import IconButton from 'material-ui/IconButton'
+import {white} from 'material-ui/styles/colors'
 
 
 export default class MonthPicker extends Component {
@@ -23,6 +23,6 @@ export default class MonthPicker extends Component {
                     <HardwareKeyboardArrowRight color={white} />
                 </IconButton>
             </div>
-        );
+        )
     }
 }

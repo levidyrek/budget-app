@@ -1,16 +1,16 @@
-import React, {Component} from 'react';
-import DetailsPanel from "../containers/DetailsPanel";
-import { fetchBudgets, fetchSelectedBudget } from '../actions/budgets';
-import ReactLoading from 'react-loading';
-import BudgetTable from "../containers/BudgetTable";
-import { ADD_BUDGET_CATEGORY_DIALOG } from '../components/AddBudgetCategoryDialog';
-import { toggleDialog } from '../actions/dialogs';
+import React, {Component} from 'react'
+import DetailsPanel from "../containers/DetailsPanel"
+import { fetchBudgets, fetchSelectedBudget } from '../actions/budgets'
+import ReactLoading from 'react-loading'
+import BudgetTable from "../containers/BudgetTable"
+import { ADD_BUDGET_CATEGORY_DIALOG } from '../components/AddBudgetCategoryDialog'
+import { toggleDialog } from '../actions/dialogs'
 
 
 export default class Expenses extends Component {
 
     handleClickAdd = event => {
-        this.props.dispatch(toggleDialog(ADD_BUDGET_CATEGORY_DIALOG));
+        this.props.dispatch(toggleDialog(ADD_BUDGET_CATEGORY_DIALOG))
     }
 
     render() {
@@ -24,7 +24,7 @@ export default class Expenses extends Component {
                     <ReactLoading type="bars" color="#444" />
                 }
             </div>
-        );
+        )
     }
 
     componentWillMount() {
@@ -36,22 +36,22 @@ export default class Expenses extends Component {
     }
 
     checkIfLoading() {
-        const { budgets, selectedBudget } = this.props;
+        const { budgets, selectedBudget } = this.props
 
         return budgets.fetching || !budgets.items
-            || selectedBudget.fetching || !selectedBudget.budget;
+            || selectedBudget.fetching || !selectedBudget.budget
     }
 
     fetchDataIfNeeded() {
-        const { budgets, selectedBudget, dispatch } = this.props;
+        const { budgets, selectedBudget, dispatch } = this.props
 
         // If budgets are have not been fetched or are being fetched, fetch them.
         if (!budgets.fetching && !budgets.items) {
-            dispatch(fetchBudgets());
+            dispatch(fetchBudgets())
         } else if (budgets.items && !selectedBudget.fetching && selectedBudget.invalidated) {
 
             // If budgets have been fetched, but selected budget hasn't been, fetch it.
-            dispatch(fetchSelectedBudget(selectedBudget.month, selectedBudget.year));
+            dispatch(fetchSelectedBudget(selectedBudget.month, selectedBudget.year))
         }
     }
 }

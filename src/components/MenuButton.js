@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import './stylesheets/MenuButton.css';
-import IconButton from "material-ui/IconButton";
-import NavigationMenu from "material-ui/svg-icons/navigation/menu";
+import React, {Component} from 'react'
+import './stylesheets/MenuButton.css'
+import IconButton from "material-ui/IconButton"
+import NavigationMenu from "material-ui/svg-icons/navigation/menu"
 
 
 export default class MenuButton extends Component {
@@ -13,6 +13,6 @@ export default class MenuButton extends Component {
                     <NavigationMenu/>
                 </IconButton>
             </div>
-        );
+        )
     }
 }

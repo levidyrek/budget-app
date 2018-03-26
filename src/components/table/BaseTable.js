@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
-import './stylesheets/BaseTable.css';
+import React, {Component} from 'react'
+import './stylesheets/BaseTable.css'
 
 // Import React Table
-import ReactTable from "react-table";
-import "react-table/react-table.css";
+import ReactTable from "react-table"
+import "react-table/react-table.css"
 
 
 export default class BaseTable extends Component {
     onClickCell = (event) => {
 
-    };
+    }
 
     render() {
         return (
@@ -20,6 +20,6 @@ export default class BaseTable extends Component {
                 className="-striped -highlight"
                 showPagination={false}
                 />
-        );
+        )
     }
 }

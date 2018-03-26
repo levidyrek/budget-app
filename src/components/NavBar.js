@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import './stylesheets/NavBar.css';
-import MenuItem from 'material-ui/MenuItem';
-import logo from '../logo.svg';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react'
+import './stylesheets/NavBar.css'
+import MenuItem from 'material-ui/MenuItem'
+import logo from '../logo.svg'
+import { Link } from 'react-router-dom'
 
 
 export default class NavBar extends Component {
@@ -15,7 +15,7 @@ export default class NavBar extends Component {
         default: {
 
         }
-    };
+    }
 
     render() {
         return (
@@ -31,6 +31,6 @@ export default class NavBar extends Component {
                     <MenuItem>Goals</MenuItem>
                 </div>
             </div>
-        );
+        )
     }
 }

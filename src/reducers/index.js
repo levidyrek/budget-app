@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux';
-import * as responsiveReducers from './responsive';
-import * as budgetReducers from './budgets';
-import * as authReducers from './auth';
-import * as dialogReducers from './dialogs';
+import { combineReducers } from 'redux'
+import * as responsiveReducers from './responsive'
+import * as budgetReducers from './budgets'
+import * as authReducers from './auth'
+import * as dialogReducers from './dialogs'
 
 
 const rootReducer = combineReducers({
@@ -10,6 +10,6 @@ const rootReducer = combineReducers({
     ...budgetReducers,
     ...authReducers,
     ...dialogReducers
-});
+})
 
-export default rootReducer;
+export default rootReducer

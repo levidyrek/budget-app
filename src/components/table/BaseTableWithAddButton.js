@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import './stylesheets/BaseTableWithAddButton.css';
-import BaseTable from "./BaseTable";
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
+import React, {Component} from 'react'
+import './stylesheets/BaseTableWithAddButton.css'
+import BaseTable from "./BaseTable"
+import FloatingActionButton from 'material-ui/FloatingActionButton'
+import ContentAdd from 'material-ui/svg-icons/content/add'
 
 
 export default class BaseTableWithAddButton extends Component {
@@ -10,7 +10,7 @@ export default class BaseTableWithAddButton extends Component {
         position: 'absolute',
         right: 0,
         bottom: 0
-    };
+    }
 
     render() {
         return (
@@ -20,6 +20,6 @@ export default class BaseTableWithAddButton extends Component {
                     <ContentAdd/>
                 </FloatingActionButton>
             </div>
-        );
+        )
     }
 }

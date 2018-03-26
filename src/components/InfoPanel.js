@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import './stylesheets/InfoPanel.css';
+import React, {Component} from 'react'
+import './stylesheets/InfoPanel.css'
 
 
 export default class InfoPanel extends Component {
@@ -7,6 +7,6 @@ export default class InfoPanel extends Component {
         return (
             <div className="InfoPanel">
             </div>
-        );
+        )
     }
 }
