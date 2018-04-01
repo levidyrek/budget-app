@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import ReactSignupLoginComponent from 'react-signup-login-component'
 import './stylesheets/LoginPage.css'
+import ReactLoading from 'react-loading'
+import { Redirect } from 'react-router-dom'
 
 export default class LoginPage extends Component {
 
@@ -10,6 +11,12 @@ export default class LoginPage extends Component {
             error: "",
             username: "",
             password: ""
+        }
+
+        // If not authenticated but not verified, verify.
+        const { auth, fetchUserInfo } = this.props
+        if (!auth.authenticated && !auth.verified && !auth.fetching) {
+            fetchUserInfo()
         }
 
         this.handleInputChange = this.handleInputChange.bind(this)
@@ -40,11 +47,28 @@ export default class LoginPage extends Component {
     }
 
     render() {
+        if (this.props.auth.fetching) {
+            return (
+                <ReactLoading type="bars" color="#444" />
+            )
+        }
+
+        if (this.props.auth.authenticated) {
+            const to = {
+                pathname: this.props.location.state.from, 
+                state: {from: '/login'}
+            }
+
+            return (
+                <Redirect to={to} />
+            )
+        }
+
         return (
             <div>
                 <h2>Budget App</h2>
                 <p id="error">
-                    {this.state.error || this.props.token.error}
+                    {this.state.error || this.props.auth.error}
                 </p>
                 <input
                     id="username"

@@ -6,10 +6,10 @@ import { Redirect, Route } from 'react-router-dom'
 export default class PrivateRoute extends Component {
 
     render() {
-       const {component: Component, ...rest} = this.props
+       const {auth, component: Component, ...rest} = this.props
 
        const renderRoute = props => {
-           if (true) {
+           if (auth.authenticated) {
               return (
                   <Component {...props} />
               )
@@ -17,7 +17,7 @@ export default class PrivateRoute extends Component {
 
            const to = {
                pathname: '/login', 
-               state: {from: props.location}
+               state: {from: props.location.pathname}
            }
 
            return (

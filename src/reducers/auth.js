@@ -1,26 +1,39 @@
-import { REQUEST_AUTH_TOKEN, RECEIVE_AUTH_TOKEN } from '../actions/auth'
+import { REQUEST_AUTH, RECEIVE_AUTH,
+         RECEIVE_AUTH_ERROR, UNAUTHENTICATE } from '../actions/auth'
 
 
-export function token(state = {
+export function auth(state = {
         fetching: false,
-        token: "",
-        error: ""
+        authenticated: false,
+        error: "",
+        verified: false  // true if verified by ajax request
     }, action) {
 
     switch(action.type) {
-        case REQUEST_AUTH_TOKEN:
+        case REQUEST_AUTH:
             return Object.assign({}, state, {
-                fetching: true,
-                token: "",
-                error: ""
+                fetching: true
             })
-        case RECEIVE_AUTH_TOKEN:
+        case RECEIVE_AUTH:
             return Object.assign({}, state, {
                 fetching: false,
-                token: action.data.token || "",
-                error: action.data.non_field_errors ?
-                       action.data.non_field_errors.join("\n") :
-                       ""
+                authenticated: true,
+                error: "",
+                verified: true
+            })
+        case RECEIVE_AUTH_ERROR:
+            return Object.assign({}, state, {
+                fetching: false,
+                authenticated: false,
+                verified: true,
+                error: action.error
+            })
+        case UNAUTHENTICATE:
+            return Object.assign({}, state, {
+                fetching: false,
+                authenticated: false,
+                verified: true,
+                error: ""
             })
         default:
             return state

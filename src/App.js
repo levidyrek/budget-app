@@ -3,8 +3,8 @@ import './App.css'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Budget from './containers/Budget'
 import LoginPage from './containers/LoginPage'
-import PrivateRoute from './components/PrivateRoute'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import PrivateRoute from './containers/PrivateRoute'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 
 export default class App extends Component {
@@ -13,10 +13,10 @@ export default class App extends Component {
         return (
             <MuiThemeProvider>
                 <Router>
-                    <div>
+                    <Switch>
                         <Route path="/login" component={LoginPage} />
                         <PrivateRoute path="/budget" component={Budget} />
-                    </div>
+                    </Switch>
                 </Router>
             </MuiThemeProvider>
         )
