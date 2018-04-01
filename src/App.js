@@ -4,7 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Budget from './containers/Budget'
 import LoginPage from './containers/LoginPage'
 import PrivateRoute from './containers/PrivateRoute'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 
 
 export default class App extends Component {
@@ -16,6 +16,7 @@ export default class App extends Component {
                     <Switch>
                         <Route path="/login" component={LoginPage} />
                         <PrivateRoute path="/budget" component={Budget} />
+                        <Redirect to="/budget" />
                     </Switch>
                 </Router>
             </MuiThemeProvider>

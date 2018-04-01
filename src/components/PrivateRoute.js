@@ -17,7 +17,7 @@ export default class PrivateRoute extends Component {
 
            const to = {
                pathname: '/login', 
-               state: {from: props.location.pathname}
+               state: { referrer: props.location.pathname }
            }
 
            return (

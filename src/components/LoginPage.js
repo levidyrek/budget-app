@@ -54,11 +54,9 @@ export default class LoginPage extends Component {
         }
 
         if (this.props.auth.authenticated) {
-            const to = {
-                pathname: this.props.location.state.from, 
-                state: {from: '/login'}
-            }
 
+            // Redirect to previous page or root, if none.
+            var to = this.props.location.state ? this.props.location.state.referrer : "/"
             return (
                 <Redirect to={to} />
             )

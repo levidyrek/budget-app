@@ -5,7 +5,7 @@ import TopBar from '../containers/TopBar'
 import Expenses from "../containers/Expenses"
 import { enableMobileMode } from '../actions/responsive'
 import DialogController from '../containers/DialogController'
-import { Route } from 'react-router-dom'
+import { Route, Redirect, Switch } from 'react-router-dom'
 
 
 const MOBILE_WIDTH_BREAKPOINT = 800
@@ -31,7 +31,10 @@ export default class Budget extends Component {
                 }
                 <div className="main-content">
                     <TopBar />
-                    <Route path={`${match.path}/expenses`} component={Expenses} />
+                    <Switch>
+                        <Route path={`${match.path}/expenses`} component={Expenses} />
+                        <Redirect to={`${match.path}/expenses`} />
+                    </Switch>
                 </div>
                 <DialogController/>
             </div>
