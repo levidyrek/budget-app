@@ -1,4 +1,5 @@
 import fetch from '../utils/fetch'
+import { showErrorDialog } from './dialogs'
 
 export const REQUEST_AUTH = "REQUEST_AUTH_TOKEN"
 export const RECEIVE_AUTH = "RECEIVE_AUTH_TOKEN"
@@ -103,9 +104,12 @@ export function logout() {
             if (response.ok) {
                 return response
             }
-            var msg = "An unexpected error occurred."
+            var msg = "Unable to log out."
             throw new Error(msg)
         }).then(() => dispatch(unauthenticate()))
-          .catch(error => dispatch(receiveLogoutError(error.message)))
+          .catch(error => {
+              dispatch(receiveLogoutError(error.message))
+              dispatch(showErrorDialog(error.message))
+        })
     }
 }
