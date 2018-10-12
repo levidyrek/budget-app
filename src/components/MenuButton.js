@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import './stylesheets/MenuButton.css'
-import IconButton from "material-ui/IconButton"
-import NavigationMenu from "material-ui/svg-icons/navigation/menu"
+import IconButton from "material-ui/core/IconButton"
+import NavigationMenu from "material-ui/icons/Menu"
 
 
 export default class MenuButton extends Component {

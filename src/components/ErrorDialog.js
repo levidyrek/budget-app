@@ -1,12 +1,12 @@
 import React from 'react';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
+import Dialog from '@material-ui/core/Dialog';
+import Button from '@material-ui/core/Button';
 
 export default class DialogExampleModal extends React.Component {
 
     render() {
         const actions = [
-            <FlatButton
+            <Button
                 label="Okay"
                 primary={true}
                 onClick={this.props.handleClose}

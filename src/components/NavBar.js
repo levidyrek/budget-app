@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import './stylesheets/NavBar.css'
-import MenuItem from 'material-ui/MenuItem'
+import MenuItem from '@material-ui/core/MenuItem'
 import logo from '../logo.svg'
 import { Link } from 'react-router-dom'
 

@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 import './stylesheets/AddBudgetCategoryDialog.css'
-import Dialog from 'material-ui/Dialog'
-import FlatButton from 'material-ui/FlatButton'
-import TextField from 'material-ui/TextField'
-import SelectField from 'material-ui/SelectField'
-import MenuItem from 'material-ui/MenuItem'
+import Dialog from '@material-ui/core/Dialog'
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
+import SelectField from '@material-ui/core/SelectField'
+import MenuItem from '@material-ui/core/MenuItem'
 
 export const ADD_BUDGET_CATEGORY_DIALOG = "ADD_BUDGET_CATEGORY_DIALOG"
 
@@ -145,12 +145,12 @@ export default class AddBudgetCategoryDialog extends Component {
 
     render() {
         const actions = [
-            <FlatButton
+            <Button
                 label='Cancel'
                 primary={true}
                 onTouchTap={this.handleClose}
             />,
-            <FlatButton
+            <Button
                 label='Add'
                 primary={true}
                 disabled={!this.inputIsValid()}

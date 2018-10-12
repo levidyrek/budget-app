@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import './App.css'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import MuiThemeProvider from '@material-ui/styles/MuiThemeProvider'
 import Budget from './containers/Budget'
 import LoginPage from './containers/LoginPage'
 import PrivateRoute from './containers/PrivateRoute'

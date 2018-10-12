@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 import './stylesheets/MonthPicker.css'
-import ActionToday from 'material-ui/svg-icons/action/today'
-import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left'
-import HardwareKeyboardArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
-import IconButton from 'material-ui/IconButton'
-import {white} from 'material-ui/styles/colors'
+import ActionToday from '@material-ui/icons/Today'
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft'
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
+import IconButton from '@material-ui/core/IconButton'
+import white from '@material-ui/core/colors/white'
 
 
 export default class MonthPicker extends Component {
@@ -12,7 +12,7 @@ export default class MonthPicker extends Component {
         return (
             <div className="MonthPicker">
                 <IconButton>
-                    <HardwareKeyboardArrowLeft color={white} />
+                    <KeyboardArrowLeft color={white} />
                 </IconButton>
                 <ActionToday color={white} />
                 <span className="dateText">
@@ -20,7 +20,7 @@ export default class MonthPicker extends Component {
                     <span id="year">2018</span>
                 </span>
                 <IconButton>
-                    <HardwareKeyboardArrowRight color={white} />
+                    <KeyboardArrowRight color={white} />
                 </IconButton>
             </div>
         )

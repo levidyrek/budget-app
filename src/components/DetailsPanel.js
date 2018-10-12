@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import './stylesheets/DetailsPanel.css'
 import InfoPanel from "./InfoPanel"
-import FloatingActionButton from 'material-ui/FloatingActionButton'
-import ContentAdd from 'material-ui/svg-icons/content/add'
+import Button from '@material-ui/core/Button'
+import ContentAdd from '@material-ui/icons/Add'
 
 
 export default class DetailsPanel extends Component {
@@ -29,12 +29,13 @@ export default class DetailsPanel extends Component {
                     <div className="currentTable">
                         {this.props.table}
                     </div>
-                    <FloatingActionButton
+                    <Button
+                        variant="fab"
                         style={this.addButtonStyle}
                         onTouchTap={this.props.handleClickAdd}
                     >
                         <ContentAdd />
-                    </FloatingActionButton>
+                    </Button>
                 </div>
                 {!this.props.mobileMode &&
                     <InfoPanel />
