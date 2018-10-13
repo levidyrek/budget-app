@@ -3,7 +3,7 @@ import './stylesheets/AddBudgetCategoryDialog.css'
 import Dialog from '@material-ui/core/Dialog'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
-import SelectField from '@material-ui/core/SelectField'
+import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 
 export const ADD_BUDGET_CATEGORY_DIALOG = "ADD_BUDGET_CATEGORY_DIALOG"
@@ -183,13 +183,13 @@ export default class AddBudgetCategoryDialog extends Component {
                     value={this.state.name}
                 />
                 <br />
-                <SelectField
+                <Select
                     floatingLabelText='Group'
                     onChange={this.handleGroupChange}
                     value={this.state.group}
                 >
                     {groupItems}
-                </SelectField>
+                </Select>
                 <br />
                 <TextField
                     hintText='Limit'
