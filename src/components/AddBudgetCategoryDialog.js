@@ -148,13 +148,13 @@ export default class AddBudgetCategoryDialog extends Component {
             <Button
                 label='Cancel'
                 primary={true}
-                onTouchTap={this.handleClose}
+                onClick={this.handleClose}
             />,
             <Button
                 label='Add'
                 primary={true}
                 disabled={!this.inputIsValid()}
-                onTouchTap={this.handleAdd}
+                onClick={this.handleAdd}
             />,
         ]
 

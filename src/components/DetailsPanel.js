@@ -32,7 +32,7 @@ export default class DetailsPanel extends Component {
                     <Button
                         variant="fab"
                         style={this.addButtonStyle}
-                        onTouchTap={this.props.handleClickAdd}
+                        onClick={this.props.handleClickAdd}
                     >
                         <ContentAdd />
                     </Button>
