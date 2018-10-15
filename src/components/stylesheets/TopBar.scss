@@ -9,7 +9,7 @@
 
   * {
     vertical-align: middle;
-    color: white;
+    color: white !important;
   }
 
   ul {
@@ -17,24 +17,23 @@
 
     li {
       list-style: none;
+      display: inline;
     }
   }
 }
 
 .left {
   margin: 0;
+  margin-left: 10px;
 }
 
 .right {
   margin: 0 0 0 auto;
+  margin-right: 10px;
 }
 
 .left, .right {
   display: inline;
-
-  * {
-    display: inline;
-  }
 }
 
 .MenuButton {
