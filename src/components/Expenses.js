@@ -15,15 +15,11 @@ export default class Expenses extends Component {
 
     render() {
         return (
-            <div>
-                {
-                    (!this.checkIfLoading() &&
-                     <DetailsPanel
-                        table={<BudgetTable />}
-                        handleClickAdd={this.handleClickAdd} />) ||
-                    <ReactLoading type="bars" color="#444" />
-                }
-            </div>
+            (!this.checkIfLoading() &&
+                <DetailsPanel
+                table={<BudgetTable />}
+                handleClickAdd={this.handleClickAdd} />) ||
+            <ReactLoading type="bars" color="#444" />
         )
     }
 

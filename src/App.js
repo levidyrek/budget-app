@@ -12,7 +12,7 @@ export default class App extends Component {
     render() {
         return (
             <Router>
-                <div>
+                <div className="full-height">
                     <Switch>
                         <Route path="/login" component={LoginPage} />
                         <PrivateRoute path="/budget" component={Budget} />
