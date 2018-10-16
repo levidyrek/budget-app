@@ -31,10 +31,10 @@ export default class AddBudgetCategoryDialog extends Component {
         this.state = this.initialState
     }
 
-    dialogStyle = {
-        width: 'auto',
-        maxWidth: '350px'
-    }
+    // dialogStyle = {
+    //     width: 'auto',
+    //     maxWidth: '350px'
+    // }
 
     handleGroupChange = (event, index, group) => {
         let validate = Object.assign({}, this.state.validate, {
@@ -172,19 +172,18 @@ export default class AddBudgetCategoryDialog extends Component {
             <Dialog
                 title='New Budget Category'
                 actions={actions}
-                modal={true}
                 open={true}
-                contentStyle={this.dialogStyle}
+                className='AddBudgetCategoryDialog'
             >
                 <TextField
-                    hintText='Category'
-                    errorText={this.state.error.name}
+                    label='Category'
+                    helperText={this.state.error.name}
                     onChange={this.handleNameChange}
                     value={this.state.name}
                 />
                 <br />
                 <Select
-                    floatingLabelText='Group'
+                    label='Group'
                     onChange={this.handleGroupChange}
                     value={this.state.group}
                 >
@@ -192,10 +191,10 @@ export default class AddBudgetCategoryDialog extends Component {
                 </Select>
                 <br />
                 <TextField
-                    hintText='Limit'
+                    label='Limit'
                     type='number'
                     step='.01'
-                    errorText={this.state.error.limit}
+                    helperText={this.state.error.limit}
                     onChange={this.handleLimitChange}
                     value={this.state.limit}
                 />
