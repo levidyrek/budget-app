@@ -1,17 +1,22 @@
 import React, {Component} from 'react'
-import './stylesheets/AddBudgetCategoryDialog.css'
 import Dialog from '@material-ui/core/Dialog'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
+import './stylesheets/AddBudgetCategoryDialog.css'
 
 export const ADD_BUDGET_CATEGORY_DIALOG = "ADD_BUDGET_CATEGORY_DIALOG"
 
 export default class AddBudgetCategoryDialog extends Component {
 
     initialState = {
-        group: 0,
+        group: '',
         name: '',
         limit: 0,
         validate: {
@@ -30,11 +35,6 @@ export default class AddBudgetCategoryDialog extends Component {
         super(props)
         this.state = this.initialState
     }
-
-    // dialogStyle = {
-    //     width: 'auto',
-    //     maxWidth: '350px'
-    // }
 
     handleGroupChange = (event, index, group) => {
         let validate = Object.assign({}, this.state.validate, {
@@ -146,16 +146,18 @@ export default class AddBudgetCategoryDialog extends Component {
     render() {
         const actions = [
             <Button
-                label='Cancel'
-                primary={true}
+                key='cancel'
                 onClick={this.handleClose}
-            />,
+            >
+                Cancel
+            </Button>,
             <Button
-                label='Add'
-                primary={true}
+                key='add'
                 disabled={!this.inputIsValid()}
                 onClick={this.handleAdd}
-            />,
+            >
+                Add
+            </Button>,
         ]
 
         const groups = this.props.budget.budget_category_groups
@@ -163,42 +165,54 @@ export default class AddBudgetCategoryDialog extends Component {
         for (let key in groups) {
             if (groups.hasOwnProperty(key)) {
                 groupItems.push(
-                    <MenuItem key={key} value={key} primaryText={groups[key].name} />
+                    <MenuItem key={key} value={key}>
+                        {groups[key].name}
+                    </MenuItem>
                 )
             }
         }
 
         return (
             <Dialog
-                title='New Budget Category'
-                actions={actions}
                 open={true}
                 className='AddBudgetCategoryDialog'
             >
-                <TextField
-                    label='Category'
-                    helperText={this.state.error.name}
-                    onChange={this.handleNameChange}
-                    value={this.state.name}
-                />
-                <br />
-                <Select
-                    label='Group'
-                    onChange={this.handleGroupChange}
-                    value={this.state.group}
-                >
-                    {groupItems}
-                </Select>
-                <br />
-                <TextField
-                    label='Limit'
-                    type='number'
-                    step='.01'
-                    helperText={this.state.error.limit}
-                    onChange={this.handleLimitChange}
-                    value={this.state.limit}
-                />
-                <div className='msg'>{this.state.apiError}</div>
+                <DialogTitle>Add Budget Category</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Create a new category for your monthly budgets.
+                    </DialogContentText>
+                    <TextField
+                        label='Category'
+                        helperText={this.state.error.name}
+                        onChange={this.handleNameChange}
+                        value={this.state.name}
+                    />
+                    <br />
+                    <Select
+                        label='Group'
+                        onChange={this.handleGroupChange}
+                        value={this.state.group}
+                    >
+                        <MenuItem value="">
+                            <em>None</em>
+                        </MenuItem>
+                        {groupItems}
+                    </Select>
+                    <br />
+                    <TextField
+                        label='Limit'
+                        type='number'
+                        step='.01'
+                        helperText={this.state.error.limit}
+                        onChange={this.handleLimitChange}
+                        value={this.state.limit}
+                    />
+                    <div className='msg'>{this.state.apiError}</div>
+                </DialogContent>
+                <DialogActions>
+                    {actions}
+                </DialogActions>
             </Dialog>
         )
     }
