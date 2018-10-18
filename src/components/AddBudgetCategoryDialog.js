@@ -4,16 +4,26 @@ import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import { withStyles } from '@material-ui/core/styles'
+import FormControl from '@material-ui/core/FormControl'
+import InputLabel from '@material-ui/core/InputLabel'
 
 import './stylesheets/AddBudgetCategoryDialog.css'
 
 export const ADD_BUDGET_CATEGORY_DIALOG = "ADD_BUDGET_CATEGORY_DIALOG"
 
-export default class AddBudgetCategoryDialog extends Component {
+const styles = theme => ({
+    input: {
+        marginTop: '20px',
+        minWidth: '200px',
+    },
+})
+
+class AddBudgetCategoryDialog extends Component {
 
     initialState = {
         group: '',
@@ -36,12 +46,12 @@ export default class AddBudgetCategoryDialog extends Component {
         this.state = this.initialState
     }
 
-    handleGroupChange = (event, index, group) => {
+    handleGroupChange = event => {
         let validate = Object.assign({}, this.state.validate, {
             group: true
         })
         this.setState({
-            group,
+            group: event.target.value,
             validate
         })
     }
@@ -144,6 +154,8 @@ export default class AddBudgetCategoryDialog extends Component {
     }
 
     render() {
+        const { classes } = this.props;
+
         const actions = [
             <Button
                 key='cancel'
@@ -187,18 +199,23 @@ export default class AddBudgetCategoryDialog extends Component {
                         helperText={this.state.error.name}
                         onChange={this.handleNameChange}
                         value={this.state.name}
+                        className={classes.input}
                     />
                     <br />
-                    <Select
-                        label='Group'
-                        onChange={this.handleGroupChange}
-                        value={this.state.group}
-                    >
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        {groupItems}
-                    </Select>
+                    <FormControl className={classes.input}>
+                        <InputLabel htmlFor='group'>Group</InputLabel>
+                        <Select
+                            label='Group'
+                            onChange={this.handleGroupChange}
+                            value={this.state.group}
+                            inputProps={{
+                                name: 'group',
+                                id: 'group'
+                            }}
+                        >
+                            {groupItems}
+                        </Select>
+                    </FormControl>
                     <br />
                     <TextField
                         label='Limit'
@@ -207,6 +224,7 @@ export default class AddBudgetCategoryDialog extends Component {
                         helperText={this.state.error.limit}
                         onChange={this.handleLimitChange}
                         value={this.state.limit}
+                        className={classes.input}
                     />
                     <div className='msg'>{this.state.apiError}</div>
                 </DialogContent>
@@ -217,3 +235,5 @@ export default class AddBudgetCategoryDialog extends Component {
         )
     }
 }
+
+export default withStyles(styles)(AddBudgetCategoryDialog)
