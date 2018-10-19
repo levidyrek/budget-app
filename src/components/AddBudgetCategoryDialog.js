@@ -194,6 +194,10 @@ class AddBudgetCategoryDialog extends Component {
                     <DialogContentText>
                         Create a new category for your monthly budgets.
                     </DialogContentText>
+                    {
+                        this.state.apiError &&
+                        <div className='error-msg'>{this.state.apiError}</div>
+                    }
                     <TextField
                         label='Category'
                         helperText={this.state.error.name}
@@ -226,7 +230,6 @@ class AddBudgetCategoryDialog extends Component {
                         value={this.state.limit}
                         className={classes.input}
                     />
-                    <div className='msg'>{this.state.apiError}</div>
                 </DialogContent>
                 <DialogActions>
                     {actions}

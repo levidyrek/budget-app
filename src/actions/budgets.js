@@ -65,7 +65,7 @@ export function fetchSelectedBudget(month, year) {
         }, error => {
             console.log(error.message)
         })
-        
+
     }
 }
 
@@ -84,6 +84,9 @@ export function addBudgetCategory(budgetCategory,
         return fetch(BUDGET_CATEGORIES_ENDPOINT, {
             method: "POST",
             body: JSON.stringify(budgetCategory),
+            headers: {
+                "Content-Type": "application/json",
+            },
             credentials: "include"
         }).then(function(response) {
             if (response.ok) {
