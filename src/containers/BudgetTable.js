@@ -21,22 +21,24 @@ function convertToCategoryRows(budget) {
 }
 
 const columns = [
-        {
-            accessor: 'group',
-            Header: 'Group'
-        },
-        {
-            accessor: 'category',
-            Header: 'Category'
-        },
-        {
-            accessor: 'limit',
-            Header: 'Limit'
-        },
-        {
-            accessor: 'spent',
-            Header: 'Spent'
-        }
+    {
+        accessor: 'group',
+        Header: 'Group',
+    },
+    {
+        accessor: 'category',
+        Header: 'Category',
+    },
+    {
+        accessor: 'limit',
+        Header: 'Limit',
+        className: 'money',
+    },
+    {
+        accessor: 'spent',
+        Header: 'Spent',
+        className: 'money',
+    },
 ]
 
 const mapStateToProps = state => {

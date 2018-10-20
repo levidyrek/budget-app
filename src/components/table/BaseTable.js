@@ -16,9 +16,9 @@ export default class BaseTable extends Component {
             <ReactTable
                 data={this.props.rows}
                 columns={this.props.columns}
-                defaultPageSize={10}
+                defaultPageSize={25}
+                minRows={25}
                 className="-striped -highlight"
-                showPagination={false}
                 />
         )
     }
