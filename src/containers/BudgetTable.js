@@ -2,6 +2,8 @@ import { connect } from 'react-redux'
 import BaseTable from '../components/table/BaseTable'
 import { withRouter } from 'react-router-dom'
 
+import { moneyRenderer } from '../utils/renderers'
+
 
 function convertToCategoryRows(budget) {
     let rows = []
@@ -31,13 +33,15 @@ const columns = [
     },
     {
         accessor: 'limit',
-        Header: 'Limit',
         className: 'money',
+        Header: 'Limit',
+        Cell: moneyRenderer,
     },
     {
         accessor: 'spent',
-        Header: 'Spent',
         className: 'money',
+        Header: 'Spent',
+        Cell: moneyRenderer,
     },
 ]
 
