@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Dialog from '@material-ui/core/Dialog'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -11,10 +11,11 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import { withStyles } from '@material-ui/core/styles'
 import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
+import { MoneyFormat } from '../utils/formats'
 
 import './stylesheets/AddBudgetCategoryDialog.css'
 
-export const ADD_BUDGET_CATEGORY_DIALOG = "ADD_BUDGET_CATEGORY_DIALOG"
+export const ADD_BUDGET_CATEGORY_DIALOG = 'ADD_BUDGET_CATEGORY_DIALOG'
 
 const styles = theme => ({
     input: {
@@ -223,12 +224,13 @@ class AddBudgetCategoryDialog extends Component {
                     <br />
                     <TextField
                         label='Limit'
-                        type='number'
-                        step='.01'
                         helperText={this.state.error.limit}
                         onChange={this.handleLimitChange}
                         value={this.state.limit}
                         className={classes.input}
+                        InputProps={{
+                            inputComponent: MoneyFormat,
+                        }}
                     />
                 </DialogContent>
                 <DialogActions>
