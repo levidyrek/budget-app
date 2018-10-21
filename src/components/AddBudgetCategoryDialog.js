@@ -205,6 +205,9 @@ class AddBudgetCategoryDialog extends Component {
                         onChange={this.handleNameChange}
                         value={this.state.name}
                         className={classes.input}
+                        inputProps={{
+                            maxLength: '50'
+                        }}
                     />
                     <br />
                     <FormControl className={classes.input}>
