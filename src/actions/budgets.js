@@ -89,18 +89,32 @@ export function addBudgetCategory(budgetCategory,
             },
             credentials: "include"
         }).then(function(response) {
-            if (response.ok) {
-                return response.json()
-            }
-            let json = response.json()
-            let userMsg = json.detail ? json.detail : 'Unexpected error occurred.'
-            throw Error(userMsg)
-        }).then(function(json) {
+
+            // Nested then() to resolve json response so the error message
+            // is available if an error needs to be thrown.
+            return response.json().then(json => {
+                if (response.ok) {
+                    return json
+                }
+
+                // Response failed. Throw an error with the appropriate message.
+                let userMsg = 'Unexpected error occurred.'
+                if (json.detail) {
+                    userMsg = json.detail
+                } else if (json.non_field_errors) {
+                    userMsg = json.non_field_errors.join('\n')
+                }
+
+                return Promise.reject(userMsg)
+            })
+        }).then(() => {
+
+            // Request was successful.
             successCallback()
             dispatch(invalidateSelectedBudget())
-        }, error => {
-            errorCallback(error.message)
-            console.log(error.message)
+        }).catch(error => {
+            errorCallback(error)
+            console.log(error)
         })
     }
 }
