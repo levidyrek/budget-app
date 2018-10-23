@@ -20,7 +20,7 @@ export const ADD_BUDGET_CATEGORY_DIALOG = 'ADD_BUDGET_CATEGORY_DIALOG'
 const styles = theme => ({
     input: {
         marginTop: '20px',
-        minWidth: '200px',
+        minWidth: '325px',
     },
 })
 

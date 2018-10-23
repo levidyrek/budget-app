@@ -4,6 +4,9 @@
 import React from 'react'
 import NumberFormat from 'react-number-format'
 
+const MAX_PRE_DECIMAL_DIGITS = 18
+const MAX_POST_DECIMAL_DIGITS = 2
+
 
 export function MoneyFormat(props) {
     const { inputRef, onChange, ...other } = props;
@@ -21,6 +24,20 @@ export function MoneyFormat(props) {
             }}
             thousandSeparator
             prefix='$'
+            isAllowed={(values) => {
+
+                // Validate number for max digits before/after the decimal.
+                var { value } = values
+                var split = value.split('.')
+
+                if (split[0].length > MAX_PRE_DECIMAL_DIGITS) {
+                    return false
+                }
+                if (split.length > 1 && split[1].length > MAX_POST_DECIMAL_DIGITS) {
+                    return false
+                }
+                return true
+            }}
             />
     );
 }
