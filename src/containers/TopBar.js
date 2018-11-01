@@ -1,19 +1,15 @@
-import { connect } from 'react-redux'
-import TopBar from '../components/TopBar'
-import { withRouter } from 'react-router-dom'
-import { logout } from '../actions/auth'
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import TopBar from '../components/TopBar';
+import { logout } from '../actions/auth';
 
 
-const mapStateToProps = state => {
-    return {
-        mobileMode: state.mobileMode
-    }
-}
+const mapStateToProps = state => ({
+  mobileMode: state.mobileMode,
+});
 
-const mapDispatchToProps = dispatch => {
-    return {
-        logOut: () => dispatch(logout())
-    }
-}
+const mapDispatchToProps = dispatch => ({
+  logOut: () => dispatch(logout()),
+});
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TopBar))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TopBar));

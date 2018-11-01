@@ -1,12 +1,10 @@
-import { connect } from 'react-redux'
-import NavBar from '../components/NavBar'
-import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import NavBar from '../components/NavBar';
 
 
-const mapStateToProps = state => {
-    return {
-        floating: state.mobileMode
-    }
-}
+const mapStateToProps = state => ({
+  floating: state.mobileMode,
+});
 
-export default withRouter(connect(mapStateToProps)(NavBar))
+export default withRouter(connect(mapStateToProps)(NavBar));

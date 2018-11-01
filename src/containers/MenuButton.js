@@ -1,21 +1,17 @@
-import { connect } from 'react-redux'
-import MenuButton from '../components/MenuButton'
-import { toggleNavBar } from '../actions/responsive'
-import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import MenuButton from '../components/MenuButton';
+import { toggleNavBar } from '../actions/responsive';
 
 
-const mapStateToProps = state => {
-    return {
+const mapStateToProps = state => ({
 
-    }
-}
+});
 
-const mapDispatchToProps = dispatch => {
-    return {
-        clickHandler: () => {
-            dispatch(toggleNavBar())
-        }
-    }
-}
+const mapDispatchToProps = dispatch => ({
+  clickHandler: () => {
+    dispatch(toggleNavBar());
+  },
+});
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MenuButton))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MenuButton));

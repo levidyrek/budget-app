@@ -1,12 +1,10 @@
-import { connect } from 'react-redux'
-import DetailsPanel from '../components/DetailsPanel'
-import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import DetailsPanel from '../components/DetailsPanel';
 
 
-const mapStateToProps = state => {
-    return {
-        mobileMode: state.mobileMode
-    }
-}
+const mapStateToProps = state => ({
+  mobileMode: state.mobileMode,
+});
 
-export default withRouter(connect(mapStateToProps)(DetailsPanel))
+export default withRouter(connect(mapStateToProps)(DetailsPanel));

@@ -2,6 +2,6 @@
  * Renderers for react-table.
  */
 
-export var moneyRenderer = (row) => (
-    '$' + row.value
-)
+export const moneyRenderer = row => (
+  `$${row.value}`
+);

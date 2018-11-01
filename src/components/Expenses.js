@@ -23,7 +23,7 @@ export default class Expenses extends Component {
         )
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.fetchDataIfNeeded()
     }
 

@@ -1,12 +1,10 @@
-import { connect } from 'react-redux'
-import PrivateRoute from '../components/PrivateRoute'
-import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import PrivateRoute from '../components/PrivateRoute';
 
 
-const mapStateToProps = state => {
-    return {
-        auth: state.auth
-    }
-}
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
 
-export default withRouter(connect(mapStateToProps)(PrivateRoute))
+export default withRouter(connect(mapStateToProps)(PrivateRoute));

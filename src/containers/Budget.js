@@ -1,13 +1,11 @@
-import { connect } from 'react-redux'
-import Budget from '../components/Budget'
-import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import Budget from '../components/Budget';
 
 
-const mapStateToProps = state => {
-    return {
-        mobileMode: state.mobileMode,
-        navbarEnabled: state.navbarEnabled
-    }
-}
+const mapStateToProps = state => ({
+  mobileMode: state.mobileMode,
+  navbarEnabled: state.navbarEnabled,
+});
 
-export default withRouter(connect(mapStateToProps)(Budget))
+export default withRouter(connect(mapStateToProps)(Budget));

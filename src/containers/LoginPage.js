@@ -1,24 +1,20 @@
-import { connect } from 'react-redux'
-import LoginPage from '../components/LoginPage'
-import { withRouter } from 'react-router-dom'
-import { fetchAuthToken, fetchUserInfo } from '../actions/auth'
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import LoginPage from '../components/LoginPage';
+import { fetchAuthToken, fetchUserInfo } from '../actions/auth';
 
 
-const mapStateToProps = state => {
-    return {
-        auth: state.auth
-    }
-}
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
 
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchUserInfo: () => {
-            dispatch(fetchUserInfo())
-        },
-        fetchAuthToken: (username, password) => {
-            dispatch(fetchAuthToken(username, password))
-        }
-    }
-}
+const mapDispatchToProps = dispatch => ({
+  fetchUserInfo: () => {
+    dispatch(fetchUserInfo());
+  },
+  fetchAuthToken: (username, password) => {
+    dispatch(fetchAuthToken(username, password));
+  },
+});
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginPage))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginPage));
