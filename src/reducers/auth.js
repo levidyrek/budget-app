@@ -46,7 +46,8 @@ export function auth(state = {
             })
         case RECEIVE_LOGOUT_ERROR:
             return Object.assign({}, state, {
-                loggingOut: false
+                loggingOut: false,
+                error: action.error
             })
         default:
             return state

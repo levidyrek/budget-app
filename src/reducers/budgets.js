@@ -1,5 +1,6 @@
 import { REQUEST_BUDGETS, RECEIVE_BUDGETS, REQUEST_SELECTED_BUDGET,
-         RECEIVE_SELECTED_BUDGET, INVALIDATE_SELECTED_BUDGET} from '../actions/budgets'
+         RECEIVE_SELECTED_BUDGET, INVALIDATE_SELECTED_BUDGET } from '../actions/budgets'
+import { UNAUTHENTICATE } from '../actions/auth'
 
 
 export function budgets(
@@ -56,6 +57,11 @@ export function selectedBudget(
         case INVALIDATE_SELECTED_BUDGET:
             return Object.assign({}, state, {
                 invalidated: true
+            })
+        case UNAUTHENTICATE:
+            return Object.assign({}, state, {
+                invalidated: true,
+                budget: null
             })
         default:
             return state

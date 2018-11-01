@@ -12,8 +12,8 @@ export function dialogs(state = {}, action) {
 }
 
 export function errorDialog(state={
-    error: ""
-}, action) {
+        error: ""
+    }, action) {
     switch (action.type) {
         case SHOW_ERROR_DIALOG:
             return Object.assign({}, state, {
