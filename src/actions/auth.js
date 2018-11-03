@@ -67,7 +67,7 @@ export function fetchAuthToken(username, password) {
       }
       const msg = 'Could not log in with the provided credentials.';
       throw new Error(msg);
-    }).then(json => dispatch(receiveAuth()))
+    }).then(() => dispatch(receiveAuth()))
       .catch(error => dispatch(receiveAuthError(error.message)));
   };
 }
@@ -89,8 +89,8 @@ export function fetchUserInfo() {
       }
       const msg = 'User is not logged in.';
       throw new Error(msg);
-    }).then(json => dispatch(receiveAuth()))
-      .catch(error => dispatch(receiveAuthError()));
+    }).then(() => dispatch(receiveAuth()))
+      .catch(() => dispatch(receiveAuthError()));
   };
 }
 
