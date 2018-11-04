@@ -6,6 +6,7 @@ import { logout } from '../actions/auth';
 
 const mapStateToProps = state => ({
   mobileMode: state.mobileMode,
+  userData: state.auth.userData,
 });
 
 const mapDispatchToProps = dispatch => ({

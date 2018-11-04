@@ -16,9 +16,10 @@ function requestAuth() {
   };
 }
 
-function receiveAuth() {
+function receiveAuth(data) {
   return {
     type: RECEIVE_AUTH,
+    data,
   };
 }
 
@@ -67,7 +68,7 @@ export function fetchAuthToken(username, password) {
       }
       const msg = 'Could not log in with the provided credentials.';
       throw new Error(msg);
-    }).then(() => dispatch(receiveAuth()))
+    }).then(json => dispatch(receiveAuth(json)))
       .catch(error => dispatch(receiveAuthError(error.message)));
   };
 }
@@ -89,8 +90,8 @@ export function fetchUserInfo() {
       }
       const msg = 'User is not logged in.';
       throw new Error(msg);
-    }).then(() => dispatch(receiveAuth()))
-      .catch(() => dispatch(receiveAuthError()));
+    }).then(json => dispatch(receiveAuth(json)))
+      .catch(error => dispatch(receiveAuthError(error.message)));
   };
 }
 

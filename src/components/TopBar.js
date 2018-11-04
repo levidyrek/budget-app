@@ -21,14 +21,16 @@ export default class TopBar extends Component {
 
     render() {
       const { anchorEl } = this.state;
+      const { logOut, mobileMode, userData } = this.props;
 
       return (
         <div className="TopBar">
           <ul className="left">
             <li>
-              {this.props.mobileMode
-                            && <MenuButton />
-                        }
+              {
+                mobileMode
+                && <MenuButton />
+              }
             </li>
             <li><MonthPicker /></li>
           </ul>
@@ -38,7 +40,7 @@ export default class TopBar extends Component {
               aria-haspopup="true"
               onClick={this.handleClick}
             >
-                        My Account
+              {userData.username}
             </Button>
             <Menu
               id="user-menu"
@@ -46,7 +48,7 @@ export default class TopBar extends Component {
               open={Boolean(anchorEl)}
               onClose={this.handleClose}
             >
-              <MenuItem onClick={this.props.logOut}>Logout</MenuItem>
+              <MenuItem onClick={logOut}>Logout</MenuItem>
             </Menu>
           </ul>
         </div>

@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import {
   REQUEST_AUTH, RECEIVE_AUTH,
   RECEIVE_AUTH_ERROR, REQUEST_LOGOUT,
@@ -5,32 +6,29 @@ import {
 } from '../actions/auth';
 
 
-export function auth(state = {
+const initialAuthState = {
   fetching: false,
   loggingOut: false,
   authenticated: false,
   error: '',
   verified: false, // true if verified by ajax request
-}, action) {
+  userData: null,
+};
+
+export function auth(state = initialAuthState, action) {
   switch (action.type) {
     case REQUEST_AUTH:
       return Object.assign({}, state, {
         fetching: true,
       });
     case RECEIVE_AUTH:
-      return Object.assign({}, state, {
-        fetching: false,
-        loggingOut: false,
+      return Object.assign({}, state, initialAuthState, {
         authenticated: true,
-        error: '',
         verified: true,
+        userData: action.data,
       });
     case RECEIVE_AUTH_ERROR:
-      return Object.assign({}, state, {
-        fetching: false,
-        loggingOut: false,
-        authenticated: false,
-        verified: true,
+      return Object.assign({}, state, initialAuthState, {
         error: action.error,
       });
     case REQUEST_LOGOUT:
@@ -38,13 +36,7 @@ export function auth(state = {
         loggingOut: true,
       });
     case UNAUTHENTICATE:
-      return Object.assign({}, state, {
-        fetching: false,
-        loggingOut: false,
-        authenticated: false,
-        verified: true,
-        error: '',
-      });
+      return Object.assign({}, state, initialAuthState);
     case RECEIVE_LOGOUT_ERROR:
       return Object.assign({}, state, {
         loggingOut: false,
