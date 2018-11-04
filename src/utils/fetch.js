@@ -2,7 +2,8 @@ import isoFetch from 'isomorphic-fetch';
 import { unauthenticate } from '../actions/auth';
 
 /**
- * Wraps isomorphic-fetch and
+ * Wraps isomorphic-fetch and dispatches a Redux action to unauthenticate
+ * if an unauthorized response is received.
  *
  * @param {string} url      The url for the request.
  * @param {object} options  The options for the request.
