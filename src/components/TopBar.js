@@ -64,6 +64,5 @@ TopBar.propTypes = {
   mobileMode: PropTypes.bool.isRequired,
   userData: PropTypes.shape({
     username: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
   }).isRequired,
 };

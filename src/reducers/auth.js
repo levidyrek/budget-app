@@ -7,12 +7,12 @@ import {
 
 
 const initialAuthState = {
-  fetching: false,
-  loggingOut: false,
   authenticated: false,
   error: '',
-  verified: false, // true if verified by ajax request
+  fetching: false,
+  loggingOut: false,
   userData: null,
+  verified: false, // true if verified by ajax request
 };
 
 export function auth(state = initialAuthState, action) {
@@ -24,8 +24,8 @@ export function auth(state = initialAuthState, action) {
     case RECEIVE_AUTH:
       return Object.assign({}, state, initialAuthState, {
         authenticated: true,
-        verified: true,
         userData: action.data,
+        verified: true,
       });
     case RECEIVE_AUTH_ERROR:
       return Object.assign({}, state, initialAuthState, {
@@ -39,8 +39,8 @@ export function auth(state = initialAuthState, action) {
       return Object.assign({}, state, initialAuthState);
     case RECEIVE_LOGOUT_ERROR:
       return Object.assign({}, state, {
-        loggingOut: false,
         error: action.error,
+        loggingOut: false,
       });
     default:
       return state;
