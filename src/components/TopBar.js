@@ -3,8 +3,11 @@ import './stylesheets/TopBar.css';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import PropTypes from 'prop-types';
+
 import MonthPicker from '../containers/MonthPicker';
 import MenuButton from '../containers/MenuButton';
+
 
 export default class TopBar extends Component {
     state = {
@@ -55,3 +58,12 @@ export default class TopBar extends Component {
       );
     }
 }
+
+TopBar.propTypes = {
+  logOut: PropTypes.func.isRequired,
+  mobileMode: PropTypes.bool.isRequired,
+  userData: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  }).isRequired,
+};
