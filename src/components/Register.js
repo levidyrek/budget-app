@@ -21,9 +21,14 @@ class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: '',
+      error: {
+        username: '',
+        password: '',
+        email: '',
+      },
       username: '',
       password: '',
+      email: '',
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -36,34 +41,43 @@ class Register extends Component {
   }
 
   handleRegister = () => {
-    const { username, password } = this.state;
+    const { email, username, password } = this.state;
 
+    const errors = {
+      username: '',
+      password: '',
+      email: '',
+    };
+
+    const requiredMsg = 'This field is required.';
     if (!username.length) {
-      this.setState({
-        error: 'Username is required.',
-      });
-    } else if (!password.length) {
-      this.setState({
-        error: 'Password is required.',
-      });
-    } else {
-      this.setState({
-        error: '',
-      });
+      errors.username = requiredMsg;
     }
+    if (!password.length) {
+      errors.password = requiredMsg;
+    }
+    if (!email.length) {
+      errors.email = requiredMsg;
+    }
+
+    this.setState({
+      error: errors,
+    });
   }
 
   render() {
     const { classes } = this.props;
-    const { error } = this.state;
+    const {
+      email, error, password, username,
+    } = this.state;
 
     return (
       <div>
         <h2>Budget App</h2>
         <h3>Register</h3>
-        <p id="error">
+        {/* <p id="error">
           {error}
-        </p>
+        </p> */}
         <TextField
           id="username"
           label="Username"
@@ -71,6 +85,26 @@ class Register extends Component {
           name="username"
           type="text"
           onChange={this.handleInputChange}
+          value={username}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          helperText={error.username}
+          error={error.username !== ''}
+        />
+        <TextField
+          id="email"
+          label="Email"
+          className={classes.textField}
+          name="email"
+          type="text"
+          onChange={this.handleInputChange}
+          value={email}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          helperText={error.email}
+          error={error.email !== ''}
         />
         <TextField
           id="password"
@@ -79,6 +113,12 @@ class Register extends Component {
           name="password"
           type="password"
           onChange={this.handleInputChange}
+          value={password}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          helperText={error.password}
+          error={error.password !== ''}
         />
         <Button
           variant="contained"
