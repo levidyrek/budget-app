@@ -11,13 +11,14 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
+
 import { MoneyFormat } from '../utils/formats';
 
 import './stylesheets/AddBudgetCategoryDialog.css';
 
 export const ADD_BUDGET_CATEGORY_DIALOG = 'ADD_BUDGET_CATEGORY_DIALOG';
 
-const styles = theme => ({
+const styles = () => ({
   input: {
     marginTop: '20px',
     minWidth: '325px',
@@ -47,87 +48,68 @@ class AddBudgetCategoryDialog extends Component {
     }
 
     handleGroupChange = (event) => {
-      const validate = Object.assign({}, this.state.validate, {
-        group: true,
-      });
+      const { validate } = this.state;
+
       this.setState({
         group: event.target.value,
-        validate,
+        validate: Object.assign({}, validate, {
+          group: true,
+        }),
       });
     }
 
     handleNameChange = (event) => {
+      const { error, validate } = this.state;
+
       const name = event.target.value;
       if (name) {
-        const validate = Object.assign({}, this.state.validate, {
-          name: true,
-        });
-        const error = Object.assign({}, this.state.error, {
-          name: '',
-        });
         this.setState({
           name,
-          validate,
-          error,
+          validate: Object.assign({}, validate, {
+            name: true,
+          }),
+          error: Object.assign({}, error, {
+            name: '',
+          }),
         });
       } else {
-        const validate = Object.assign({}, this.state.validate, {
-          name: false,
-        });
-        const error = Object.assign({}, this.state.error, {
-          name: 'This field is required.',
-        });
         this.setState({
-          validate,
-          error,
+          validate: Object.assign({}, validate, {
+            name: false,
+          }),
+          error: Object.assign({}, error, {
+            name: 'This field is required.',
+          }),
           name: '',
         });
       }
     }
 
     handleLimitChange = (event) => {
+      const { error, validate } = this.state;
+
       const limit = event.target.value;
       if (/^[0-9]+(\.[0-9]{2})?$/.test(limit)) {
-        const validate = Object.assign({}, this.state.validate, {
-          limit: true,
-        });
-        const error = Object.assign({}, this.state.error, {
-          limit: '',
-        });
         this.setState({
           limit,
-          validate,
-          error,
+          validate: Object.assign({}, validate, {
+            limit: true,
+          }),
+          error: Object.assign({}, error, {
+            limit: '',
+          }),
         });
       } else {
-        const validate = Object.assign({}, this.state.validate, {
-          limit: false,
-        });
-        const error = Object.assign({}, this.state.error, {
-          limit: 'Not a valid amount.',
-        });
         this.setState({
           limit,
-          validate,
-          error,
+          validate: Object.assign({}, validate, {
+            limit: false,
+          }),
+          error: Object.assign({}, error, {
+            limit: 'Not a valid amount.',
+          }),
         });
       }
-    }
-
-    inputIsValid() {
-      const values = this.state.validate;
-      for (const key in values) {
-        if (values.hasOwnProperty(key)) {
-          if (!values[key] && values[key] !== 0) {
-            return false;
-          }
-        }
-      }
-      return true;
-    }
-
-    reset() {
-      this.setState(this.initialState);
     }
 
     handleClose = () => {
@@ -153,8 +135,19 @@ class AddBudgetCategoryDialog extends Component {
       });
     }
 
+    inputIsValid() {
+      const { validate } = this.state;
+
+      const invalid = Object.values(validate).some(valid => !valid);
+      return !invalid;
+    }
+
+    reset() {
+      this.setState(this.initialState);
+    }
+
     render() {
-      const { classes } = this.props;
+      const { budget, classes } = this.props;
 
       const actions = [
         <Button
@@ -172,17 +165,17 @@ class AddBudgetCategoryDialog extends Component {
         </Button>,
       ];
 
-      const groups = this.props.budget.budget_category_groups;
+      const groups = budget.budget_category_groups;
       const groupItems = [];
-      for (const key in groups) {
-        if (groups.hasOwnProperty(key)) {
-          groupItems.push(
-            <MenuItem key={key} value={key}>
-              {groups[key].name}
-            </MenuItem>,
-          );
-        }
-      }
+      Object.entries(groups).forEach((item) => {
+        const id = item[0];
+        const group = item[1];
+        groupItems.push(
+          <MenuItem key={id} value={id}>
+            {group.name}
+          </MenuItem>,
+        );
+      });
 
       return (
         <Dialog
