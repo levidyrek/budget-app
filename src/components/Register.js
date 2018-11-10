@@ -41,6 +41,7 @@ class Register extends Component {
   }
 
   handleRegister = () => {
+    const { registerUser } = this.props;
     const { email, username, password } = this.state;
 
     const errors = {
@@ -50,19 +51,27 @@ class Register extends Component {
     };
 
     const requiredMsg = 'This field is required.';
+    let valid = true;
     if (!username.length) {
       errors.username = requiredMsg;
+      valid = false;
     }
     if (!password.length) {
       errors.password = requiredMsg;
+      valid = false;
     }
     if (!email.length) {
       errors.email = requiredMsg;
+      valid = false;
     }
 
     this.setState({
       error: errors,
     });
+
+    if (valid) {
+      registerUser(username, email, password);
+    }
   }
 
   render() {
@@ -137,6 +146,7 @@ Register.propTypes = {
     textField: PropTypes.string.isRequired,
     button: PropTypes.string.isRequired,
   }).isRequired,
+  registerUser: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(Register);

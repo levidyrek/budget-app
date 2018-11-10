@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Register from '../components/Register';
-import { fetchAuthToken, fetchUserInfo } from '../actions/auth';
+import { registerUser } from '../actions/auth';
 
 
 const mapStateToProps = state => ({
@@ -9,6 +9,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  registerUser: (username, email, password) => {
+    dispatch(registerUser(username, email, password));
+  },
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Register));

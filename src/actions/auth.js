@@ -115,8 +115,10 @@ export function registerUser(username, email, password) {
       }
       const msg = 'Could not register user.';
       throw new Error(msg);
-    }).then(() => dispatch(receiveRegisterUser()))
-      .catch(error => dispatch(receiveRegisterUserError(error.message)));
+    }).then(() => {
+      dispatch(receiveRegisterUser());
+      dispatch(fetchAuthToken(username, password));
+    }).catch(error => dispatch(receiveRegisterUserError(error.message)));
   };
 }
 
