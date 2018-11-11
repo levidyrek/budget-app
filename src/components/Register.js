@@ -5,6 +5,8 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
 
+import AuthPage from './AuthPage';
+
 
 const styles = theme => ({
   textField: {
@@ -75,18 +77,19 @@ class Register extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { auth, classes, location } = this.props;
     const {
       email, error, password, username,
     } = this.state;
 
     return (
-      <div>
-        <h2>Budget App</h2>
-        <h3>Register</h3>
-        {/* <p id="error">
-          {error}
-        </p> */}
+      <AuthPage
+        fetching={auth.fetching || auth.register.fetching}
+        authenticated={auth.authenticated}
+        error={auth.register.error || auth.error}
+        location={location}
+        title="Log In"
+      >
         <TextField
           id="username"
           label="Username"
@@ -136,17 +139,28 @@ class Register extends Component {
         >
           Register
         </Button>
-      </div>
+      </AuthPage>
     );
   }
 }
 
 Register.propTypes = {
+  auth: PropTypes.shape({
+    authenticated: PropTypes.bool.isRequired,
+    error: PropTypes.string,
+    fetching: PropTypes.bool.isRequired,
+    verified: PropTypes.bool.isRequired,
+  }).isRequired,
   classes: PropTypes.shape({
     textField: PropTypes.string.isRequired,
     button: PropTypes.string.isRequired,
   }).isRequired,
   registerUser: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      referrer: PropTypes.string,
+    }),
+  }).isRequired,
 };
 
 export default withStyles(styles)(Register);

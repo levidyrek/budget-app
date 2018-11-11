@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './stylesheets/LoginPage.css';
-import ReactLoading from 'react-loading';
-import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+import AuthPage from './AuthPage';
 
 
 export default class LoginPage extends Component {
@@ -53,26 +53,14 @@ export default class LoginPage extends Component {
       const { auth, location } = this.props;
       const { error } = this.state;
 
-      if (auth.fetching) {
-        return (
-          <ReactLoading type="bars" color="#444" />
-        );
-      }
-
-      if (auth.authenticated) {
-        // Redirect to previous page or root, if none.
-        const to = location.state ? location.state.referrer : '/';
-        return (
-          <Redirect to={to} />
-        );
-      }
-
       return (
-        <div>
-          <h2>Budget App</h2>
-          <p id="error">
-            {error || auth.error}
-          </p>
+        <AuthPage
+          fetching={auth.fetching}
+          authenticated={auth.authenticated}
+          error={error}
+          location={location}
+          title="Log In"
+        >
           <input
             id="username"
             name="username"
@@ -93,7 +81,7 @@ export default class LoginPage extends Component {
             value="Log in"
             onClick={this.handleLogin}
           />
-        </div>
+        </AuthPage>
       );
     }
 }
@@ -108,7 +96,7 @@ LoginPage.propTypes = {
   fetchAuthToken: PropTypes.func.isRequired,
   fetchUserInfo: PropTypes.func.isRequired,
   location: PropTypes.shape({
-    location: PropTypes.shape({
+    state: PropTypes.shape({
       referrer: PropTypes.string,
     }),
   }).isRequired,
