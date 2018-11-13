@@ -137,8 +137,7 @@ export function fetchUserInfo() {
       if (response.ok) {
         return response.json();
       }
-      const msg = 'User is not logged in.';
-      throw new Error(msg);
+      throw new Error();
     }).then(json => dispatch(receiveAuth(json)))
       .catch(error => dispatch(receiveAuthError(error.message)));
   };

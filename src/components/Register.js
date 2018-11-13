@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
+import EmailValidator from 'email-validator';
+import { Link } from 'react-router-dom';
 
 import AuthPage from './AuthPage';
 
@@ -65,6 +67,9 @@ class Register extends Component {
     if (!email.length) {
       errors.email = requiredMsg;
       valid = false;
+    } else if (!EmailValidator.validate(email)) {
+      errors.email = 'Please enter a valid email.';
+      valid = false;
     }
 
     this.setState({
@@ -88,7 +93,7 @@ class Register extends Component {
         authenticated={auth.authenticated}
         error={auth.register.error || auth.error}
         location={location}
-        title="Log In"
+        title="Register"
       >
         <TextField
           id="username"
@@ -139,6 +144,9 @@ class Register extends Component {
         >
           Register
         </Button>
+        <Link to="/login">
+          Log In
+        </Link>
       </AuthPage>
     );
   }
