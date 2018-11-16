@@ -4,6 +4,7 @@ import ActionToday from '@material-ui/icons/Today';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import Button from '@material-ui/core/Button';
+import PropTypes from 'prop-types';
 
 const MONTHS = [
   'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN',
@@ -53,9 +54,22 @@ export default class MonthPicker extends Component {
     });
   }
 
+  getCurrentMonth = () => {
+    const { month } = this.state;
+    return MONTHS[month - 1];
+  }
+
+  componentDidUpdate = () => {
+    const { changeMonth } = this.props;
+    const { year } = this.state;
+    const month = this.getCurrentMonth();
+
+    changeMonth(month, year);
+  }
+
   render() {
-    const { month, year } = this.state;
-    const monthText = MONTHS[month - 1];
+    const { year } = this.state;
+    const month = this.getCurrentMonth();
 
     return (
       <div className="MonthPicker">
@@ -67,7 +81,7 @@ export default class MonthPicker extends Component {
         </Button>
         <ActionToday />
         <span className="dateText">
-          <span id="month">{monthText}</span>
+          <span id="month">{month}</span>
           <span id="year">{year}</span>
         </span>
         <Button
@@ -80,3 +94,7 @@ export default class MonthPicker extends Component {
     );
   }
 }
+
+MonthPicker.propTypes = {
+  changeMonth: PropTypes.func.isRequired,
+};

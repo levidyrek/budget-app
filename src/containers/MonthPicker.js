@@ -9,8 +9,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  changeMonth: (month, url) => {
-    dispatch(fetchSelectedBudget(month, url));
+  changeMonth: (month, year) => {
+    dispatch(fetchSelectedBudget(month, year));
   },
 });
 
