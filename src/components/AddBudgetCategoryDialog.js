@@ -11,6 +11,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
+import PropTypes from 'prop-types';
 
 import { MoneyFormat } from '../utils/formats';
 
@@ -113,15 +114,20 @@ class AddBudgetCategoryDialog extends Component {
     }
 
     handleClose = () => {
+      const { handleClose } = this.props;
+
       this.reset();
-      this.props.handleClose();
+      handleClose();
     }
 
     handleAdd = () => {
-      this.props.handleSubmit({
-        category: this.state.name,
-        group: this.state.group,
-        limit: this.state.limit,
+      const { handleSubmit } = this.props;
+      const { group, name, limit } = this.state;
+
+      handleSubmit({
+        category: name,
+        group,
+        limit,
       }, this.onCallSuccess, this.onCallFailure);
     }
 
@@ -148,6 +154,9 @@ class AddBudgetCategoryDialog extends Component {
 
     render() {
       const { budget, classes } = this.props;
+      const {
+        apiError, error, group, limit, name,
+      } = this.state;
 
       const actions = [
         <Button
@@ -169,10 +178,10 @@ class AddBudgetCategoryDialog extends Component {
       const groupItems = [];
       Object.entries(groups).forEach((item) => {
         const id = item[0];
-        const group = item[1];
+        const itemGroup = item[1];
         groupItems.push(
           <MenuItem key={id} value={id}>
-            {group.name}
+            {itemGroup.name}
           </MenuItem>,
         );
       });
@@ -188,14 +197,14 @@ class AddBudgetCategoryDialog extends Component {
                         Create a new category for your monthly budgets.
             </DialogContentText>
             {
-                        this.state.apiError
-                        && <div className="error-msg">{this.state.apiError}</div>
-                    }
+              apiError
+              && <div className="error-msg">{apiError}</div>
+            }
             <TextField
               label="Category"
-              helperText={this.state.error.name}
+              helperText={error.name}
               onChange={this.handleNameChange}
-              value={this.state.name}
+              value={name}
               className={classes.input}
               inputProps={{
                 maxLength: '50',
@@ -207,7 +216,7 @@ class AddBudgetCategoryDialog extends Component {
               <Select
                 label="Group"
                 onChange={this.handleGroupChange}
-                value={this.state.group}
+                value={group}
                 inputProps={{
                   name: 'group',
                   id: 'group',
@@ -219,9 +228,9 @@ class AddBudgetCategoryDialog extends Component {
             <br />
             <TextField
               label="Limit"
-              helperText={this.state.error.limit}
+              helperText={error.limit}
               onChange={this.handleLimitChange}
-              value={this.state.limit}
+              value={limit}
               className={classes.input}
               InputProps={{
                 inputComponent: MoneyFormat,
@@ -235,5 +244,16 @@ class AddBudgetCategoryDialog extends Component {
       );
     }
 }
+
+AddBudgetCategoryDialog.propTypes = {
+  budget: PropTypes.shape({
+    budget_category_groups: PropTypes.object.isRequired,
+  }).isRequired,
+  classes: PropTypes.shape({
+    input: PropTypes.string.isRequired,
+  }).isRequired,
+  handleClose: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+};
 
 export default withStyles(styles)(AddBudgetCategoryDialog);

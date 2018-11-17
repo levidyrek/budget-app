@@ -1,16 +1,21 @@
-import 'es6-promise/auto'
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
-import './index.css'
-import { Provider } from 'react-redux'
-import configureStore from './store/ConfigureStore'
+/* eslint-disable no-undef */
+/* eslint-disable no-underscore-dangle */
+import 'es6-promise/auto';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import configureStore from './store/ConfigureStore';
 
-let store = configureStore()
+import App from './App';
+import './index.css';
+
+const store = configureStore();
+
+window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 
 ReactDOM.render(
   <Provider store={store}>
-      <App />
+    <App />
   </Provider>,
-  document.getElementById('root')
-)
+  document.getElementById('root'),
+);
