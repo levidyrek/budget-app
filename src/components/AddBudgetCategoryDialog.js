@@ -121,10 +121,11 @@ class AddBudgetCategoryDialog extends Component {
     }
 
     handleAdd = () => {
-      const { handleSubmit } = this.props;
+      const { budget, handleSubmit } = this.props;
       const { group, name, limit } = this.state;
 
       handleSubmit({
+        budget: budget.pk,
         category: name,
         group,
         limit,
@@ -180,7 +181,7 @@ class AddBudgetCategoryDialog extends Component {
         const id = item[0];
         const itemGroup = item[1];
         groupItems.push(
-          <MenuItem key={id} value={id}>
+          <MenuItem key={id} value={itemGroup.name}>
             {itemGroup.name}
           </MenuItem>,
         );
@@ -248,6 +249,7 @@ class AddBudgetCategoryDialog extends Component {
 AddBudgetCategoryDialog.propTypes = {
   budget: PropTypes.shape({
     budget_category_groups: PropTypes.object.isRequired,
+    pk: PropTypes.number.isRequired,
   }).isRequired,
   classes: PropTypes.shape({
     input: PropTypes.string.isRequired,
