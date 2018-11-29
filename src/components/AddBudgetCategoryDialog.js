@@ -124,12 +124,17 @@ class AddBudgetCategoryDialog extends Component {
       const { budget, handleSubmit } = this.props;
       const { group, name, limit } = this.state;
 
-      handleSubmit({
-        budget: budget.pk,
-        category: name,
-        group,
-        limit,
-      }, this.onCallSuccess, this.onCallFailure);
+      handleSubmit(
+        {
+          budget_month: budget.month,
+          budget_year: budget.year,
+          category: name,
+          group,
+          limit,
+        },
+        this.onCallSuccess,
+        this.onCallFailure,
+      );
     }
 
     onCallSuccess = () => {
@@ -164,14 +169,14 @@ class AddBudgetCategoryDialog extends Component {
           key="cancel"
           onClick={this.handleClose}
         >
-                Cancel
+          Cancel
         </Button>,
         <Button
           key="add"
           disabled={!this.inputIsValid()}
           onClick={this.handleAdd}
         >
-                Add
+          Add
         </Button>,
       ];
 
@@ -195,7 +200,7 @@ class AddBudgetCategoryDialog extends Component {
           <DialogTitle>Add Budget Category</DialogTitle>
           <DialogContent>
             <DialogContentText>
-                        Create a new category for your monthly budgets.
+              Create a new category for your monthly budgets.
             </DialogContentText>
             {
               apiError
@@ -249,7 +254,8 @@ class AddBudgetCategoryDialog extends Component {
 AddBudgetCategoryDialog.propTypes = {
   budget: PropTypes.shape({
     budget_category_groups: PropTypes.object.isRequired,
-    pk: PropTypes.number.isRequired,
+    month: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
   }).isRequired,
   classes: PropTypes.shape({
     input: PropTypes.string.isRequired,
