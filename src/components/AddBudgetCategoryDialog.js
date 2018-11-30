@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -12,6 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import PropTypes from 'prop-types';
+import CreatableSelect from 'react-select/lib/Creatable';
 
 import { MoneyFormat } from '../utils/formats';
 
@@ -48,11 +47,12 @@ class AddBudgetCategoryDialog extends Component {
       this.state = this.initialState;
     }
 
-    handleGroupChange = (event) => {
+    handleGroupChange = (option) => {
       const { validate } = this.state;
+      const value = option ? option.value : '';
 
       this.setState({
-        group: event.target.value,
+        group: value,
         validate: Object.assign({}, validate, {
           group: true,
         }),
@@ -183,13 +183,11 @@ class AddBudgetCategoryDialog extends Component {
       const groups = budget.budget_category_groups;
       const groupItems = [];
       Object.entries(groups).forEach((item) => {
-        const id = item[0];
         const itemGroup = item[1];
-        groupItems.push(
-          <MenuItem key={id} value={itemGroup.name}>
-            {itemGroup.name}
-          </MenuItem>,
-        );
+        groupItems.push({
+          value: itemGroup.name,
+          label: itemGroup.name,
+        });
       });
 
       return (
@@ -219,17 +217,15 @@ class AddBudgetCategoryDialog extends Component {
             <br />
             <FormControl className={classes.input}>
               <InputLabel htmlFor="group">Group</InputLabel>
-              <Select
-                label="Group"
-                onChange={this.handleGroupChange}
-                value={group}
-                inputProps={{
-                  name: 'group',
-                  id: 'group',
+              <CreatableSelect
+                value={{
+                  value: group,
+                  label: group,
                 }}
-              >
-                {groupItems}
-              </Select>
+                isClearable
+                onChange={this.handleGroupChange}
+                options={groupItems}
+              />
             </FormControl>
             <br />
             <TextField
