@@ -8,11 +8,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
 import PropTypes from 'prop-types';
-import CreatableSelect from 'react-select/lib/Creatable';
 
 import { MoneyFormat } from '../utils/formats';
+import CreatableSelect from './CreatableSelect';
 
 import './stylesheets/AddBudgetCategoryDialog.css';
 
@@ -216,7 +215,6 @@ class AddBudgetCategoryDialog extends Component {
             />
             <br />
             <FormControl className={classes.input}>
-              <InputLabel htmlFor="group">Group</InputLabel>
               <CreatableSelect
                 value={{
                   value: group,
@@ -225,6 +223,7 @@ class AddBudgetCategoryDialog extends Component {
                 isClearable
                 onChange={this.handleGroupChange}
                 options={groupItems}
+                placeholder="Group"
               />
             </FormControl>
             <br />
