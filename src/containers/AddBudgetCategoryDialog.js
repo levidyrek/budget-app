@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import AddBudgetCategoryDialog from '../components/AddBudgetCategoryDialog';
-import { ADD_BUDGET_CATEGORY_DIALOG } from '../components/AddBudgetCategoryDialog';
+import AddBudgetCategoryDialog, { ADD_BUDGET_CATEGORY_DIALOG } from '../components/AddBudgetCategoryDialog';
 import { toggleDialog } from '../actions/dialogs';
 import { addBudgetCategory } from '../actions/budgets';
 
 
 const mapStateToProps = state => ({
   budget: state.selectedBudget.budget,
+  year: state.selectedBudget.year,
+  month: state.selectedBudget.month,
 });
 
 const mapDispatchToProps = dispatch => ({

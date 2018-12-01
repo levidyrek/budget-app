@@ -120,13 +120,13 @@ class AddBudgetCategoryDialog extends Component {
     }
 
     handleAdd = () => {
-      const { budget, handleSubmit } = this.props;
+      const { handleSubmit, month, year } = this.props;
       const { group, name, limit } = this.state;
 
       handleSubmit(
         {
-          budget_month: budget.month,
-          budget_year: budget.year,
+          budget_month: month,
+          budget_year: year,
           category: name,
           group,
           limit,
@@ -249,14 +249,14 @@ class AddBudgetCategoryDialog extends Component {
 AddBudgetCategoryDialog.propTypes = {
   budget: PropTypes.shape({
     budget_category_groups: PropTypes.object.isRequired,
-    month: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
   }).isRequired,
   classes: PropTypes.shape({
     input: PropTypes.string.isRequired,
   }).isRequired,
   handleClose: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  month: PropTypes.string.isRequired,
+  year: PropTypes.number.isRequired,
 };
 
 export default withStyles(styles)(AddBudgetCategoryDialog);
