@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-underscore-dangle */
-import 'es6-promise/auto';
+import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';

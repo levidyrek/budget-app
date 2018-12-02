@@ -1,45 +1,49 @@
 import React, { Component } from 'react';
 import './stylesheets/DetailsPanel.css';
-import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
 import ContentAdd from '@material-ui/icons/Add';
+import PropTypes from 'prop-types';
+
 import InfoPanel from './InfoPanel';
 
 
-export default class DetailsPanel extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dialog: 0,
-    };
+class DetailsPanel extends Component {
+  addButtonStyle = {
+    bottom: 0,
+    right: 0,
+    position: 'absolute',
+    marginRight: '35px',
+    marginBottom: '20px',
   }
 
-    addButtonStyle = {
-      bottom: 0,
-      right: 0,
-      position: 'absolute',
-      marginRight: '35px',
-      marginBottom: '20px',
-    }
+  render() {
+    const { handleClickAdd, mobileMode, table } = this.props;
 
-    render() {
-      return (
-        <div className="DetailsPanel">
-          <div className="tableView">
-            <div className="currentTable">
-              {this.props.table}
-            </div>
-            <Button
-              variant="fab"
-              style={this.addButtonStyle}
-              onClick={this.props.handleClickAdd}
-            >
-              <ContentAdd />
-            </Button>
+    return (
+      <div className="DetailsPanel">
+        <div className="tableView">
+          <div className="currentTable">
+            {table}
           </div>
-          {!this.props.mobileMode
-                    && <InfoPanel />
-                }
+          <Fab
+            style={this.addButtonStyle}
+            onClick={handleClickAdd}
+          >
+            <ContentAdd />
+          </Fab>
         </div>
-      );
-    }
+        {!mobileMode
+          && <InfoPanel />
+        }
+      </div>
+    );
+  }
 }
+
+DetailsPanel.propTypes = {
+  handleClickAdd: PropTypes.func.isRequired,
+  mobileMode: PropTypes.bool.isRequired,
+  table: PropTypes.node.isRequired,
+};
+
+export default DetailsPanel;
