@@ -1,7 +1,8 @@
 @import 'styles/_constants.scss';
 
 .TopBar {
-  height: 75px;
+  height: 65px;
+  min-height: 65px;
   width: 100%;
   background-color: $primary-color;
   display: flex;
