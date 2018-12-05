@@ -8,17 +8,14 @@ import { moneyRenderer } from '../utils/renderers';
 function convertToCategoryRows(budget) {
   const rows = [];
   const budgetCategories = budget.budget_categories;
-  for (const pk in budgetCategories) {
-    if (budgetCategories.hasOwnProperty(pk)) {
-      const category = budgetCategories[pk];
-      rows.push({
-        group: budget.budget_category_groups[category.group].name,
-        category: category.category,
-        limit: category.limit,
-        spent: category.spent,
-      });
-    }
-  }
+  Object.values(budgetCategories).forEach((category) => {
+    rows.push({
+      group: budget.budget_category_groups[category.group].name,
+      category: category.category,
+      limit: parseFloat(category.limit),
+      spent: parseFloat(category.spent),
+    });
+  });
   return rows;
 }
 
