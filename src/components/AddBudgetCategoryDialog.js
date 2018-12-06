@@ -22,6 +22,9 @@ const styles = () => ({
     marginTop: '20px',
     minWidth: '325px',
   },
+  dialogContent: {
+    overflowY: 'visible',
+  },
 });
 
 class AddBudgetCategoryDialog extends Component {
@@ -192,10 +195,12 @@ class AddBudgetCategoryDialog extends Component {
       return (
         <Dialog
           open
-          className="AddBudgetCategoryDialog"
+          className={classes.dialogContent}
         >
           <DialogTitle>Add Budget Category</DialogTitle>
-          <DialogContent>
+          <DialogContent
+            className={classes.dialogContent}
+          >
             <DialogContentText>
               Create a new category for your monthly budgets.
             </DialogContentText>
