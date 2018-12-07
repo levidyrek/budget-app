@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './stylesheets/Budget.css';
 import { Route, Redirect, Switch } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import NavBar from '../containers/NavBar';
 import TopBar from '../containers/TopBar';
 import Expenses from '../containers/Expenses';
@@ -11,24 +13,35 @@ import DialogController from '../containers/DialogController';
 const MOBILE_WIDTH_BREAKPOINT = 800;
 
 
-export default class Budget extends Component {
+class Budget extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      navbarEnabled: false,
-    };
 
     this.updateWindowDimensions();
   }
 
+  componentDidMount() {
+    window.addEventListener('resize', this.updateWindowDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+
+  updateWindowDimensions = () => {
+    const { dispatch } = this.props;
+
+    dispatch(enableMobileMode(window.innerWidth < MOBILE_WIDTH_BREAKPOINT));
+  }
+
   render() {
-    const { match } = this.props;
+    const { match, mobileMode, navbarEnabled } = this.props;
     return (
       <div className="budget-layout">
         {
-                    (!this.props.mobileMode || this.props.navbarEnabled)
-                    && <NavBar />
-                }
+          (!mobileMode || navbarEnabled)
+          && <NavBar />
+        }
         <div className="main-content">
           <TopBar />
           <Switch>
@@ -40,16 +53,15 @@ export default class Budget extends Component {
       </div>
     );
   }
-
-  componentDidMount() {
-    window.addEventListener('resize', this.updateWindowDimensions);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateWindowDimensions);
-  }
-
-    updateWindowDimensions = () => {
-      this.props.dispatch(enableMobileMode(window.innerWidth < MOBILE_WIDTH_BREAKPOINT));
-    }
 }
+
+Budget.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  match: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+  }).isRequired,
+  mobileMode: PropTypes.bool.isRequired,
+  navbarEnabled: PropTypes.bool.isRequired,
+};
+
+export default Budget;
