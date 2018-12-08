@@ -25,6 +25,9 @@ const styles = () => ({
   dialogContent: {
     overflowY: 'visible',
   },
+  paper: {
+    overflowY: 'visible',
+  },
 });
 
 class AddBudgetCategoryDialog extends Component {
@@ -195,7 +198,9 @@ class AddBudgetCategoryDialog extends Component {
       return (
         <Dialog
           open
-          className={classes.dialogContent}
+          classes={{
+            paper: classes.paper,
+          }}
         >
           <DialogTitle>Add Budget Category</DialogTitle>
           <DialogContent
