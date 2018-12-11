@@ -3,24 +3,24 @@ import PropTypes from 'prop-types';
 
 import BudgetCategoryDialog from '../containers/BudgetCategoryDialog';
 
-export const ADD_BUDGET_CATEGORY_DIALOG = 'ADD_BUDGET_CATEGORY_DIALOG';
+export const EDIT_BUDGET_CATEGORY_DIALOG = 'EDIT_BUDGET_CATEGORY_DIALOG';
 
-const AddBudgetCategoryDialog = (props) => {
+const EditBudgetCategoryDialog = (props) => {
   const { handleSubmit } = props;
   const dialogText = 'Create a new category for your monthly budget.';
 
   return (
     <BudgetCategoryDialog
-      dialogName={ADD_BUDGET_CATEGORY_DIALOG}
+      dialogName={EDIT_BUDGET_CATEGORY_DIALOG}
       handleSubmit={handleSubmit}
-      submitAction="Add"
+      submitAction="Update"
       dialogText={dialogText}
     />
   );
 };
 
-AddBudgetCategoryDialog.propTypes = {
+EditBudgetCategoryDialog.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
 };
 
-export default AddBudgetCategoryDialog;
+export default EditBudgetCategoryDialog;

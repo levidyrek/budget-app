@@ -123,7 +123,7 @@ class BudgetCategoryDialog extends Component {
     handleClose(dialogName);
   }
 
-  handleAdd = () => {
+  handleSubmit = () => {
     const { handleSubmit, month, year } = this.props;
     const { group, name, limit } = this.state;
 
@@ -162,7 +162,9 @@ class BudgetCategoryDialog extends Component {
   }
 
   render() {
-    const { budget, classes } = this.props;
+    const {
+      budget, classes, dialogText, submitAction,
+    } = this.props;
     const {
       apiError, error, group, limit, name,
     } = this.state;
@@ -175,11 +177,11 @@ class BudgetCategoryDialog extends Component {
         Cancel
       </Button>,
       <Button
-        key="add"
+        key="submit"
         disabled={!this.inputIsValid()}
-        onClick={this.handleAdd}
+        onClick={this.handleSubmit}
       >
-        Add
+        {submitAction}
       </Button>,
     ];
 
@@ -200,12 +202,14 @@ class BudgetCategoryDialog extends Component {
           paper: classes.paper,
         }}
       >
-        <DialogTitle>Add Budget Category</DialogTitle>
+        <DialogTitle>
+          {`${submitAction} Budget Category`}
+        </DialogTitle>
         <DialogContent
           className={classes.dialogContent}
         >
           <DialogContentText>
-            Create a new category for your monthly budgets.
+            {dialogText}
           </DialogContentText>
           {
             apiError
@@ -262,9 +266,11 @@ BudgetCategoryDialog.propTypes = {
     input: PropTypes.string.isRequired,
   }).isRequired,
   dialogName: PropTypes.string.isRequired,
+  dialogText: PropTypes.string.isRequired,
   handleClose: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   month: PropTypes.string.isRequired,
+  submitAction: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired,
 };
 
