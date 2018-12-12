@@ -4,7 +4,9 @@ export function dialogs(state = {}, action) {
   switch (action.type) {
     case TOGGLE_DIALOG:
       return Object.assign({}, state, {
-        [action.dialog]: !state[action.dialog],
+        [action.dialog]: {
+          show: !state[action.dialog],
+        },
       });
     default:
       return state;

@@ -6,34 +6,48 @@ import { ADD_BUDGET_CATEGORY_DIALOG } from './AddBudgetCategoryDialog';
 import EditBudgetCategoryDialog from '../containers/EditBudgetCategoryDialog';
 import { EDIT_BUDGET_CATEGORY_DIALOG } from './EditBudgetCategoryDialog';
 
+const dialogs = {};
+
+export function registerDialog(dialog) {
+  dialogs.push(dialog);
+}
+
 const DialogController = (props) => {
-  const { dialogs } = props;
+  const { dialogState } = props;
 
   return (
     <div>
       {
-        dialogs[ADD_BUDGET_CATEGORY_DIALOG]
+        dialogState[ADD_BUDGET_CATEGORY_DIALOG].show
         && <AddBudgetCategoryDialog />
       }
       {
-        dialogs[EDIT_BUDGET_CATEGORY_DIALOG]
+        dialogState[EDIT_BUDGET_CATEGORY_DIALOG].show
         && <EditBudgetCategoryDialog />
       }
     </div>
   );
 };
 
+const dialogShape = PropTypes.shape({
+  show: PropTypes.bool,
+});
+
 DialogController.propTypes = {
-  dialogs: PropTypes.shape({
-    [ADD_BUDGET_CATEGORY_DIALOG]: PropTypes.bool,
-    [EDIT_BUDGET_CATEGORY_DIALOG]: PropTypes.bool,
+  dialogState: PropTypes.shape({
+    [ADD_BUDGET_CATEGORY_DIALOG]: dialogShape,
+    [EDIT_BUDGET_CATEGORY_DIALOG]: dialogShape,
   }),
 };
 
+const dialogDefault = {
+  show: false,
+};
+
 DialogController.defaultProps = {
-  dialogs: {
-    [ADD_BUDGET_CATEGORY_DIALOG]: false,
-    [EDIT_BUDGET_CATEGORY_DIALOG]: false,
+  dialogState: {
+    [ADD_BUDGET_CATEGORY_DIALOG]: dialogDefault,
+    [EDIT_BUDGET_CATEGORY_DIALOG]: dialogDefault,
   },
 };
 
