@@ -20,6 +20,14 @@ const EditBudgetCategoryDialog = (props) => {
 };
 
 EditBudgetCategoryDialog.propTypes = {
+  dialogState: PropTypes.shape({
+    data: PropTypes.shape({
+      category: PropTypes.string.isRequired,
+      group: PropTypes.string.isRequired,
+      limit: PropTypes.number.isRequired,
+      spent: PropTypes.number.isRequired,
+    }),
+  }).isRequired,
   handleSubmit: PropTypes.func.isRequired,
 };
 

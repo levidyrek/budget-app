@@ -6,11 +6,6 @@ import { ADD_BUDGET_CATEGORY_DIALOG } from './AddBudgetCategoryDialog';
 import EditBudgetCategoryDialog from '../containers/EditBudgetCategoryDialog';
 import { EDIT_BUDGET_CATEGORY_DIALOG } from './EditBudgetCategoryDialog';
 
-const dialogs = {};
-
-export function registerDialog(dialog) {
-  dialogs.push(dialog);
-}
 
 const DialogController = (props) => {
   const { dialogState } = props;
@@ -37,18 +32,7 @@ DialogController.propTypes = {
   dialogState: PropTypes.shape({
     [ADD_BUDGET_CATEGORY_DIALOG]: dialogShape,
     [EDIT_BUDGET_CATEGORY_DIALOG]: dialogShape,
-  }),
-};
-
-const dialogDefault = {
-  show: false,
-};
-
-DialogController.defaultProps = {
-  dialogState: {
-    [ADD_BUDGET_CATEGORY_DIALOG]: dialogDefault,
-    [EDIT_BUDGET_CATEGORY_DIALOG]: dialogDefault,
-  },
+  }).isRequired,
 };
 
 export default DialogController;

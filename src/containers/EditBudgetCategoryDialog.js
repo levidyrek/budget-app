@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import EditBudgetCategoryDialog from '../components/EditBudgetCategoryDialog';
+import EditBudgetCategoryDialog, { EDIT_BUDGET_CATEGORY_DIALOG } from '../components/EditBudgetCategoryDialog';
 import { addBudgetCategory } from '../actions/budgets';
 
-
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+  dialogState: state.dialogs[EDIT_BUDGET_CATEGORY_DIALOG],
+});
 
 const mapDispatchToProps = dispatch => ({
   handleSubmit: (data, successCallback, errorCallback) => {

@@ -1,12 +1,15 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+
 import BudgetTable from '../components/table/BudgetTable';
+import { toggleDialog } from '../actions/dialogs';
+import { EDIT_BUDGET_CATEGORY_DIALOG } from '../components/EditBudgetCategoryDialog';
 
 
 function convertToCategoryRows(budget) {
   const rows = [];
-  const budget_categories = budget.budget_categories;
-  Object.values(budget_categories).forEach((category) => {
+  const budgetCategories = budget.budget_categories;
+  Object.values(budgetCategories).forEach((category) => {
     rows.push({
       pk: category.pk,
       group: budget.budget_category_groups[category.group].name,
@@ -22,4 +25,10 @@ const mapStateToProps = state => ({
   rows: convertToCategoryRows(state.selectedBudget.budget),
 });
 
-export default withRouter(connect(mapStateToProps)(BudgetTable));
+const mapDispatchToProps = dispatch => ({
+  showEditDialog: (rowData) => {
+    dispatch(toggleDialog(EDIT_BUDGET_CATEGORY_DIALOG, rowData));
+  },
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BudgetTable));

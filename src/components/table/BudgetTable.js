@@ -34,18 +34,14 @@ class BudgetTable extends Component {
     },
   ];
 
-  handleRowClick = () => {
-
-  }
-
   render() {
-    const { rows } = this.props;
+    const { rows, showEditDialog } = this.props;
 
     return (
       <BaseTable
         rows={rows}
         columns={this.columns}
-        handleRowClick={this.handleRowClick}
+        handleRowClick={showEditDialog}
       />
     );
   }
@@ -53,6 +49,7 @@ class BudgetTable extends Component {
 
 BudgetTable.propTypes = {
   rows: PropTypes.arrayOf(PropTypes.object).isRequired,
+  showEditDialog: PropTypes.func.isRequired,
 };
 
 export default BudgetTable;
