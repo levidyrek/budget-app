@@ -47,7 +47,24 @@ class BudgetCategoryDialog extends Component {
 
   constructor(props) {
     super(props);
-    this.state = this.initialState;
+
+    // If initial values are passed in, set them to state
+    // and mark them as valid.
+    let propState = {};
+    if (props.initData) {
+      const { group, category, limit } = props.initData;
+      propState = {
+        group,
+        name: category,
+        limit,
+        validate: {
+          group: true,
+          name: true,
+          limit: true,
+        },
+      };
+    }
+    this.state = Object.assign({}, this.initialState, propState);
   }
 
   handleGroupChange = (option) => {
@@ -267,11 +284,24 @@ BudgetCategoryDialog.propTypes = {
   }).isRequired,
   dialogName: PropTypes.string.isRequired,
   dialogText: PropTypes.string.isRequired,
+  initData: PropTypes.shape({
+    group: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    limit: PropTypes.number.isRequired,
+  }),
   handleClose: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   month: PropTypes.string.isRequired,
   submitAction: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired,
+};
+
+BudgetCategoryDialog.defaultProps = {
+  initData: {
+    group: '',
+    category: '',
+    limit: 0,
+  },
 };
 
 export default withStyles(styles)(BudgetCategoryDialog);
