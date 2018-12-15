@@ -30,6 +30,7 @@ const styles = () => ({
 
 class BudgetCategoryDialog extends Component {
   initialState = {
+    pk: null,
     group: '',
     name: '',
     limit: 0,
@@ -52,8 +53,11 @@ class BudgetCategoryDialog extends Component {
     // and mark them as valid.
     let propState = {};
     if (props.initData) {
-      const { group, category, limit } = props.initData;
+      const {
+        pk, group, category, limit,
+      } = props.initData;
       propState = {
+        pk,
         group,
         name: category,
         limit,
@@ -142,10 +146,13 @@ class BudgetCategoryDialog extends Component {
 
   handleSubmit = () => {
     const { handleSubmit, month, year } = this.props;
-    const { group, name, limit } = this.state;
+    const {
+      pk, group, name, limit,
+    } = this.state;
 
     handleSubmit(
       {
+        pk,
         budget_month: month,
         budget_year: year,
         category: name,
@@ -285,9 +292,10 @@ BudgetCategoryDialog.propTypes = {
   dialogName: PropTypes.string.isRequired,
   dialogText: PropTypes.string.isRequired,
   initData: PropTypes.shape({
-    group: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
+    group: PropTypes.string.isRequired,
     limit: PropTypes.number.isRequired,
+    pk: PropTypes.number.isRequired,
   }),
   handleClose: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
