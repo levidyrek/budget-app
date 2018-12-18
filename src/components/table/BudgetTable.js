@@ -42,6 +42,9 @@ class BudgetTable extends Component {
         rows={rows}
         columns={this.columns}
         handleRowClick={showEditDialog}
+        defaultSorted={[{
+          id: 'group',
+        }]}
       />
     );
   }

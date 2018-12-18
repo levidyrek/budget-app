@@ -259,7 +259,7 @@ class BudgetCategoryDialog extends Component {
               isClearable
               onChange={this.handleGroupChange}
               options={groupItems}
-              placeholder="Group"
+              label="Group"
             />
           </FormControl>
           <br />

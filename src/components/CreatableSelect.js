@@ -137,7 +137,7 @@ const components = {
 };
 
 const CreatableSelect = (props) => {
-  const { classes, theme } = props;
+  const { classes, label, theme } = props;
 
   const selectStyles = {
     input: base => ({
@@ -156,6 +156,12 @@ const CreatableSelect = (props) => {
           classes={classes}
           styles={selectStyles}
           components={components}
+          textFieldProps={{
+            label,
+            InputLabelProps: {
+              shrink: true,
+            },
+          }}
           {...props}
         />
       </NoSsr>
@@ -165,6 +171,7 @@ const CreatableSelect = (props) => {
 
 CreatableSelect.propTypes = {
   classes: PropTypes.object.isRequired,
+  label: PropTypes.string.isRequired,
   theme: PropTypes.object.isRequired,
 };
 

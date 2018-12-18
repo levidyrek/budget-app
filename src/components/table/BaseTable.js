@@ -27,6 +27,7 @@ class BaseTable extends Component {
 
     return (
       <ReactTable
+        {...this.props}
         data={rows}
         columns={columns}
         defaultPageSize={25}
