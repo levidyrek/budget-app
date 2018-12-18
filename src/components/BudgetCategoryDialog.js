@@ -295,7 +295,7 @@ BudgetCategoryDialog.propTypes = {
     category: PropTypes.string.isRequired,
     group: PropTypes.string.isRequired,
     limit: PropTypes.number.isRequired,
-    pk: PropTypes.number.isRequired,
+    pk: PropTypes.number,
   }),
   handleClose: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
