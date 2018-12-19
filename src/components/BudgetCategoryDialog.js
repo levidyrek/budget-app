@@ -252,14 +252,19 @@ class BudgetCategoryDialog extends Component {
           <br />
           <FormControl className={classes.input}>
             <CreatableSelect
-              value={{
-                value: group,
-                label: group,
-              }}
+              value={
+                // Only return an object if group has a value, so
+                // that the placeholder shows appropriately.
+                group && {
+                  value: group,
+                  label: group,
+                }
+              }
               isClearable
               onChange={this.handleGroupChange}
               options={groupItems}
               label="Group"
+              placeholder="Select a group"
             />
           </FormControl>
           <br />

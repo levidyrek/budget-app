@@ -23,6 +23,7 @@ const styles = theme => ({
     flex: 1,
     alignItems: 'center',
     overflow: 'hidden',
+    height: '23px',
   },
   noOptionsMessage: {
     padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
@@ -31,7 +32,6 @@ const styles = theme => ({
     fontSize: 16,
   },
   placeholder: {
-    position: 'absolute',
     left: 2,
     fontSize: 16,
   },
