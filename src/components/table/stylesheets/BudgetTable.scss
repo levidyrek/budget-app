@@ -1,0 +1,11 @@
+.rt-tr:not(.-padRow) {
+    cursor: pointer;
+}
+
+/*
+    Hide pagination, since react-table does not support disabling pagination
+    by default.
+*/
+.pagination-bottom {
+    display: none;
+}

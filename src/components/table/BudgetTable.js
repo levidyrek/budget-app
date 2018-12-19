@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import { moneyRenderer } from '../../utils/renderers';
 import BaseTable from './BaseTable';
+import './stylesheets/BudgetTable.css';
 
 
 class BudgetTable extends Component {
@@ -45,6 +46,10 @@ class BudgetTable extends Component {
         defaultSorted={[{
           id: 'group',
         }]}
+        // react-table does not support disabling pagination,
+        // so set page size to number of rows and show 5 padding rows.
+        defaultPageSize={rows.length}
+        minRows={rows.length + 5}
       />
     );
   }
