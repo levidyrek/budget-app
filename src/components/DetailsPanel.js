@@ -3,6 +3,7 @@ import './stylesheets/DetailsPanel.css';
 import Fab from '@material-ui/core/Fab';
 import ContentAdd from '@material-ui/icons/Add';
 import PropTypes from 'prop-types';
+import { withTheme } from '@material-ui/core/styles';
 
 import InfoPanel from './InfoPanel';
 
@@ -28,6 +29,7 @@ class DetailsPanel extends Component {
           <Fab
             style={this.addButtonStyle}
             onClick={handleClickAdd}
+            color="primary"
           >
             <ContentAdd />
           </Fab>
@@ -46,4 +48,4 @@ DetailsPanel.propTypes = {
   table: PropTypes.node.isRequired,
 };
 
-export default DetailsPanel;
+export default withTheme()(DetailsPanel);

@@ -4,12 +4,13 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import PropTypes from 'prop-types';
+import { withTheme } from '@material-ui/core/styles';
 
 import MonthPicker from '../containers/MonthPicker';
 import MenuButton from '../containers/MenuButton';
 
 
-export default class TopBar extends Component {
+class TopBar extends Component {
     state = {
       anchorEl: null,
     };
@@ -24,10 +25,21 @@ export default class TopBar extends Component {
 
     render() {
       const { anchorEl } = this.state;
-      const { logOut, mobileMode, userData } = this.props;
+      const {
+        logOut, mobileMode, theme, userData,
+      } = this.props;
+
+      const styles = {
+        topBar: {
+          backgroundColor: theme.palette.primary.main,
+        },
+      };
 
       return (
-        <div className="TopBar">
+        <div
+          className="TopBar"
+          style={styles.topBar}
+        >
           <ul className="left">
             <li>
               {
@@ -62,7 +74,12 @@ export default class TopBar extends Component {
 TopBar.propTypes = {
   logOut: PropTypes.func.isRequired,
   mobileMode: PropTypes.bool.isRequired,
+  theme: PropTypes.shape({
+    palette: PropTypes.object.isRequired,
+  }).isRequired,
   userData: PropTypes.shape({
     username: PropTypes.string.isRequired,
   }).isRequired,
 };
+
+export default withTheme()(TopBar);
