@@ -50,6 +50,7 @@ class BudgetTable extends Component {
         // so set page size to number of rows and show 5 padding rows.
         defaultPageSize={rows.length}
         minRows={rows.length + 5}
+        noDataText="No categories found"
       />
     );
   }
