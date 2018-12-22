@@ -1,7 +1,11 @@
 @import 'styles/_constants.scss';
 
 .DetailsPanel {
-  height: 100%;
+  /*
+    Hard-coded until I can figure out why the flex styling doesn't
+    work in Firefox or Edge.
+  */
+  height: calc(100% - 65px);
   display: flex;
   flex-direction: row;
 }
@@ -16,14 +20,11 @@
 }
 
 .currentTable {
-  display: flex;
-  flex-direction: column;
+  height: 100%;
+}
 
-  > div {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
+.ReactTable {
+  max-height: 100%;
 }
 
 .InfoPanel {
