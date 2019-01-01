@@ -6,13 +6,14 @@ import BudgetCategoryDialog from '../containers/BudgetCategoryDialog';
 export const EDIT_BUDGET_CATEGORY_DIALOG = 'EDIT_BUDGET_CATEGORY_DIALOG';
 
 const EditBudgetCategoryDialog = (props) => {
-  const { dialogState, handleSubmit } = props;
+  const { dialogState, handleDelete, handleSubmit } = props;
   const dialogText = 'Modify this category for this month\'s budget.';
 
   return (
     <BudgetCategoryDialog
       dialogName={EDIT_BUDGET_CATEGORY_DIALOG}
       handleSubmit={handleSubmit}
+      handleDelete={handleDelete}
       submitAction="Update"
       dialogText={dialogText}
       initData={dialogState.data}
@@ -29,6 +30,7 @@ EditBudgetCategoryDialog.propTypes = {
       spent: PropTypes.number.isRequired,
     }),
   }).isRequired,
+  handleDelete: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 };
 

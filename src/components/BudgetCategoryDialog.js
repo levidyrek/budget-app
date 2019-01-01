@@ -164,6 +164,13 @@ class BudgetCategoryDialog extends Component {
     );
   }
 
+  handleDelete = () => {
+    const { handleDelete } = this.props;
+    const { pk } = this.state;
+
+    handleDelete(pk, this.onCallSuccess, this.onCallFailure);
+  }
+
   onCallSuccess = () => {
     this.handleClose();
   }
@@ -187,7 +194,7 @@ class BudgetCategoryDialog extends Component {
 
   render() {
     const {
-      budget, classes, dialogText, submitAction,
+      budget, classes, dialogText, handleDelete, submitAction,
     } = this.props;
     const {
       apiError, error, group, limit, name,
@@ -208,6 +215,17 @@ class BudgetCategoryDialog extends Component {
         {submitAction}
       </Button>,
     ];
+
+    if (handleDelete) {
+      actions.push(
+        <Button
+          key="delete"
+          onClick={this.handleDelete}
+        >
+          Delete
+        </Button>,
+      );
+    }
 
     const groups = budget.budget_category_groups;
     const groupItems = [];
@@ -296,6 +314,7 @@ BudgetCategoryDialog.propTypes = {
   }).isRequired,
   dialogName: PropTypes.string.isRequired,
   dialogText: PropTypes.string.isRequired,
+  handleDelete: PropTypes.func,
   initData: PropTypes.shape({
     category: PropTypes.string.isRequired,
     group: PropTypes.string.isRequired,
@@ -315,6 +334,7 @@ BudgetCategoryDialog.defaultProps = {
     category: '',
     limit: 0,
   },
+  handleDelete: null,
 };
 
 export default withStyles(styles)(BudgetCategoryDialog);

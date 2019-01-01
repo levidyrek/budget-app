@@ -131,3 +131,22 @@ export function updateBudgetCategory(budgetCategory, successCallback, errorCallb
     errorCallback(error);
   });
 }
+
+export function deleteBudgetCategory(pk, successCallback, errorCallback) {
+  return dispatch => fetch(`${BUDGET_CATEGORIES_ENDPOINT}${pk}/`, {
+    method: 'DELETE',
+    credentials: 'include',
+  }).then((response) => {
+    if (response.ok) {
+      return;
+    }
+
+    return Promise.reject('Delete was unsuccessful.');
+  }).then(() => {
+    // Request was successful.
+    successCallback();
+    dispatch(invalidateSelectedBudget());
+  }).catch((error) => {
+    errorCallback(error);
+  });
+}
