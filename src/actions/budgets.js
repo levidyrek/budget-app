@@ -138,9 +138,10 @@ export function deleteBudgetCategory(pk, successCallback, errorCallback) {
     credentials: 'include',
   }).then((response) => {
     if (response.ok) {
-      return;
+      return true;
     }
 
+    // eslint-disable-next-line prefer-promise-reject-errors
     return Promise.reject('Delete was unsuccessful.');
   }).then(() => {
     // Request was successful.
