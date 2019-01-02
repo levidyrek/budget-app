@@ -9,6 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import PropTypes from 'prop-types';
+import { red } from '@material-ui/core/colors';
 
 import { MoneyFormat } from '../utils/formats';
 import CreatableSelect from './CreatableSelect';
@@ -16,6 +17,12 @@ import CreatableSelect from './CreatableSelect';
 import './stylesheets/BudgetCategoryDialog.css';
 
 const styles = () => ({
+  deleteButton: {
+    color: red[500],
+    '&:hover': {
+      backgroundColor: red[50],
+    },
+  },
   input: {
     marginTop: '20px',
     minWidth: '325px',
@@ -221,6 +228,7 @@ class BudgetCategoryDialog extends Component {
         <Button
           key="delete"
           onClick={this.handleDelete}
+          className={classes.deleteButton}
         >
           Delete
         </Button>,
