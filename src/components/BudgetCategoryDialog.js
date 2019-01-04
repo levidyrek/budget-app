@@ -13,6 +13,7 @@ import { red } from '@material-ui/core/colors';
 
 import { MoneyFormat } from '../utils/formats';
 import CreatableSelect from './CreatableSelect';
+import ConfirmationDialog from './ConfirmationDialog';
 
 import './stylesheets/BudgetCategoryDialog.css';
 
@@ -51,6 +52,7 @@ class BudgetCategoryDialog extends Component {
       limit: '',
     },
     apiError: '',
+    confirmOpen: false,
   }
 
   constructor(props) {
@@ -178,6 +180,18 @@ class BudgetCategoryDialog extends Component {
     handleDelete(pk, this.onCallSuccess, this.onCallFailure);
   }
 
+  handleCancelDelete = () => {
+    this.setState({
+      confirmOpen: false,
+    });
+  }
+
+  handleClickDelete = () => {
+    this.setState({
+      confirmOpen: true,
+    });
+  }
+
   onCallSuccess = () => {
     this.handleClose();
   }
@@ -204,7 +218,7 @@ class BudgetCategoryDialog extends Component {
       budget, classes, dialogText, handleDelete, submitAction,
     } = this.props;
     const {
-      apiError, error, group, limit, name,
+      apiError, confirmOpen, error, group, limit, name,
     } = this.state;
 
     const actions = [
@@ -227,7 +241,7 @@ class BudgetCategoryDialog extends Component {
       actions.push(
         <Button
           key="delete"
-          onClick={this.handleDelete}
+          onClick={this.handleClickDelete}
           className={classes.deleteButton}
         >
           Delete
@@ -246,69 +260,78 @@ class BudgetCategoryDialog extends Component {
     });
 
     return (
-      <Dialog
-        open
-        classes={{
-          paper: classes.paper,
-        }}
-      >
-        <DialogTitle>
-          {`${submitAction} Budget Category`}
-        </DialogTitle>
-        <DialogContent
-          className={classes.dialogContent}
+      <div>
+        <Dialog
+          open
+          classes={{
+            paper: classes.paper,
+          }}
         >
-          <DialogContentText>
-            {dialogText}
-          </DialogContentText>
-          {
-            apiError
-            && <div className="error-msg">{apiError}</div>
-          }
-          <TextField
-            label="Category"
-            helperText={error.name}
-            onChange={this.handleNameChange}
-            value={name}
-            className={classes.input}
-            inputProps={{
-              maxLength: '50',
-            }}
-          />
-          <br />
-          <FormControl className={classes.input}>
-            <CreatableSelect
-              value={
-                // Only return an object if group has a value, so
-                // that the placeholder shows appropriately.
-                group && {
-                  value: group,
-                  label: group,
-                }
-              }
-              isClearable
-              onChange={this.handleGroupChange}
-              options={groupItems}
-              label="Group"
-              placeholder="Select a group"
+          <DialogTitle>
+            {`${submitAction} Budget Category`}
+          </DialogTitle>
+          <DialogContent
+            className={classes.dialogContent}
+          >
+            <DialogContentText>
+              {dialogText}
+            </DialogContentText>
+            {
+              apiError
+              && <div className="error-msg">{apiError}</div>
+            }
+            <TextField
+              label="Category"
+              helperText={error.name}
+              onChange={this.handleNameChange}
+              value={name}
+              className={classes.input}
+              inputProps={{
+                maxLength: '50',
+              }}
             />
-          </FormControl>
-          <br />
-          <TextField
-            label="Limit"
-            helperText={error.limit}
-            onChange={this.handleLimitChange}
-            value={limit}
-            className={classes.input}
-            InputProps={{
-              inputComponent: MoneyFormat,
-            }}
-          />
-        </DialogContent>
-        <DialogActions>
-          {actions}
-        </DialogActions>
-      </Dialog>
+            <br />
+            <FormControl className={classes.input}>
+              <CreatableSelect
+                value={
+                  // Only return an object if group has a value, so
+                  // that the placeholder shows appropriately.
+                  group && {
+                    value: group,
+                    label: group,
+                  }
+                }
+                isClearable
+                onChange={this.handleGroupChange}
+                options={groupItems}
+                label="Group"
+                placeholder="Select a group"
+              />
+            </FormControl>
+            <br />
+            <TextField
+              label="Limit"
+              helperText={error.limit}
+              onChange={this.handleLimitChange}
+              value={limit}
+              className={classes.input}
+              InputProps={{
+                inputComponent: MoneyFormat,
+              }}
+            />
+          </DialogContent>
+          <DialogActions>
+            {actions}
+          </DialogActions>
+        </Dialog>
+        <ConfirmationDialog
+          title="Deletion Confirmation"
+          description="Are you sure you want to delete this category?"
+          handleOk={this.handleDelete}
+          handleClose={this.handleCancelDelete}
+          open={confirmOpen}
+        />
+      </div>
     );
   }
 }
