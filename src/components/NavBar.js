@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import './stylesheets/NavBar.css';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Link } from 'react-router-dom';
-import logo from '../logo.svg';
+import PropTypes from 'prop-types';
 
 
-export default class NavBar extends Component {
+class NavBar extends Component {
     styles = {
       floating: {
         position: 'absolute',
@@ -17,21 +17,27 @@ export default class NavBar extends Component {
     }
 
     render() {
+      const { floating } = this.props;
+
       return (
         <div
           className="NavBar"
-          style={this.props.floating ? this.styles.floating : this.styles.default}
+          style={floating ? this.styles.floating : this.styles.default}
         >
-          <img src={logo} alt="" id="logo" />
+          <h2 className="header">Budget App</h2>
           <div className="menu">
             <Link to="/budget/expenses">
               <MenuItem>Expenses</MenuItem>
             </Link>
             <MenuItem>Transactions</MenuItem>
-            <MenuItem>Income</MenuItem>
-            <MenuItem>Goals</MenuItem>
           </div>
         </div>
       );
     }
 }
+
+NavBar.propTypes = {
+  floating: PropTypes.bool.isRequired,
+};
+
+export default NavBar;
