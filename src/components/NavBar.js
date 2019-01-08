@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './stylesheets/NavBar.css';
 import MenuItem from '@material-ui/core/MenuItem';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types';
 
 
@@ -26,10 +26,18 @@ class NavBar extends Component {
         >
           <h2 className="header">Budget App</h2>
           <div className="menu">
-            <Link to="/budget/expenses">
-              <MenuItem>Expenses</MenuItem>
-            </Link>
-            <MenuItem>Transactions</MenuItem>
+            <NavLink
+              to="/budget/expenses"
+              activeClassName="active"
+            >
+              <MenuItem className="menuItem">Expenses</MenuItem>
+            </NavLink>
+            <NavLink
+              to="/budget/transactions"
+              activeClassName="active"
+            >
+              <MenuItem className="menuItem">Transactions</MenuItem>
+            </NavLink>
           </div>
         </div>
       );
