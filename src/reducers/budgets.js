@@ -30,7 +30,6 @@ export function budgets(
 const emptyBudget = {
   budget_categories: {},
   budget_category_groups: {},
-  budget_goals: [],
   month: '',
   year: '',
 };
