@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import NavBar from '../containers/NavBar';
 import TopBar from '../containers/TopBar';
 import Expenses from '../containers/Expenses';
+import Transactions from '../containers/Transactions';
 import { enableMobileMode } from '../actions/responsive';
 import DialogController from '../containers/DialogController';
 
@@ -46,6 +47,7 @@ class Budget extends Component {
           <TopBar />
           <Switch>
             <Route path={`${match.path}/expenses`} component={Expenses} />
+            <Route path={`${match.path}/transactions`} component={Transactions} />
             <Redirect to={`${match.path}/expenses`} />
           </Switch>
         </div>
