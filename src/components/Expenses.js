@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactLoading from 'react-loading';
 import PropTypes from 'prop-types';
 
 import DetailsPanel from '../containers/DetailsPanel';
@@ -10,29 +9,20 @@ import { toggleDialog } from '../actions/dialogs';
 
 
 class Expenses extends Component {
-  constructor(props) {
-    super(props);
-    this.fetchDataIfNeeded();
-  }
-
-  componentDidUpdate() {
-    this.fetchDataIfNeeded();
-  }
-
   handleClickAdd = () => {
     const { dispatch } = this.props;
 
     dispatch(toggleDialog(ADD_BUDGET_CATEGORY_DIALOG));
   }
 
-  checkIfLoading() {
+  checkIfLoading = () => {
     const { budgets, selectedBudget } = this.props;
 
     return budgets.fetching || !budgets.items
       || selectedBudget.fetching || !selectedBudget.budget;
   }
 
-  fetchDataIfNeeded() {
+  fetchDataIfNeeded = () => {
     const { budgets, selectedBudget, dispatch } = this.props;
 
     // If budgets are have not been fetched or are being fetched, fetch them.
@@ -46,16 +36,12 @@ class Expenses extends Component {
 
   render() {
     return (
-      (
-        !this.checkIfLoading()
-        && (
-          <DetailsPanel
-            table={<BudgetTable />}
-            handleClickAdd={this.handleClickAdd}
-          />
-        )
-      )
-      || <ReactLoading type="bars" color="#444" />
+      <DetailsPanel
+        table={<BudgetTable />}
+        handleClickAdd={this.handleClickAdd}
+        checkIfLoading={this.checkIfLoading}
+        fetchDataIfNeeded={this.fetchDataIfNeeded}
+      />
     );
   }
 }
