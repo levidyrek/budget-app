@@ -31,6 +31,7 @@ const emptyBudget = {
   budget_categories: {},
   budget_category_groups: {},
   month: '',
+  transactions: {},
   year: '',
 };
 
