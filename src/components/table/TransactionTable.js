@@ -6,31 +6,30 @@ import { moneyRenderer } from '../../utils/renderers';
 import BaseTable from './BaseTable';
 
 
-class ExpenseTable extends Component {
+// TODO: Look into generalizing this and the ExpenseTable
+class TransactionTable extends Component {
   columns = [
     {
       accessor: 'pk',
       show: false,
     },
     {
-      accessor: 'group',
-      Header: 'Group',
+      accessor: 'amount',
+      Header: 'Amount',
+      className: 'money',
+      Cell: moneyRenderer,
     },
     {
-      accessor: 'category',
+      accessor: 'payee',
+      Header: 'Payee',
+    },
+    {
+      accessor: 'budget_category',
       Header: 'Category',
     },
     {
-      accessor: 'limit',
-      className: 'money',
-      Header: 'Limit',
-      Cell: moneyRenderer,
-    },
-    {
-      accessor: 'spent',
-      className: 'money',
-      Header: 'Spent',
-      Cell: moneyRenderer,
+      accessor: 'date',
+      Header: 'Date',
     },
   ];
 
@@ -43,21 +42,21 @@ class ExpenseTable extends Component {
         columns={this.columns}
         handleRowClick={showEditDialog}
         defaultSorted={[{
-          id: 'group',
+          id: 'date',
         }]}
         // react-table does not support disabling pagination,
         // so set page size to number of rows and show 5 padding rows.
         defaultPageSize={rows.length}
         minRows={rows.length + 5}
-        noDataText="No categories found"
+        noDataText="No transactions found"
       />
     );
   }
 }
 
-ExpenseTable.propTypes = {
+TransactionTable.propTypes = {
   rows: PropTypes.arrayOf(PropTypes.object).isRequired,
   showEditDialog: PropTypes.func.isRequired,
 };
 
-export default ExpenseTable;
+export default TransactionTable;

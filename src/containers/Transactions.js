@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import Expenses from '../components/Expenses';
+import Transactions from '../components/Transactions';
 
 
 const mapStateToProps = state => ({
@@ -8,4 +8,4 @@ const mapStateToProps = state => ({
   selectedBudget: state.selectedBudget,
 });
 
-export default withRouter(connect(mapStateToProps)(Expenses));
+export default withRouter(connect(mapStateToProps)(Transactions));
