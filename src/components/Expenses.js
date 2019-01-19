@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import DetailsPanel from '../containers/DetailsPanel';
 import { fetchBudgets, fetchSelectedBudget } from '../actions/budgets';
-import BudgetTable from '../containers/BudgetTable';
+import ExpenseTable from '../containers/ExpenseTable';
 import { ADD_BUDGET_CATEGORY_DIALOG } from './AddBudgetCategoryDialog';
 import { toggleDialog } from '../actions/dialogs';
 
@@ -37,7 +37,7 @@ class Expenses extends Component {
   render() {
     return (
       <DetailsPanel
-        table={<BudgetTable />}
+        table={<ExpenseTable />}
         handleClickAdd={this.handleClickAdd}
         checkIfLoading={this.checkIfLoading}
         fetchDataIfNeeded={this.fetchDataIfNeeded}

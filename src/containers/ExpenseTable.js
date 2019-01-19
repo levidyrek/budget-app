@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import BudgetTable from '../components/table/BudgetTable';
+import ExpenseTable from '../components/table/ExpenseTable';
 import { toggleDialog } from '../actions/dialogs';
 import { EDIT_BUDGET_CATEGORY_DIALOG } from '../components/EditBudgetCategoryDialog';
 
@@ -31,4 +31,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BudgetTable));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ExpenseTable));

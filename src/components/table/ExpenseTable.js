@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 
 import { moneyRenderer } from '../../utils/renderers';
 import BaseTable from './BaseTable';
-import './stylesheets/BudgetTable.css';
+import './stylesheets/ExpenseTable.css';
 
 
-class BudgetTable extends Component {
+class ExpenseTable extends Component {
   columns = [
     {
       accessor: 'pk',
@@ -56,9 +56,9 @@ class BudgetTable extends Component {
   }
 }
 
-BudgetTable.propTypes = {
+ExpenseTable.propTypes = {
   rows: PropTypes.arrayOf(PropTypes.object).isRequired,
   showEditDialog: PropTypes.func.isRequired,
 };
 
-export default BudgetTable;
+export default ExpenseTable;
