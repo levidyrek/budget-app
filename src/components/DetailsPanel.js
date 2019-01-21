@@ -7,6 +7,7 @@ import { withTheme } from '@material-ui/core/styles';
 
 import './stylesheets/DetailsPanel.css';
 import InfoPanel from './InfoPanel';
+import { fetchBudgets, fetchSelectedBudget } from '../actions/budgets';
 
 
 class DetailsPanel extends Component {
@@ -27,19 +28,33 @@ class DetailsPanel extends Component {
     this.fetchDataIfNeeded();
   }
 
+  checkIfLoading = () => {
+    const { budgets, selectedBudget } = this.props;
+
+    return budgets.fetching || !budgets.items
+      || selectedBudget.fetching || !selectedBudget.budget;
+  }
+
   fetchDataIfNeeded = () => {
-    const { fetchDataIfNeeded } = this.props;
-    fetchDataIfNeeded();
+    const { budgets, dispatch, selectedBudget } = this.props;
+
+    // If budgets are have not been fetched or are being fetched, fetch them.
+    if (!budgets.fetching && !budgets.items) {
+      dispatch(fetchBudgets());
+    } else if (budgets.items && !selectedBudget.fetching && selectedBudget.invalidated) {
+      // If budgets have been fetched, but selected budget hasn't been, fetch it.
+      dispatch(fetchSelectedBudget(selectedBudget.month, selectedBudget.year));
+    }
   }
 
   render() {
     const {
-      checkIfLoading, handleClickAdd, mobileMode, table,
+      handleClickAdd, mobileMode, table,
     } = this.props;
 
     return (
       (
-        !checkIfLoading()
+        !this.checkIfLoading()
         && (
           <div className="DetailsPanel">
             <div className="tableView">
@@ -67,10 +82,19 @@ class DetailsPanel extends Component {
 }
 
 DetailsPanel.propTypes = {
-  checkIfLoading: PropTypes.func.isRequired,
+  budgets: PropTypes.shape({
+    fetching: PropTypes.bool.isRequired,
+    items: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
+  dispatch: PropTypes.func.isRequired,
   handleClickAdd: PropTypes.func.isRequired,
-  fetchDataIfNeeded: PropTypes.func.isRequired,
   mobileMode: PropTypes.bool.isRequired,
+  selectedBudget: PropTypes.shape({
+    fetching: PropTypes.bool.isRequired,
+    invalidated: PropTypes.bool.isRequired,
+    month: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+  }).isRequired,
   table: PropTypes.node.isRequired,
 };
 
