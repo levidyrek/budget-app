@@ -36,20 +36,24 @@ const styles = () => ({
   },
 });
 
-class BudgetCategoryDialog extends Component {
+class TransactionDialog extends Component {
   initialState = {
     pk: null,
-    group: '',
-    name: '',
-    limit: 0,
+    amount: 0,
+    payee: '',
+    category: null,
+    date: null,
     validate: {
-      group: false,
-      name: false,
-      limit: true,
+      amount: false,
+      payee: false,
+      category: false,
+      date: false,
     },
     error: {
-      name: '',
-      limit: '',
+      amount: '',
+      payee: '',
+      category: '',
+      date: '',
     },
     apiError: '',
     confirmOpen: false,
@@ -63,17 +67,19 @@ class BudgetCategoryDialog extends Component {
     let propState = {};
     if (props.initData) {
       const {
-        pk, group, category, limit,
+        amount, category, date, payee, pk,
       } = props.initData;
       propState = {
+        amount,
+        category,
+        date,
+        payee,
         pk,
-        group,
-        name: category,
-        limit,
         validate: {
-          group: true,
-          name: true,
-          limit: true,
+          amount: true,
+          category: true,
+          date: true,
+          payee: true,
         },
       };
     }
@@ -336,7 +342,7 @@ class BudgetCategoryDialog extends Component {
   }
 }
 
-BudgetCategoryDialog.propTypes = {
+TransactionDialog.propTypes = {
   budget: PropTypes.shape({
     budget_category_groups: PropTypes.object.isRequired,
   }).isRequired,
@@ -359,7 +365,7 @@ BudgetCategoryDialog.propTypes = {
   year: PropTypes.number.isRequired,
 };
 
-BudgetCategoryDialog.defaultProps = {
+TransactionDialog.defaultProps = {
   initData: {
     group: '',
     category: '',
@@ -368,4 +374,4 @@ BudgetCategoryDialog.defaultProps = {
   handleDelete: null,
 };
 
-export default withStyles(styles)(BudgetCategoryDialog);
+export default withStyles(styles)(TransactionDialog);
