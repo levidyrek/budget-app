@@ -86,67 +86,40 @@ class TransactionDialog extends Component {
     this.state = Object.assign({}, this.initialState, propState);
   }
 
-  handleGroupChange = (option) => {
+  handlePayeeChange = (option) => {
     const { validate } = this.state;
     const value = option ? option.value : '';
 
     this.setState({
-      group: value,
+      payee: value,
       validate: Object.assign({}, validate, {
-        group: true,
+        payee: true,
       }),
     });
   }
 
-  handleNameChange = (event) => {
+  handleAmountChange = (event) => {
     const { error, validate } = this.state;
 
-    const name = event.target.value;
-    if (name) {
+    const amount = event.target.value;
+    if (/^[0-9]+(\.[0-9]{2})?$/.test(amount)) {
       this.setState({
-        name,
+        amount,
         validate: Object.assign({}, validate, {
-          name: true,
+          amount: true,
         }),
         error: Object.assign({}, error, {
-          name: '',
+          amount: '',
         }),
       });
     } else {
       this.setState({
+        amount,
         validate: Object.assign({}, validate, {
-          name: false,
+          amount: false,
         }),
         error: Object.assign({}, error, {
-          name: 'This field is required.',
-        }),
-        name: '',
-      });
-    }
-  }
-
-  handleLimitChange = (event) => {
-    const { error, validate } = this.state;
-
-    const limit = event.target.value;
-    if (/^[0-9]+(\.[0-9]{2})?$/.test(limit)) {
-      this.setState({
-        limit,
-        validate: Object.assign({}, validate, {
-          limit: true,
-        }),
-        error: Object.assign({}, error, {
-          limit: '',
-        }),
-      });
-    } else {
-      this.setState({
-        limit,
-        validate: Object.assign({}, validate, {
-          limit: false,
-        }),
-        error: Object.assign({}, error, {
-          limit: 'Not a valid amount.',
+          amount: 'Not a valid amount.',
         }),
       });
     }
@@ -157,33 +130,6 @@ class TransactionDialog extends Component {
 
     this.reset();
     handleClose(dialogName);
-  }
-
-  handleSubmit = () => {
-    const { handleSubmit, month, year } = this.props;
-    const {
-      pk, group, name, limit,
-    } = this.state;
-
-    handleSubmit(
-      {
-        pk,
-        budget_month: month,
-        budget_year: year,
-        category: name,
-        group,
-        limit,
-      },
-      this.onCallSuccess,
-      this.onCallFailure,
-    );
-  }
-
-  handleDelete = () => {
-    const { handleDelete } = this.props;
-    const { pk } = this.state;
-
-    handleDelete(pk, this.onCallSuccess, this.onCallFailure);
   }
 
   handleCancelDelete = () => {
@@ -221,10 +167,10 @@ class TransactionDialog extends Component {
 
   render() {
     const {
-      budget, classes, dialogText, handleDelete, submitAction,
+      budget, classes, dialogText, submitAction,
     } = this.props;
     const {
-      apiError, confirmOpen, error, group, limit, name,
+      amount, apiError, confirmOpen, error, payee,
     } = this.state;
 
     const actions = [
@@ -237,29 +183,29 @@ class TransactionDialog extends Component {
       <Button
         key="submit"
         disabled={!this.inputIsValid()}
-        onClick={this.handleSubmit}
+        // onClick={this.handleSubmit}
       >
         {submitAction}
       </Button>,
     ];
 
-    if (handleDelete) {
-      actions.push(
-        <Button
-          key="delete"
-          onClick={this.handleClickDelete}
-          className={classes.deleteButton}
-        >
-          Delete
-        </Button>,
-      );
-    }
+    // if (handleDelete) {
+    //   actions.push(
+    //     <Button
+    //       key="delete"
+    //       onClick={this.handleClickDelete}
+    //       className={classes.deleteButton}
+    //     >
+    //       Delete
+    //     </Button>,
+    //   );
+    // }
 
-    const groups = budget.budget_category_groups;
-    const groupItems = [];
-    Object.entries(groups).forEach((item) => {
+    const transactionLookup = budget.transactions;
+    const transactions = [];
+    Object.entries(transactionLookup).forEach((item) => {
       const itemGroup = item[1];
-      groupItems.push({
+      transactions.push({
         value: itemGroup.name,
         label: itemGroup.name,
       });
@@ -274,7 +220,7 @@ class TransactionDialog extends Component {
           }}
         >
           <DialogTitle>
-            {`${submitAction} Budget Category`}
+            {`${submitAction} Transaction`}
           </DialogTitle>
           <DialogContent
             className={classes.dialogContent}
@@ -287,44 +233,34 @@ class TransactionDialog extends Component {
               && <div className="error-msg">{apiError}</div>
             }
             <TextField
-              label="Category"
-              helperText={error.name}
-              onChange={this.handleNameChange}
-              value={name}
+              label="Amount"
+              helperText={error.amount}
+              onChange={this.handleMoneyChange}
+              value={amount}
               className={classes.input}
-              inputProps={{
-                maxLength: '50',
+              InputProps={{
+                inputComponent: MoneyFormat,
               }}
             />
             <br />
             <FormControl className={classes.input}>
               <CreatableSelect
                 value={
-                  // Only return an object if group has a value, so
+                  // Only return an object if payee has a value, so
                   // that the placeholder shows appropriately.
-                  group && {
-                    value: group,
-                    label: group,
+                  payee && {
+                    value: payee,
+                    label: payee,
                   }
                 }
                 isClearable
-                onChange={this.handleGroupChange}
-                options={groupItems}
-                label="Group"
-                placeholder="Select a group"
+                onChange={this.handlePayeeChange}
+                options={transactions}
+                label="Payee"
+                placeholder="Select a payee"
               />
             </FormControl>
             <br />
-            <TextField
-              label="Limit"
-              helperText={error.limit}
-              onChange={this.handleLimitChange}
-              value={limit}
-              className={classes.input}
-              InputProps={{
-                inputComponent: MoneyFormat,
-              }}
-            />
           </DialogContent>
           <DialogActions>
             {actions}
@@ -332,7 +268,7 @@ class TransactionDialog extends Component {
         </Dialog>
         <ConfirmationDialog
           title="Deletion Confirmation"
-          description="Are you sure you want to delete this category?"
+          description="Are you sure you want to delete this transaction?"
           handleOk={this.handleDelete}
           handleClose={this.handleCancelDelete}
           open={confirmOpen}
@@ -344,34 +280,34 @@ class TransactionDialog extends Component {
 
 TransactionDialog.propTypes = {
   budget: PropTypes.shape({
-    budget_category_groups: PropTypes.object.isRequired,
+    transactions: PropTypes.object.isRequired,
   }).isRequired,
   classes: PropTypes.shape({
     input: PropTypes.string.isRequired,
   }).isRequired,
   dialogName: PropTypes.string.isRequired,
   dialogText: PropTypes.string.isRequired,
-  handleDelete: PropTypes.func,
+  // handleDelete: PropTypes.func,
   initData: PropTypes.shape({
+    amount: PropTypes.number.isRequired,
     category: PropTypes.string.isRequired,
-    group: PropTypes.string.isRequired,
-    limit: PropTypes.number.isRequired,
+    date: PropTypes.string.isRequired,
+    payee: PropTypes.string.isRequired,
     pk: PropTypes.number,
   }),
   handleClose: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  month: PropTypes.string.isRequired,
+  // handleSubmit: PropTypes.func.isRequired,
   submitAction: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
 };
 
 TransactionDialog.defaultProps = {
   initData: {
-    group: '',
+    amount: 0,
     category: '',
-    limit: 0,
+    date: '',
+    payee: '',
   },
-  handleDelete: null,
+  // handleDelete: null,
 };
 
 export default withStyles(styles)(TransactionDialog);
