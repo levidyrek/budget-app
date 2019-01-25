@@ -167,7 +167,7 @@ class TransactionDialog extends Component {
 
   render() {
     const {
-      budget, classes, dialogText, submitAction,
+      budget, classes, dialogText, open, submitAction,
     } = this.props;
     const {
       amount, apiError, confirmOpen, error, payee,
@@ -214,7 +214,7 @@ class TransactionDialog extends Component {
     return (
       <div>
         <Dialog
-          open
+          open={open}
           classes={{
             paper: classes.paper,
           }}
@@ -297,6 +297,7 @@ TransactionDialog.propTypes = {
   }),
   handleClose: PropTypes.func.isRequired,
   // handleSubmit: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
   submitAction: PropTypes.string.isRequired,
 };
 

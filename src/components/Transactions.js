@@ -3,29 +3,40 @@ import PropTypes from 'prop-types';
 
 import DetailsPanel from '../containers/DetailsPanel';
 import TransactionTable from '../containers/TransactionTable';
-import { ADD_BUDGET_CATEGORY_DIALOG } from './AddBudgetCategoryDialog';
+import AddTransactionDialog from '../containers/AddTransactionDialog';
 import { toggleDialog } from '../actions/dialogs';
 
 
 class Transactions extends Component {
-  handleClickAdd = () => {
-    const { dispatch } = this.props;
+  constructor(props) {
+    super(props);
 
-    dispatch(toggleDialog(ADD_BUDGET_CATEGORY_DIALOG));
+    this.state = {
+      addDialogOpen: false,
+    };
+  }
+
+  handleClickAdd = () => {
+    this.setState({
+      addDialogOpen: true,
+    });
   }
 
   render() {
+    const { addDialogOpen } = this.state;
+
     return (
-      <DetailsPanel
-        table={<TransactionTable />}
-        handleClickAdd={this.handleClickAdd}
-      />
+      <div>
+        <DetailsPanel
+          table={<TransactionTable />}
+          handleClickAdd={this.handleClickAdd}
+        />
+        <AddTransactionDialog
+          open={addDialogOpen}
+        />
+      </div>
     );
   }
 }
-
-Transactions.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
 
 export default Transactions;
