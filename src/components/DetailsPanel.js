@@ -49,7 +49,7 @@ class DetailsPanel extends Component {
 
   render() {
     const {
-      handleClickAdd, mobileMode, table,
+      children, handleClickAdd, mobileMode, table,
     } = this.props;
 
     return (
@@ -68,6 +68,9 @@ class DetailsPanel extends Component {
               >
                 <ContentAdd />
               </Fab>
+              <div>
+                {children}
+              </div>
             </div>
             {
               !mobileMode
@@ -86,6 +89,7 @@ DetailsPanel.propTypes = {
     fetching: PropTypes.bool.isRequired,
     items: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
+  children: PropTypes.node.isRequired,
   dispatch: PropTypes.func.isRequired,
   handleClickAdd: PropTypes.func.isRequired,
   mobileMode: PropTypes.bool.isRequired,
@@ -97,5 +101,9 @@ DetailsPanel.propTypes = {
   }).isRequired,
   table: PropTypes.node.isRequired,
 };
+
+// DetailsPanel.defaultProps = {
+//   children: [],
+// };
 
 export default withTheme()(DetailsPanel);

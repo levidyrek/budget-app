@@ -22,6 +22,12 @@ class Transactions extends Component {
     });
   }
 
+  handleCloseAdd = () => {
+    this.setState({
+      addDialogOpen: false,
+    });
+  }
+
   render() {
     const { addDialogOpen } = this.state;
 
@@ -30,10 +36,12 @@ class Transactions extends Component {
         <DetailsPanel
           table={<TransactionTable />}
           handleClickAdd={this.handleClickAdd}
-        />
-        <AddTransactionDialog
-          open={addDialogOpen}
-        />
+        >
+          <AddTransactionDialog
+            open={addDialogOpen}
+            handleClose={this.handleCloseAdd}
+          />
+        </DetailsPanel>
       </div>
     );
   }

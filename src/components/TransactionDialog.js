@@ -126,10 +126,10 @@ class TransactionDialog extends Component {
   }
 
   handleClose = () => {
-    const { dialogName, handleClose } = this.props;
+    const { handleClose } = this.props;
 
+    handleClose();
     this.reset();
-    handleClose(dialogName);
   }
 
   handleCancelDelete = () => {
@@ -201,6 +201,7 @@ class TransactionDialog extends Component {
     //   );
     // }
 
+    // TODO: These should be Payees rather than transactions.
     const transactionLookup = budget.transactions;
     const transactions = [];
     Object.entries(transactionLookup).forEach((item) => {
@@ -285,7 +286,6 @@ TransactionDialog.propTypes = {
   classes: PropTypes.shape({
     input: PropTypes.string.isRequired,
   }).isRequired,
-  dialogName: PropTypes.string.isRequired,
   dialogText: PropTypes.string.isRequired,
   // handleDelete: PropTypes.func,
   initData: PropTypes.shape({

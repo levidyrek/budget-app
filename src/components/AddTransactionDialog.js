@@ -6,13 +6,10 @@ import TransactionDialog from '../containers/TransactionDialog';
 export const ADD_TRANSACTION_DIALOG = 'ADD_TRANSACTION_DIALOG';
 
 const AddTransactionDialog = (props) => {
-  const { handleSubmit } = props;
   const dialogText = 'Create a new transaction for your monthly budget.';
 
   return (
     <TransactionDialog
-      dialogName={ADD_TRANSACTION_DIALOG}
-      handleSubmit={handleSubmit}
       submitAction="Add"
       dialogText={dialogText}
       {...props}

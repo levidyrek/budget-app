@@ -9,9 +9,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleClose: (dialogName) => {
-    dispatch(toggleDialog(dialogName));
-  },
+
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TransactionDialog));
