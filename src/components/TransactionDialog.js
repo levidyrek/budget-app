@@ -201,12 +201,11 @@ class TransactionDialog extends Component {
     //   );
     // }
 
-    // TODO: These should be Payees rather than transactions.
-    const transactionLookup = budget.transactions;
-    const transactions = [];
-    Object.entries(transactionLookup).forEach((item) => {
+    const payeeLookup = budget.payees;
+    const payees = [];
+    Object.entries(payeeLookup).forEach((item) => {
       const itemGroup = item[1];
-      transactions.push({
+      payees.push({
         value: itemGroup.name,
         label: itemGroup.name,
       });
@@ -256,7 +255,7 @@ class TransactionDialog extends Component {
                 }
                 isClearable
                 onChange={this.handlePayeeChange}
-                options={transactions}
+                options={payees}
                 label="Payee"
                 placeholder="Select a payee"
               />
@@ -281,7 +280,7 @@ class TransactionDialog extends Component {
 
 TransactionDialog.propTypes = {
   budget: PropTypes.shape({
-    transactions: PropTypes.object.isRequired,
+    payees: PropTypes.object.isRequired,
   }).isRequired,
   classes: PropTypes.shape({
     input: PropTypes.string.isRequired,
