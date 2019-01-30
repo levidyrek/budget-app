@@ -10,6 +10,9 @@ import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import PropTypes from 'prop-types';
 import { red } from '@material-ui/core/colors';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import { MoneyFormat } from '../utils/formats';
 import CreatableSelect from './CreatableSelect';
@@ -84,6 +87,10 @@ class TransactionDialog extends Component {
       };
     }
     this.state = Object.assign({}, this.initialState, propState);
+  }
+
+  handleCategoryChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   handlePayeeChange = (option) => {
@@ -170,7 +177,7 @@ class TransactionDialog extends Component {
       budget, classes, dialogText, open, submitAction,
     } = this.props;
     const {
-      amount, apiError, confirmOpen, error, payee,
+      amount, apiError, category, confirmOpen, error, payee,
     } = this.state;
 
     const actions = [
@@ -204,11 +211,22 @@ class TransactionDialog extends Component {
     const payeeLookup = budget.payees;
     const payees = [];
     Object.entries(payeeLookup).forEach((item) => {
-      const itemGroup = item[1];
+      const payeeData = item[1];
       payees.push({
-        value: itemGroup.name,
-        label: itemGroup.name,
+        value: payeeData.name,
+        label: payeeData.name,
       });
+    });
+
+    const categoryLookup = budget.budget_categories;
+    const categories = [];
+    Object.entries(categoryLookup).forEach((item) => {
+      const categoryData = item[1];
+      categories.push(
+        <MenuItem key={categoryData.pk} value={categoryData.pk}>
+          {categoryData.category}
+        </MenuItem>,
+      );
     });
 
     return (
@@ -261,6 +279,19 @@ class TransactionDialog extends Component {
               />
             </FormControl>
             <br />
+            <FormControl className={classes.input}>
+              <InputLabel htmlFor="category">Category</InputLabel>
+              <Select
+                value={category}
+                onChange={this.handleCategoryChange}
+                inputProps={{
+                  name: 'category',
+                  id: 'category',
+                }}
+              >
+                {categories}
+              </Select>
+            </FormControl>
           </DialogContent>
           <DialogActions>
             {actions}
@@ -280,6 +311,7 @@ class TransactionDialog extends Component {
 
 TransactionDialog.propTypes = {
   budget: PropTypes.shape({
+    budget_categories: PropTypes.object.isRequired,
     payees: PropTypes.object.isRequired,
   }).isRequired,
   classes: PropTypes.shape({
