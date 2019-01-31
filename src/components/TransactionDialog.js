@@ -100,6 +100,17 @@ class TransactionDialog extends Component {
     });
   }
 
+  // handleDateChange = (event) => {
+  //   const { validate } = this.state;
+
+  //   this.setState({
+  //     date: event.target.value,
+  //     validate: Object.assign({}, validate, {
+  //       date: true,
+  //     }),
+  //   });
+  // }
+
   handlePayeeChange = (option) => {
     const { validate } = this.state;
     const value = option ? option.value : '';
@@ -156,6 +167,10 @@ class TransactionDialog extends Component {
     this.setState({
       confirmOpen: true,
     });
+  }
+
+  handleDateChange = () => {
+
   }
 
   onCallSuccess = () => {
@@ -294,7 +309,6 @@ class TransactionDialog extends Component {
                 inputProps={{
                   name: 'category',
                   id: 'category',
-                  shrink: true,
                 }}
                 displayEmpty
               >
@@ -304,6 +318,19 @@ class TransactionDialog extends Component {
                 {categories}
               </Select>
             </FormControl>
+            <br />
+            <TextField
+              id="date"
+              label="Date"
+              type="date"
+              InputLabelProps={{
+                name: 'date',
+                shrink: true,
+              }}
+              className={classes.input}
+              // value={date}
+              // onChange={this.handleDateChange}
+            />
           </DialogContent>
           <DialogActions>
             {actions}
