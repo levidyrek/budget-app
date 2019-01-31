@@ -90,7 +90,14 @@ class TransactionDialog extends Component {
   }
 
   handleCategoryChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
+    const { validate } = this.state;
+
+    this.setState({
+      category: event.target.value,
+      validate: Object.assign({}, validate, {
+        category: true,
+      }),
+    });
   }
 
   handlePayeeChange = (option) => {
@@ -280,15 +287,20 @@ class TransactionDialog extends Component {
             </FormControl>
             <br />
             <FormControl className={classes.input}>
-              <InputLabel htmlFor="category">Category</InputLabel>
+              <InputLabel htmlFor="category" shrink>Category</InputLabel>
               <Select
                 value={category}
                 onChange={this.handleCategoryChange}
                 inputProps={{
                   name: 'category',
                   id: 'category',
+                  shrink: true,
                 }}
+                displayEmpty
               >
+                <MenuItem value="" disabled>
+                  Select a category
+                </MenuItem>
                 {categories}
               </Select>
             </FormControl>
