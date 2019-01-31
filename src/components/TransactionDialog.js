@@ -46,16 +46,13 @@ class TransactionDialog extends Component {
     payee: '',
     category: null,
     date: null,
+    inflow: false,
     validate: {
       amount: false,
-      payee: false,
-      category: false,
       date: false,
     },
     error: {
       amount: '',
-      payee: '',
-      category: '',
       date: '',
     },
     apiError: '',
@@ -89,65 +86,39 @@ class TransactionDialog extends Component {
     this.state = Object.assign({}, this.initialState, propState);
   }
 
-  handleCategoryChange = (event) => {
-    const { validate } = this.state;
+  handleChange = (name, value, valid = true, errorMsg = '') => {
+    const { error, validate } = this.state;
 
     this.setState({
-      category: event.target.value,
+      [name]: value,
       validate: Object.assign({}, validate, {
-        category: true,
+        [name]: valid,
+      }),
+      error: Object.assign({}, error, {
+        [name]: errorMsg,
       }),
     });
   }
 
-  handleDateChange = (event) => {
-    const { validate } = this.state;
-
-    this.setState({
-      date: event.target.value,
-      validate: Object.assign({}, validate, {
-        date: true,
-      }),
-    });
+  handleChangeEvent = (event) => {
+    this.handleChange(event.target.name, event.target.value);
   }
 
   handlePayeeChange = (option) => {
-    const { validate } = this.state;
     const value = option ? option.value : '';
 
-    this.setState({
-      payee: value,
-      validate: Object.assign({}, validate, {
-        payee: true,
-      }),
-    });
+    this.handleChange('payee', value);
   }
 
   handleAmountChange = (event) => {
-    const { error, validate } = this.state;
-
     const amount = event.target.value;
-    if (/^[0-9]+(\.[0-9]{2})?$/.test(amount)) {
-      this.setState({
-        amount,
-        validate: Object.assign({}, validate, {
-          amount: true,
-        }),
-        error: Object.assign({}, error, {
-          amount: '',
-        }),
-      });
-    } else {
-      this.setState({
-        amount,
-        validate: Object.assign({}, validate, {
-          amount: false,
-        }),
-        error: Object.assign({}, error, {
-          amount: 'Not a valid amount.',
-        }),
-      });
+    let valid = true;
+    let error = '';
+    if (!/^[0-9]+(\.[0-9]{2})?$/.test(amount)) {
+      valid = false;
+      error = 'Not a valid amount.';
     }
+    this.handleChange('amount', amount, valid, error);
   }
 
   handleClose = () => {
@@ -271,7 +242,7 @@ class TransactionDialog extends Component {
             <TextField
               label="Amount"
               helperText={error.amount}
-              onChange={this.handleMoneyChange}
+              onChange={this.handleAmountChange}
               value={amount}
               className={classes.input}
               InputProps={{
@@ -301,7 +272,7 @@ class TransactionDialog extends Component {
               <InputLabel htmlFor="category" shrink>Category</InputLabel>
               <Select
                 value={category}
-                onChange={this.handleCategoryChange}
+                onChange={this.handleChangeEvent}
                 inputProps={{
                   name: 'category',
                   id: 'category',
@@ -319,13 +290,13 @@ class TransactionDialog extends Component {
               id="date"
               label="Date"
               type="date"
+              name="date"
               InputLabelProps={{
-                name: 'date',
                 shrink: true,
               }}
               className={classes.input}
               value={date}
-              onChange={this.handleDateChange}
+              onChange={this.handleChangeEvent}
             />
           </DialogContent>
           <DialogActions>
