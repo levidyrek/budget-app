@@ -100,16 +100,16 @@ class TransactionDialog extends Component {
     });
   }
 
-  // handleDateChange = (event) => {
-  //   const { validate } = this.state;
+  handleDateChange = (event) => {
+    const { validate } = this.state;
 
-  //   this.setState({
-  //     date: event.target.value,
-  //     validate: Object.assign({}, validate, {
-  //       date: true,
-  //     }),
-  //   });
-  // }
+    this.setState({
+      date: event.target.value,
+      validate: Object.assign({}, validate, {
+        date: true,
+      }),
+    });
+  }
 
   handlePayeeChange = (option) => {
     const { validate } = this.state;
@@ -169,10 +169,6 @@ class TransactionDialog extends Component {
     });
   }
 
-  handleDateChange = () => {
-
-  }
-
   onCallSuccess = () => {
     this.handleClose();
   }
@@ -199,7 +195,7 @@ class TransactionDialog extends Component {
       budget, classes, dialogText, open, submitAction,
     } = this.props;
     const {
-      amount, apiError, category, confirmOpen, error, payee,
+      amount, apiError, category, confirmOpen, date, error, payee,
     } = this.state;
 
     const actions = [
@@ -328,8 +324,8 @@ class TransactionDialog extends Component {
                 shrink: true,
               }}
               className={classes.input}
-              // value={date}
-              // onChange={this.handleDateChange}
+              value={date}
+              onChange={this.handleDateChange}
             />
           </DialogContent>
           <DialogActions>
