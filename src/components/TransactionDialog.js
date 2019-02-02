@@ -8,11 +8,13 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import PropTypes from 'prop-types';
 import { red } from '@material-ui/core/colors';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import Switch from '@material-ui/core/Switch';
 
 import { MoneyFormat } from '../utils/formats';
 import CreatableSelect from './CreatableSelect';
@@ -104,6 +106,10 @@ class TransactionDialog extends Component {
     this.handleChange(event.target.name, event.target.value);
   }
 
+  handleCheckedEvent = (event) => {
+    this.handleChange(event.target.name, event.target.checked);
+  }
+
   handlePayeeChange = (option) => {
     const value = option ? option.value : '';
 
@@ -166,7 +172,7 @@ class TransactionDialog extends Component {
       budget, classes, dialogText, open, submitAction,
     } = this.props;
     const {
-      amount, apiError, category, confirmOpen, date, error, payee,
+      amount, apiError, category, confirmOpen, date, error, inflow, payee,
     } = this.state;
 
     const actions = [
@@ -249,6 +255,21 @@ class TransactionDialog extends Component {
                 inputComponent: MoneyFormat,
               }}
             />
+            <br />
+            <FormControl className={classes.input}>
+              <FormControlLabel
+                value="inflow"
+                control={(
+                  <Switch
+                    checked={inflow}
+                    name="inflow"
+                    onChange={this.handleCheckedEvent}
+                    color="primary"
+                  />
+                )}
+                label="Inflow"
+              />
+            </FormControl>
             <br />
             <FormControl className={classes.input}>
               <CreatableSelect
