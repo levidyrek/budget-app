@@ -80,10 +80,10 @@ function getUserError(json) {
   return userMsg;
 }
 
-export function addBudgetCategory(budgetCategory, successCallback, errorCallback) {
-  return dispatch => fetch(BUDGET_CATEGORIES_ENDPOINT, {
-    method: 'POST',
-    body: JSON.stringify(budgetCategory),
+function updateBudgetItem(url, method, item, successCallback, errorCallback) {
+  return dispatch => fetch(url, {
+    method,
+    body: JSON.stringify(item),
     headers: {
       'Content-Type': 'application/json',
     },
@@ -104,34 +104,21 @@ export function addBudgetCategory(budgetCategory, successCallback, errorCallback
   }).catch((error) => {
     errorCallback(error);
   });
+}
+
+export function addBudgetCategory(budgetCategory, successCallback, errorCallback) {
+  const url = BUDGET_CATEGORIES_ENDPOINT;
+  const method = 'POST';
+  return updateBudgetItem(url, method, budgetCategory, successCallback, errorCallback);
 }
 
 export function updateBudgetCategory(budgetCategory, successCallback, errorCallback) {
-  return dispatch => fetch(`${BUDGET_CATEGORIES_ENDPOINT}${budgetCategory.pk}/`, {
-    method: 'PUT',
-    body: JSON.stringify(budgetCategory),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    credentials: 'include',
-  }).then(response => response.json().then((json) => {
-    if (response.ok) {
-      return json;
-    }
-
-    // Response failed. Throw an error with the appropriate message.
-    const userMsg = getUserError(json);
-
-    return Promise.reject(userMsg);
-  })).then(() => {
-    // Request was successful.
-    successCallback();
-    dispatch(invalidateSelectedBudget());
-  }).catch((error) => {
-    errorCallback(error);
-  });
+  const url = `${BUDGET_CATEGORIES_ENDPOINT}${budgetCategory.pk}/`;
+  const method = 'PUT';
+  return updateBudgetItem(url, method, budgetCategory, successCallback, errorCallback);
 }
 
+// TODO: Generalize
 export function deleteBudgetCategory(pk, successCallback, errorCallback) {
   return dispatch => fetch(`${BUDGET_CATEGORIES_ENDPOINT}${pk}/`, {
     method: 'DELETE',
@@ -152,29 +139,8 @@ export function deleteBudgetCategory(pk, successCallback, errorCallback) {
   });
 }
 
-// TODO: Generalize
 export function addTransaction(transaction, successCallback, errorCallback) {
-  return dispatch => fetch(TRANSACTIONS_ENDPOINT, {
-    method: 'POST',
-    body: JSON.stringify(transaction),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    credentials: 'include',
-  }).then(response => response.json().then((json) => {
-    if (response.ok) {
-      return json;
-    }
-
-    // Response failed. Throw an error with the appropriate message.
-    const userMsg = getUserError(json);
-
-    return Promise.reject(userMsg);
-  })).then(() => {
-    // Request was successful.
-    successCallback();
-    dispatch(invalidateSelectedBudget());
-  }).catch((error) => {
-    errorCallback(error);
-  });
+  const url = TRANSACTIONS_ENDPOINT;
+  const method = 'POST';
+  return updateBudgetItem(url, method, transaction, successCallback, errorCallback);
 }
