@@ -51,7 +51,9 @@ class TransactionDialog extends Component {
     inflow: false,
     validate: {
       amount: false,
+      category: false,
       date: false,
+      payee: false,
     },
     error: {
       amount: '',
@@ -380,12 +382,7 @@ TransactionDialog.propTypes = {
 };
 
 TransactionDialog.defaultProps = {
-  initData: {
-    amount: 0,
-    category: '',
-    date: '',
-    payee: '',
-  },
+  initData: null,
   // handleDelete: null,
 };
 
