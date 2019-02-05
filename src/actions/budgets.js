@@ -1,4 +1,4 @@
-import { BUDGETS_ENDPOINT, BUDGET_CATEGORIES_ENDPOINT } from '../constants';
+import { BUDGETS_ENDPOINT, BUDGET_CATEGORIES_ENDPOINT, TRANSACTIONS_ENDPOINT } from '../constants';
 
 export const REQUEST_BUDGETS = 'REQUEST_BUDGETS';
 export const RECEIVE_BUDGETS = 'RECEIVE_BUDGETS';
@@ -144,6 +144,33 @@ export function deleteBudgetCategory(pk, successCallback, errorCallback) {
     // eslint-disable-next-line prefer-promise-reject-errors
     return Promise.reject('Delete was unsuccessful.');
   }).then(() => {
+    // Request was successful.
+    successCallback();
+    dispatch(invalidateSelectedBudget());
+  }).catch((error) => {
+    errorCallback(error);
+  });
+}
+
+// TODO: Generalize
+export function addTransaction(transaction, successCallback, errorCallback) {
+  return dispatch => fetch(TRANSACTIONS_ENDPOINT, {
+    method: 'POST',
+    body: JSON.stringify(transaction),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  }).then(response => response.json().then((json) => {
+    if (response.ok) {
+      return json;
+    }
+
+    // Response failed. Throw an error with the appropriate message.
+    const userMsg = getUserError(json);
+
+    return Promise.reject(userMsg);
+  })).then(() => {
     // Request was successful.
     successCallback();
     dispatch(invalidateSelectedBudget());

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import TransactionDialog from '../components/TransactionDialog';
-import { toggleDialog } from '../actions/dialogs';
+import { addTransaction } from '../actions/budgets';
 
 
 const mapStateToProps = state => ({
@@ -9,7 +9,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-
+  handleSubmit: (transaction, successCallback, errorCallback) => {
+    dispatch(addTransaction(transaction, successCallback, errorCallback));
+  },
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TransactionDialog));

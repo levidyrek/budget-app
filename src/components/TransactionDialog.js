@@ -46,8 +46,8 @@ class TransactionDialog extends Component {
     pk: null,
     amount: 0,
     payee: '',
-    category: null,
-    date: null,
+    category: '',
+    date: '',
     inflow: false,
     validate: {
       amount: false,
@@ -146,6 +146,26 @@ class TransactionDialog extends Component {
     });
   }
 
+  handleSubmit = () => {
+    const { handleSubmit } = this.props;
+    const {
+      pk, amount, category, date, inflow, payee,
+    } = this.state;
+
+    handleSubmit(
+      {
+        pk,
+        amount,
+        budget_category: category,
+        date,
+        inflow,
+        payee,
+      },
+      this.onCallSuccess,
+      this.onCallFailure,
+    );
+  }
+
   onCallSuccess = () => {
     this.handleClose();
   }
@@ -185,7 +205,7 @@ class TransactionDialog extends Component {
       <Button
         key="submit"
         disabled={!this.inputIsValid()}
-        // onClick={this.handleSubmit}
+        onClick={this.handleSubmit}
       >
         {submitAction}
       </Button>,
@@ -354,7 +374,7 @@ TransactionDialog.propTypes = {
     pk: PropTypes.number,
   }),
   handleClose: PropTypes.func.isRequired,
-  // handleSubmit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
   submitAction: PropTypes.string.isRequired,
 };
