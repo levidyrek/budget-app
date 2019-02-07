@@ -44,7 +44,7 @@ class TransactionTable extends Component {
 
   handleRowClick = (rowData) => {
     this.setState({
-      editDialogOpen: false,
+      editDialogOpen: true,
       editData: rowData,
     });
   }
@@ -52,11 +52,12 @@ class TransactionTable extends Component {
   handleCloseEdit = () => {
     this.setState({
       editDialogOpen: false,
+      editData: null,
     });
   }
 
   render() {
-    const { rows, showEditDialog } = this.props;
+    const { rows } = this.props;
     const { editData, editDialogOpen } = this.state;
 
     return (
@@ -64,7 +65,7 @@ class TransactionTable extends Component {
         <BaseTable
           rows={rows}
           columns={this.columns}
-          handleRowClick={showEditDialog}
+          handleRowClick={this.handleRowClick}
           defaultSorted={[{
             id: 'date',
           }]}
@@ -77,7 +78,7 @@ class TransactionTable extends Component {
         <EditTransactionDialog
           open={editDialogOpen}
           handleClose={this.handleCloseEdit}
-          editData={editData}
+          initData={editData}
         />
       </div>
     );
@@ -86,7 +87,6 @@ class TransactionTable extends Component {
 
 TransactionTable.propTypes = {
   rows: PropTypes.arrayOf(PropTypes.object).isRequired,
-  showEditDialog: PropTypes.func.isRequired,
 };
 
 export default TransactionTable;

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import TransactionDialog from '../containers/TransactionDialog';
 
 const EditTransactionDialog = (props) => {
-  const { handleDelete, handleSubmit } = props;
+  const { initData, handleDelete, handleSubmit } = props;
   const dialogText = 'Edit this transaction.';
 
   return (
@@ -13,12 +13,20 @@ const EditTransactionDialog = (props) => {
       dialogText={dialogText}
       handleSubmit={handleSubmit}
       handleDelete={handleDelete}
+      initData={initData}
       {...props}
     />
   );
 };
 
 EditTransactionDialog.propTypes = {
+  initData: PropTypes.shape({
+    amount: PropTypes.number.isRequired,
+    category: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    payee: PropTypes.string.isRequired,
+    pk: PropTypes.number,
+  }).isRequired,
   handleDelete: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 };

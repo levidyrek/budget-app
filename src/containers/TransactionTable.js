@@ -2,8 +2,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import TransactionTable from '../components/table/TransactionTable';
-import { toggleDialog } from '../actions/dialogs';
-import { EDIT_BUDGET_CATEGORY_DIALOG } from '../components/EditBudgetCategoryDialog';
 
 
 function convertToTransactionRows(budget) {
@@ -26,9 +24,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  showEditDialog: (rowData) => {
-    dispatch(toggleDialog(EDIT_BUDGET_CATEGORY_DIALOG, rowData));
-  },
+
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TransactionTable));
