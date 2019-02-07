@@ -106,21 +106,8 @@ function updateBudgetItem(url, method, item, successCallback, errorCallback) {
   });
 }
 
-export function addBudgetCategory(budgetCategory, successCallback, errorCallback) {
-  const url = BUDGET_CATEGORIES_ENDPOINT;
-  const method = 'POST';
-  return updateBudgetItem(url, method, budgetCategory, successCallback, errorCallback);
-}
-
-export function updateBudgetCategory(budgetCategory, successCallback, errorCallback) {
-  const url = `${BUDGET_CATEGORIES_ENDPOINT}${budgetCategory.pk}/`;
-  const method = 'PUT';
-  return updateBudgetItem(url, method, budgetCategory, successCallback, errorCallback);
-}
-
-// TODO: Generalize
-export function deleteBudgetCategory(pk, successCallback, errorCallback) {
-  return dispatch => fetch(`${BUDGET_CATEGORIES_ENDPOINT}${pk}/`, {
+function deleteBudgetItem(url, successCallback, errorCallback) {
+  return dispatch => fetch(url, {
     method: 'DELETE',
     credentials: 'include',
   }).then((response) => {
@@ -139,8 +126,36 @@ export function deleteBudgetCategory(pk, successCallback, errorCallback) {
   });
 }
 
+export function addBudgetCategory(budgetCategory, successCallback, errorCallback) {
+  const url = BUDGET_CATEGORIES_ENDPOINT;
+  const method = 'POST';
+  return updateBudgetItem(url, method, budgetCategory, successCallback, errorCallback);
+}
+
+export function updateBudgetCategory(budgetCategory, successCallback, errorCallback) {
+  const url = `${BUDGET_CATEGORIES_ENDPOINT}${budgetCategory.pk}/`;
+  const method = 'PUT';
+  return updateBudgetItem(url, method, budgetCategory, successCallback, errorCallback);
+}
+
+export function deleteBudgetCategory(pk, successCallback, errorCallback) {
+  const url = `${BUDGET_CATEGORIES_ENDPOINT}${pk}/`;
+  return deleteBudgetItem(url, successCallback, errorCallback);
+}
+
 export function addTransaction(transaction, successCallback, errorCallback) {
   const url = TRANSACTIONS_ENDPOINT;
   const method = 'POST';
   return updateBudgetItem(url, method, transaction, successCallback, errorCallback);
+}
+
+export function updateTransaction(transaction, successCallback, errorCallback) {
+  const url = `${TRANSACTIONS_ENDPOINT}${transaction.pk}/`;
+  const method = 'PUT';
+  return updateBudgetItem(url, method, transaction, successCallback, errorCallback);
+}
+
+export function deleteTransaction(pk, successCallback, errorCallback) {
+  const url = `${TRANSACTIONS_ENDPOINT}${pk}/`;
+  return deleteBudgetItem(url, successCallback, errorCallback);
 }
