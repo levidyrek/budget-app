@@ -7,7 +7,7 @@ export const EDIT_BUDGET_CATEGORY_DIALOG = 'EDIT_BUDGET_CATEGORY_DIALOG';
 
 const EditBudgetCategoryDialog = (props) => {
   const { dialogState, handleDelete, handleSubmit } = props;
-  const dialogText = 'Modify this category for this month\'s budget.';
+  const dialogText = 'Modify this category.';
 
   return (
     <BudgetCategoryDialog
