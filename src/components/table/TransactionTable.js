@@ -37,28 +37,31 @@ class TransactionTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      editDialogOpen: false,
       editData: null,
     };
   }
 
   handleRowClick = (rowData) => {
     this.setState({
-      editDialogOpen: true,
-      editData: rowData,
+      editData: {
+        amount: parseFloat(rowData.amount),
+        category: rowData.budget_category,
+        date: rowData.date,
+        payee: rowData.payee,
+        pk: rowData.pk,
+      },
     });
   }
 
   handleCloseEdit = () => {
     this.setState({
-      editDialogOpen: false,
       editData: null,
     });
   }
 
   render() {
     const { rows } = this.props;
-    const { editData, editDialogOpen } = this.state;
+    const { editData } = this.state;
 
     return (
       <div>
@@ -75,17 +78,23 @@ class TransactionTable extends Component {
           minRows={rows.length + 5}
           noDataText="No transactions found"
         />
-        <EditTransactionDialog
-          open={editDialogOpen}
-          handleClose={this.handleCloseEdit}
-          initData={editData}
-        />
+        {
+          editData
+          && (
+            <EditTransactionDialog
+              open
+              handleClose={this.handleCloseEdit}
+              initData={editData}
+            />
+          )
+        }
       </div>
     );
   }
 }
 
 TransactionTable.propTypes = {
+  categoryRenderer: PropTypes.func.isRequired,
   rows: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 

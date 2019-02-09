@@ -4,6 +4,10 @@ import { withRouter } from 'react-router-dom';
 import TransactionTable from '../components/table/TransactionTable';
 
 
+const getCategoryRenderer = budget => transaction => (
+  budget.budget_categories[transaction.budget_category].category
+);
+
 function convertToTransactionRows(budget) {
   const rows = [];
   Object.values(budget.transactions).forEach((transaction) => {
@@ -11,7 +15,7 @@ function convertToTransactionRows(budget) {
       pk: transaction.pk,
       amount: transaction.amount,
       payee: transaction.payee,
-      budget_category: budget.budget_categories[transaction.budget_category].category,
+      budget_category: transaction.budget_category,
       date: transaction.date,
       inflow: transaction.inflow,
     });
@@ -20,6 +24,7 @@ function convertToTransactionRows(budget) {
 }
 
 const mapStateToProps = state => ({
+  categoryRenderer: getCategoryRenderer(state.selectedBudget.budget),
   rows: convertToTransactionRows(state.selectedBudget.budget),
 });
 
