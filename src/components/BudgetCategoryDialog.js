@@ -36,6 +36,8 @@ const styles = () => ({
   },
 });
 
+// TODO: Update this dialog to work the same way
+// TransactionDialog works (i.e. without Redux).
 class BudgetCategoryDialog extends Component {
   initialState = {
     pk: null,

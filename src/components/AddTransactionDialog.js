@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import TransactionDialog from '../containers/TransactionDialog';
 
 const AddTransactionDialog = (props) => {
-  const dialogText = 'Create a new transaction for your monthly budget.';
+  const dialogText = 'Add a new transaction.';
 
   return (
     <TransactionDialog
