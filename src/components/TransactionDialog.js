@@ -148,6 +148,13 @@ class TransactionDialog extends Component {
     });
   }
 
+  handleDelete = () => {
+    const { handleDelete } = this.props;
+    const { pk } = this.state;
+
+    handleDelete(pk, this.onCallSuccess, this.onCallFailure);
+  }
+
   handleSubmit = () => {
     const { handleSubmit } = this.props;
     const {
@@ -191,7 +198,7 @@ class TransactionDialog extends Component {
 
   render() {
     const {
-      budget, classes, dialogText, open, submitAction,
+      budget, classes, dialogText, handleDelete, open, submitAction,
     } = this.props;
     const {
       amount, apiError, category, confirmOpen, date, error, inflow, payee,
@@ -213,17 +220,17 @@ class TransactionDialog extends Component {
       </Button>,
     ];
 
-    // if (handleDelete) {
-    //   actions.push(
-    //     <Button
-    //       key="delete"
-    //       onClick={this.handleClickDelete}
-    //       className={classes.deleteButton}
-    //     >
-    //       Delete
-    //     </Button>,
-    //   );
-    // }
+    if (handleDelete) {
+      actions.push(
+        <Button
+          key="delete"
+          onClick={this.handleClickDelete}
+          className={classes.deleteButton}
+        >
+          Delete
+        </Button>,
+      );
+    }
 
     const payeeLookup = budget.payees;
     const payees = [];
@@ -349,7 +356,7 @@ class TransactionDialog extends Component {
         <ConfirmationDialog
           title="Deletion Confirmation"
           description="Are you sure you want to delete this transaction?"
-          // handleOk={this.handleDelete}
+          handleOk={this.handleDelete}
           handleClose={this.handleCancelDelete}
           open={confirmOpen}
         />
@@ -367,7 +374,7 @@ TransactionDialog.propTypes = {
     input: PropTypes.string.isRequired,
   }).isRequired,
   dialogText: PropTypes.string.isRequired,
-  // handleDelete: PropTypes.func,
+  handleDelete: PropTypes.func,
   initData: PropTypes.shape({
     amount: PropTypes.number.isRequired,
     category: PropTypes.number.isRequired,
@@ -383,7 +390,7 @@ TransactionDialog.propTypes = {
 
 TransactionDialog.defaultProps = {
   initData: null,
-  // handleDelete: null,
+  handleDelete: null,
 };
 
 export default withStyles(styles)(TransactionDialog);
