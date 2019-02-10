@@ -4,8 +4,8 @@ import { withRouter } from 'react-router-dom';
 import TransactionTable from '../components/table/TransactionTable';
 
 
-const getCategoryRenderer = budget => transaction => (
-  budget.budget_categories[transaction.budget_category].category
+const getCategoryRenderer = budget => row => (
+  budget.budget_categories[row.value].category
 );
 
 function convertToTransactionRows(budget) {
@@ -28,8 +28,4 @@ const mapStateToProps = state => ({
   rows: convertToTransactionRows(state.selectedBudget.budget),
 });
 
-const mapDispatchToProps = dispatch => ({
-
-});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TransactionTable));
+export default withRouter(connect(mapStateToProps)(TransactionTable));

@@ -9,36 +9,42 @@ import EditTransactionDialog from '../../containers/EditTransactionDialog';
 
 // TODO: Look into generalizing this and the ExpenseTable
 class TransactionTable extends Component {
-  columns = [
-    {
-      accessor: 'pk',
-      show: false,
-    },
-    {
-      accessor: 'amount',
-      Header: 'Amount',
-      className: 'money',
-      Cell: moneyRenderer,
-    },
-    {
-      accessor: 'payee',
-      Header: 'Payee',
-    },
-    {
-      accessor: 'budget_category',
-      Header: 'Category',
-    },
-    {
-      accessor: 'date',
-      Header: 'Date',
-    },
-  ];
 
   constructor(props) {
     super(props);
     this.state = {
       editData: null,
     };
+  }
+
+  getColumns = () => {
+    const { categoryRenderer } = this.props;
+
+    return [
+      {
+        accessor: 'pk',
+        show: false,
+      },
+      {
+        accessor: 'amount',
+        Header: 'Amount',
+        className: 'money',
+        Cell: moneyRenderer,
+      },
+      {
+        accessor: 'payee',
+        Header: 'Payee',
+      },
+      {
+        accessor: 'budget_category',
+        Header: 'Category',
+        Cell: categoryRenderer,
+      },
+      {
+        accessor: 'date',
+        Header: 'Date',
+      },
+    ];
   }
 
   handleRowClick = (rowData) => {
@@ -67,7 +73,7 @@ class TransactionTable extends Component {
       <div>
         <BaseTable
           rows={rows}
-          columns={this.columns}
+          columns={this.getColumns()}
           handleRowClick={this.handleRowClick}
           defaultSorted={[{
             id: 'date',
