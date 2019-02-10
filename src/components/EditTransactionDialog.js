@@ -24,6 +24,7 @@ EditTransactionDialog.propTypes = {
     amount: PropTypes.number.isRequired,
     category: PropTypes.number.isRequired,
     date: PropTypes.string.isRequired,
+    inflow: PropTypes.bool.isRequired,
     payee: PropTypes.string.isRequired,
     pk: PropTypes.number,
   }).isRequired,

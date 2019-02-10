@@ -9,7 +9,6 @@ import EditTransactionDialog from '../../containers/EditTransactionDialog';
 
 // TODO: Look into generalizing this and the ExpenseTable
 class TransactionTable extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -53,6 +52,7 @@ class TransactionTable extends Component {
         amount: parseFloat(rowData.amount),
         category: rowData.budget_category,
         date: rowData.date,
+        inflow: rowData.inflow,
         payee: rowData.payee,
         pk: rowData.pk,
       },

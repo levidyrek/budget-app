@@ -71,12 +71,13 @@ class TransactionDialog extends Component {
     let propState = {};
     if (props.initData) {
       const {
-        amount, category, date, payee, pk,
+        amount, category, date, inflow, payee, pk,
       } = props.initData;
       propState = {
         amount,
         category,
         date,
+        inflow,
         payee,
         pk,
         validate: {
@@ -379,6 +380,7 @@ TransactionDialog.propTypes = {
     amount: PropTypes.number.isRequired,
     category: PropTypes.number.isRequired,
     date: PropTypes.string.isRequired,
+    inflow: PropTypes.bool.isRequired,
     payee: PropTypes.string.isRequired,
     pk: PropTypes.number,
   }),

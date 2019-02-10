@@ -14,10 +14,10 @@ function convertToTransactionRows(budget) {
     rows.push({
       pk: transaction.pk,
       amount: transaction.amount,
-      payee: transaction.payee,
       budget_category: transaction.budget_category,
       date: transaction.date,
       inflow: transaction.inflow,
+      payee: transaction.payee,
     });
   });
   return rows;
