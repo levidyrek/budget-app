@@ -29,10 +29,12 @@ class BaseTable extends Component {
       <ReactTable
         data={rows}
         columns={columns}
-        defaultPageSize={25}
-        minRows={25}
         className="-striped -highlight"
         getTrProps={this.getTrProps}
+        // react-table does not support disabling pagination,
+        // so set page size to number of rows and show 5 padding rows.
+        defaultPageSize={rows.length}
+        minRows={rows.length + 5}
         {...this.props}
       />
     );

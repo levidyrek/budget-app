@@ -7,7 +7,6 @@ import { moneyRenderer } from '../../utils/renderers';
 import EditTransactionDialog from '../../containers/EditTransactionDialog';
 
 
-// TODO: Look into generalizing this and the ExpenseTable
 class TransactionTable extends Component {
   constructor(props) {
     super(props);
@@ -78,10 +77,6 @@ class TransactionTable extends Component {
           defaultSorted={[{
             id: 'date',
           }]}
-          // react-table does not support disabling pagination,
-          // so set page size to number of rows and show 5 padding rows.
-          defaultPageSize={rows.length}
-          minRows={rows.length + 5}
           noDataText="No transactions found"
         />
         {
