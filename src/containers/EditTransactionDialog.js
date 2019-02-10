@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import EditTransactionDialog from '../components/EditTransactionDialog';
 import { deleteTransaction, updateTransaction } from '../actions/budgets';
 
-const mapStateToProps = state => ({
+const mapStateToProps = () => ({
 
 });
 

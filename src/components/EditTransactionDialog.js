@@ -22,7 +22,7 @@ const EditTransactionDialog = (props) => {
 EditTransactionDialog.propTypes = {
   initData: PropTypes.shape({
     amount: PropTypes.number.isRequired,
-    category: PropTypes.string.isRequired,
+    category: PropTypes.number.isRequired,
     date: PropTypes.string.isRequired,
     payee: PropTypes.string.isRequired,
     pk: PropTypes.number,

@@ -349,7 +349,7 @@ class TransactionDialog extends Component {
         <ConfirmationDialog
           title="Deletion Confirmation"
           description="Are you sure you want to delete this transaction?"
-          handleOk={this.handleDelete}
+          // handleOk={this.handleDelete}
           handleClose={this.handleCancelDelete}
           open={confirmOpen}
         />
@@ -370,7 +370,7 @@ TransactionDialog.propTypes = {
   // handleDelete: PropTypes.func,
   initData: PropTypes.shape({
     amount: PropTypes.number.isRequired,
-    category: PropTypes.string.isRequired,
+    category: PropTypes.number.isRequired,
     date: PropTypes.string.isRequired,
     payee: PropTypes.string.isRequired,
     pk: PropTypes.number,
