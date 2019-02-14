@@ -8,13 +8,11 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import PropTypes from 'prop-types';
 import { red } from '@material-ui/core/colors';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import Switch from '@material-ui/core/Switch';
 
 import { MoneyFormat } from '../utils/formats';
 import CreatableSelect from './CreatableSelect';
@@ -48,7 +46,6 @@ class TransactionDialog extends Component {
     payee: '',
     category: '',
     date: '',
-    inflow: false,
     validate: {
       amount: false,
       category: false,
@@ -71,13 +68,12 @@ class TransactionDialog extends Component {
     let propState = {};
     if (props.initData) {
       const {
-        amount, category, date, inflow, payee, pk,
+        amount, category, date, payee, pk,
       } = props.initData;
       propState = {
         amount,
         category,
         date,
-        inflow,
         payee,
         pk,
         validate: {
@@ -159,7 +155,7 @@ class TransactionDialog extends Component {
   handleSubmit = () => {
     const { handleSubmit } = this.props;
     const {
-      pk, amount, category, date, inflow, payee,
+      pk, amount, category, date, payee,
     } = this.state;
 
     handleSubmit(
@@ -168,7 +164,6 @@ class TransactionDialog extends Component {
         amount,
         budget_category: category,
         date,
-        inflow,
         payee,
       },
       this.onCallSuccess,
@@ -202,7 +197,7 @@ class TransactionDialog extends Component {
       budget, classes, dialogText, handleDelete, open, submitAction,
     } = this.props;
     const {
-      amount, apiError, category, confirmOpen, date, error, inflow, payee,
+      amount, apiError, category, confirmOpen, date, error, payee,
     } = this.state;
 
     const actions = [
@@ -287,21 +282,6 @@ class TransactionDialog extends Component {
             />
             <br />
             <FormControl className={classes.input}>
-              <FormControlLabel
-                value="inflow"
-                control={(
-                  <Switch
-                    checked={inflow}
-                    name="inflow"
-                    onChange={this.handleCheckedEvent}
-                    color="primary"
-                  />
-                )}
-                label="Inflow"
-              />
-            </FormControl>
-            <br />
-            <FormControl className={classes.input}>
               <CreatableSelect
                 value={
                   // Only return an object if payee has a value, so
@@ -380,7 +360,6 @@ TransactionDialog.propTypes = {
     amount: PropTypes.number.isRequired,
     category: PropTypes.number.isRequired,
     date: PropTypes.string.isRequired,
-    inflow: PropTypes.bool.isRequired,
     payee: PropTypes.string.isRequired,
     pk: PropTypes.number,
   }),

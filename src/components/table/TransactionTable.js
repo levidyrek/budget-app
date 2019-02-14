@@ -51,7 +51,6 @@ class TransactionTable extends Component {
         amount: parseFloat(rowData.amount),
         category: rowData.budget_category,
         date: rowData.date,
-        inflow: rowData.inflow,
         payee: rowData.payee,
         pk: rowData.pk,
       },

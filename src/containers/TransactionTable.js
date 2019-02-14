@@ -16,7 +16,6 @@ function convertToTransactionRows(budget) {
       amount: transaction.amount,
       budget_category: transaction.budget_category,
       date: transaction.date,
-      inflow: transaction.inflow,
       payee: transaction.payee,
     });
   });
