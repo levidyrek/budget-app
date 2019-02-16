@@ -4,7 +4,7 @@ import MenuButton from '../components/MenuButton';
 import { toggleNavBar } from '../actions/responsive';
 
 
-const mapStateToProps = state => ({
+const mapStateToProps = () => ({
 
 });
 

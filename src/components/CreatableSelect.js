@@ -45,13 +45,14 @@ const styles = theme => ({
 });
 
 function NoOptionsMessage(props) {
+  const { children, innerProps, selectProps } = props;
   return (
     <Typography
       color="textSecondary"
-      className={props.selectProps.classes.noOptionsMessage}
-      {...props.innerProps}
+      className={selectProps.classes.noOptionsMessage}
+      {...innerProps}
     >
-      {props.children}
+      {children}
     </Typography>
   );
 }
@@ -61,67 +62,85 @@ function inputComponent({ inputRef, ...props }) {
 }
 
 function Control(props) {
+  const {
+    children, innerProps, innerRef, selectProps,
+  } = props;
   return (
     <TextField
       fullWidth
       InputProps={{
         inputComponent,
         inputProps: {
-          className: props.selectProps.classes.input,
-          inputRef: props.innerRef,
-          children: props.children,
-          ...props.innerProps,
+          className: selectProps.classes.input,
+          inputRef: innerRef,
+          children,
+          ...innerProps,
         },
       }}
-      {...props.selectProps.textFieldProps}
+      {...selectProps.textFieldProps}
     />
   );
 }
 
 function Option(props) {
+  const {
+    children, innerProps, innerRef, isFocused, isSelected,
+  } = props;
   return (
     <MenuItem
-      buttonRef={props.innerRef}
-      selected={props.isFocused}
+      buttonRef={innerRef}
+      selected={isFocused}
       component="div"
       style={{
-        fontWeight: props.isSelected ? 500 : 400,
+        fontWeight: isSelected ? 500 : 400,
       }}
-      {...props.innerProps}
+      {...innerProps}
     >
-      {props.children}
+      {children}
     </MenuItem>
   );
 }
 
 function Placeholder(props) {
+  const {
+    children, innerProps, selectProps,
+  } = props;
   return (
     <Typography
       color="textSecondary"
-      className={props.selectProps.classes.placeholder}
-      {...props.innerProps}
+      className={selectProps.classes.placeholder}
+      {...innerProps}
     >
-      {props.children}
+      {children}
     </Typography>
   );
 }
 
 function SingleValue(props) {
+  const {
+    children, innerProps, selectProps,
+  } = props;
   return (
-    <Typography className={props.selectProps.classes.singleValue} {...props.innerProps}>
-      {props.children}
+    <Typography className={selectProps.classes.singleValue} {...innerProps}>
+      {children}
     </Typography>
   );
 }
 
 function ValueContainer(props) {
-  return <div className={props.selectProps.classes.valueContainer}>{props.children}</div>;
+  const {
+    children, selectProps,
+  } = props;
+  return <div className={selectProps.classes.valueContainer}>{children}</div>;
 }
 
 function Menu(props) {
+  const {
+    children, innerProps, selectProps,
+  } = props;
   return (
-    <Paper square className={props.selectProps.classes.paper} {...props.innerProps}>
-      {props.children}
+    <Paper square className={selectProps.classes.paper} {...innerProps}>
+      {children}
     </Paper>
   );
 }
