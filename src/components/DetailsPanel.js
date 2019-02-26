@@ -49,7 +49,7 @@ class DetailsPanel extends Component {
 
   render() {
     const {
-      children, handleClickAdd, mobileMode, table,
+      buttons, children, handleClickAdd, mobileMode, table,
     } = this.props;
 
     return (
@@ -61,6 +61,7 @@ class DetailsPanel extends Component {
               <div className="currentTable">
                 {table}
               </div>
+              {buttons}
               <Fab
                 style={this.addButtonStyle}
                 onClick={handleClickAdd}
