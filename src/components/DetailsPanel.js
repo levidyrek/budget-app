@@ -61,14 +61,16 @@ class DetailsPanel extends Component {
               <div className="currentTable">
                 {table}
               </div>
-              {buttons}
-              <Fab
-                style={this.addButtonStyle}
-                onClick={handleClickAdd}
-                color="primary"
-              >
-                <ContentAdd />
-              </Fab>
+              <div className="fabs">
+                {buttons}
+                <Fab
+                  // style={this.addButtonStyle}
+                  onClick={handleClickAdd}
+                  color="primary"
+                >
+                  <ContentAdd />
+                </Fab>
+              </div>
               <div>
                 {children}
               </div>

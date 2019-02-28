@@ -5,6 +5,7 @@ import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 import FileCopyIcon from '@material-ui/icons/FileCopyOutlined';
+import FlashIcon from '@material-ui/icons/FlashOn';
 
 import DetailsPanel from '../containers/DetailsPanel';
 import ExpenseTable from '../containers/ExpenseTable';
@@ -49,12 +50,12 @@ class Expenses extends Component {
   };
 
   render() {
-    const { open } = this.props;
+    const { open } = this.state;
 
     const buttons = [(
       <SpeedDial
         ariaLabel="SpeedDial tooltip example"
-        icon={<SpeedDialIcon />}
+        icon={<FlashIcon />}
         onBlur={this.handleCloseSpeedDial}
         onClick={this.handleClickSpeedDial}
         onClose={this.handleCloseSpeedDial}

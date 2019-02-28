@@ -35,3 +35,15 @@
 .ExpenseTable {
   flex: 1 1 auto;
 }
+
+.fabs {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 35px;
+  margin-bottom: 20px;
+
+  > {
+    display: inline;
+  }
+}
