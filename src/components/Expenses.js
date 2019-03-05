@@ -10,12 +10,14 @@ import DetailsPanel from '../containers/DetailsPanel';
 import ExpenseTable from '../containers/ExpenseTable';
 import { ADD_BUDGET_CATEGORY_DIALOG } from './AddBudgetCategoryDialog';
 import { toggleDialog } from '../actions/dialogs';
+import ConfirmationDialog from './ConfirmationDialog';
 
 
 class Expenses extends Component {
   state = {
     open: false,
     hidden: false,
+    confirmOpen: false,
   };
 
   handleClickAdd = () => {
@@ -45,12 +47,24 @@ class Expenses extends Component {
     }
   };
 
-  handleClickCopyBudget = () => {
+  openConfirmDialog = () => {
+    this.setState({
+      confirmOpen: true,
+    });
+  };
+
+  closeConfirmDialog = () => {
+    this.setState({
+      confirmOpen: false,
+    });
+  };
+
+  copyBudget = () => {
 
   };
 
   render() {
-    const { open } = this.state;
+    const { confirmOpen, open } = this.state;
 
     const buttons = [(
       <SpeedDial
@@ -69,17 +83,28 @@ class Expenses extends Component {
           icon={<FileCopyIcon />}
           tooltipTitle="Copy Previous Month's budget"
           tooltipOpen
-          onClick={this.handleClickCopyBudget}
+          onClick={this.openConfirmDialog}
         />
       </SpeedDial>
     )];
+
+    const confirmMsg = 'Are you sure you want to copy last month\'s budget?'
+      + ' This month\'s budget will be overwritten.';
 
     return (
       <DetailsPanel
         table={<ExpenseTable />}
         handleClickAdd={this.handleClickAdd}
         buttons={buttons}
-      />
+      >
+        <ConfirmationDialog
+          title="Copy Last Month's Budget"
+          description={confirmMsg}
+          handleOk={this.copyBudget}
+          handleClose={this.closeConfirmDialog}
+          open={confirmOpen}
+        />
+      </DetailsPanel>
     );
   }
 }
