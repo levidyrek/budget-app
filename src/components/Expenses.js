@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import SpeedDial from '@material-ui/lab/SpeedDial';
-import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 import FileCopyIcon from '@material-ui/icons/FileCopyOutlined';
 import FlashIcon from '@material-ui/icons/FlashOn';
@@ -12,10 +11,6 @@ import ExpenseTable from '../containers/ExpenseTable';
 import { ADD_BUDGET_CATEGORY_DIALOG } from './AddBudgetCategoryDialog';
 import { toggleDialog } from '../actions/dialogs';
 
-
-const speedDialActions = [
-  { icon: <FileCopyIcon />, name: 'Copy Previous Month\'s budget' },
-];
 
 class Expenses extends Component {
   state = {
@@ -42,11 +37,16 @@ class Expenses extends Component {
   };
 
   handleOpenSpeedDial = () => {
-    if (!this.state.hidden) {
+    const { hidden } = this.state;
+    if (!hidden) {
       this.setState({
         open: true,
       });
     }
+  };
+
+  handleClickCopyBudget = () => {
+
   };
 
   render() {
@@ -54,7 +54,7 @@ class Expenses extends Component {
 
     const buttons = [(
       <SpeedDial
-        ariaLabel="SpeedDial tooltip example"
+        ariaLabel="SpeedDial tooltip"
         icon={<FlashIcon />}
         onBlur={this.handleCloseSpeedDial}
         onClick={this.handleClickSpeedDial}
@@ -64,15 +64,13 @@ class Expenses extends Component {
         onMouseLeave={this.handleCloseSpeedDial}
         open={open}
       >
-        {speedDialActions.map(action => (
-          <SpeedDialAction
-            key={action.name}
-            icon={action.icon}
-            tooltipTitle={action.name}
-            tooltipOpen
-            onClick={this.handleClick}
-          />
-        ))}
+        <SpeedDialAction
+          key="copy-budget"
+          icon={<FileCopyIcon />}
+          tooltipTitle="Copy Previous Month's budget"
+          tooltipOpen
+          onClick={this.handleClickCopyBudget}
+        />
       </SpeedDial>
     )];
 

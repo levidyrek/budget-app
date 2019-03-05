@@ -1,4 +1,6 @@
-import { BUDGETS_ENDPOINT, BUDGET_CATEGORIES_ENDPOINT, TRANSACTIONS_ENDPOINT } from '../constants';
+import {
+  BUDGETS_ENDPOINT, BUDGET_CATEGORIES_ENDPOINT, COPY_BUDGET_ENDPOINT, TRANSACTIONS_ENDPOINT,
+} from '../constants';
 
 export const REQUEST_BUDGETS = 'REQUEST_BUDGETS';
 export const RECEIVE_BUDGETS = 'RECEIVE_BUDGETS';
@@ -153,6 +155,17 @@ export function updateTransaction(transaction, successCallback, errorCallback) {
   const url = `${TRANSACTIONS_ENDPOINT}${transaction.pk}/`;
   const method = 'PUT';
   return updateBudgetItem(url, method, transaction, successCallback, errorCallback);
+}
+
+export function copyBudget(source, targetYear, targetMonth, successCallback, errorCallback) {
+  const url = COPY_BUDGET_ENDPOINT;
+  const method = 'POST';
+  const item = {
+    source,
+    target_year: targetYear,
+    target_month: targetMonth,
+  };
+  return updateBudgetItem(url, method, item, successCallback, errorCallback);
 }
 
 export function deleteTransaction(pk, successCallback, errorCallback) {
