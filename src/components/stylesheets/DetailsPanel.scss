@@ -43,7 +43,9 @@
   margin-right: 35px;
   margin-bottom: 20px;
 
-  > {
-    display: inline;
+  > * {
+    display: inline-flex !important;
+    vertical-align: bottom;
+    margin-left: 10px !important;
   }
 }
