@@ -157,14 +157,17 @@ export function updateTransaction(transaction, successCallback, errorCallback) {
   return updateBudgetItem(url, method, transaction, successCallback, errorCallback);
 }
 
-export function copyBudget(source, targetYear, targetMonth, successCallback, errorCallback) {
+export function copyBudget(targetYear, targetMonth, successCallback, errorCallback, source = null) {
   const url = COPY_BUDGET_ENDPOINT;
   const method = 'POST';
   const item = {
-    source,
     target_year: targetYear,
     target_month: targetMonth,
   };
+
+  if (source) {
+    item.source = source;
+  }
   return updateBudgetItem(url, method, item, successCallback, errorCallback);
 }
 

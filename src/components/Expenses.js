@@ -17,6 +17,7 @@ class Expenses extends Component {
   state = {
     open: false,
     hidden: false,
+    confirmError: '',
     confirmOpen: false,
   };
 
@@ -59,12 +60,22 @@ class Expenses extends Component {
     });
   };
 
-  copyBudget = () => {
+  handleServerError = (error) => {
+    this.setState({
+      confirmError: error,
+    });
+  }
 
+  copyBudget = () => {
+    const { copyBudget, month, year } = this.props;
+    copyBudget(year, month, this.closeConfirmDialog, this.handleServerError);
+    this.setState({
+      confirmError: '',
+    });
   };
 
   render() {
-    const { confirmOpen, open } = this.state;
+    const { confirmError, confirmOpen, open } = this.state;
 
     const buttons = [(
       <SpeedDial
@@ -103,6 +114,7 @@ class Expenses extends Component {
           handleOk={this.copyBudget}
           handleClose={this.closeConfirmDialog}
           open={confirmOpen}
+          error={confirmError}
         />
       </DetailsPanel>
     );
@@ -110,7 +122,10 @@ class Expenses extends Component {
 }
 
 Expenses.propTypes = {
+  copyBudget: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
+  month: PropTypes.string.isRequired,
+  year: PropTypes.number.isRequired,
 };
 
 export default Expenses;

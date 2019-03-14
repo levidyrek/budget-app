@@ -5,10 +5,11 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Dialog from '@material-ui/core/Dialog';
+import DialogContentText from '@material-ui/core/DialogContentText';
 
 function ConfirmationDialog(props) {
   const {
-    description, handleClose, handleOk, open, title, ...other
+    description, error, handleClose, handleOk, open, title, ...other
   } = props;
 
   return (
@@ -22,9 +23,13 @@ function ConfirmationDialog(props) {
     >
       <DialogTitle id="confirmation-dialog-title">{title}</DialogTitle>
       <DialogContent>
-        <p>
+        <DialogContentText>
           {description}
-        </p>
+        </DialogContentText>
+        {
+          error
+          && <div className="error-msg">{error}</div>
+        }
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
@@ -42,8 +47,13 @@ ConfirmationDialog.propTypes = {
   description: PropTypes.string.isRequired,
   handleClose: PropTypes.func.isRequired,
   handleOk: PropTypes.func.isRequired,
+  error: PropTypes.string,
   open: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
+};
+
+ConfirmationDialog.defaultProps = {
+  error: '',
 };
 
 export default ConfirmationDialog;
