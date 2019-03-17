@@ -9,7 +9,6 @@ import FlashIcon from '@material-ui/icons/FlashOn';
 import DetailsPanel from '../containers/DetailsPanel';
 import ExpenseTable from '../containers/ExpenseTable';
 import { ADD_BUDGET_CATEGORY_DIALOG } from './AddBudgetCategoryDialog';
-import { toggleDialog } from '../actions/dialogs';
 import ConfirmationDialog from './ConfirmationDialog';
 
 
@@ -22,9 +21,9 @@ class Expenses extends Component {
   };
 
   handleClickAdd = () => {
-    const { dispatch } = this.props;
+    const { toggleDialog } = this.props;
 
-    dispatch(toggleDialog(ADD_BUDGET_CATEGORY_DIALOG));
+    toggleDialog(ADD_BUDGET_CATEGORY_DIALOG);
   }
 
   handleClickSpeedDial = () => {
@@ -124,8 +123,8 @@ class Expenses extends Component {
 
 Expenses.propTypes = {
   copyBudget: PropTypes.func.isRequired,
-  dispatch: PropTypes.func.isRequired,
   month: PropTypes.string.isRequired,
+  toggleDialog: PropTypes.func.isRequired,
   year: PropTypes.number.isRequired,
 };
 

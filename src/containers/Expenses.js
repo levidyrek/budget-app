@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Expenses from '../components/Expenses';
 import { copyBudget } from '../actions/budgets';
+import { toggleDialog } from '../actions/dialogs';
 
 const mapStateToProps = state => ({
   year: state.selectedBudget.year,
@@ -11,6 +12,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   copyBudget: (targetYear, targetMonth, successCallback, errorCallback) => {
     dispatch(copyBudget(targetYear, targetMonth, successCallback, errorCallback));
+  },
+  toggleDialog: (dialogName) => {
+    dispatch(toggleDialog(dialogName));
   },
 });
 
