@@ -90,16 +90,28 @@ function updateBudgetItem(url, method, item, successCallback, errorCallback) {
       'Content-Type': 'application/json',
     },
     credentials: 'include',
-  }).then(response => response.json().then((json) => {
-    if (response.ok) {
-      return json;
+  }).then((response) => {
+    const contentType = response.headers.get('content-type');
+    if (contentType && contentType.indexOf('application/json') !== -1) {
+      return response.json().then((json) => {
+        if (response.ok) {
+          return json;
+        }
+
+        // Response failed. Throw an error with the appropriate message.
+        const userMsg = getUserError(json);
+
+        return Promise.reject(userMsg);
+      });
     }
 
-    // Response failed. Throw an error with the appropriate message.
-    const userMsg = getUserError(json);
+    if (!response.ok) {
+      const errorMsg = `An unexpected error occured: ${response.statusText}`;
+      return Promise.reject(errorMsg);
+    }
 
-    return Promise.reject(userMsg);
-  })).then(() => {
+    return null;
+  }).then(() => {
     // Request was successful.
     successCallback();
     dispatch(invalidateSelectedBudget());

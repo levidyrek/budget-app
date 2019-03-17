@@ -57,6 +57,7 @@ class Expenses extends Component {
   closeConfirmDialog = () => {
     this.setState({
       confirmOpen: false,
+      confirmError: '',
     });
   };
 
