@@ -88,6 +88,7 @@ class Expenses extends Component {
         onMouseEnter={this.handleOpenSpeedDial}
         onMouseLeave={this.handleCloseSpeedDial}
         open={open}
+        key="SpeedDial"
       >
         <SpeedDialAction
           key="copy-budget"

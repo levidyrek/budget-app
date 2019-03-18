@@ -11,14 +11,6 @@ import { fetchBudgets, fetchSelectedBudget } from '../actions/budgets';
 
 
 class DetailsPanel extends Component {
-  addButtonStyle = {
-    bottom: 0,
-    right: 0,
-    position: 'absolute',
-    marginRight: '35px',
-    marginBottom: '20px',
-  }
-
   constructor(props) {
     super(props);
     this.fetchDataIfNeeded();
@@ -64,7 +56,6 @@ class DetailsPanel extends Component {
               <div className="fabs">
                 {buttons}
                 <Fab
-                  // style={this.addButtonStyle}
                   onClick={handleClickAdd}
                   color="primary"
                 >
@@ -92,6 +83,7 @@ DetailsPanel.propTypes = {
     fetching: PropTypes.bool.isRequired,
     items: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
+  buttons: PropTypes.arrayOf(PropTypes.node),
   children: PropTypes.node.isRequired,
   dispatch: PropTypes.func.isRequired,
   handleClickAdd: PropTypes.func.isRequired,
@@ -105,8 +97,8 @@ DetailsPanel.propTypes = {
   table: PropTypes.node.isRequired,
 };
 
-// DetailsPanel.defaultProps = {
-//   children: [],
-// };
+DetailsPanel.defaultProps = {
+  buttons: [],
+};
 
 export default withTheme()(DetailsPanel);
