@@ -1,5 +1,8 @@
 import fetch from '../utils/fetch';
 import { showErrorDialog } from './dialogs';
+import {
+  AUTH_TOKEN_ENDPOINT, LOGOUT_ENDPOINT, REGISTER_USER_ENDPOINT, USER_INFO_ENDPOINT,
+} from '../urls';
 
 export const REQUEST_AUTH = 'REQUEST_AUTH_TOKEN';
 export const RECEIVE_AUTH = 'RECEIVE_AUTH_TOKEN';
@@ -74,7 +77,7 @@ function receiveRegisterUserError(error) {
 export function fetchAuthToken(username, password) {
   return (dispatch) => {
     dispatch(requestAuth());
-    return fetch(dispatch, 'http://localhost:8000/users/obtain-auth-token/', {
+    return fetch(dispatch, AUTH_TOKEN_ENDPOINT, {
       method: 'POST',
       body: JSON.stringify({
         username,
@@ -98,7 +101,7 @@ export function fetchAuthToken(username, password) {
 export function registerUser(username, email, password) {
   return (dispatch) => {
     dispatch(requestRegisterUser());
-    return fetch(dispatch, 'http://localhost:8000/users/register/', {
+    return fetch(dispatch, REGISTER_USER_ENDPOINT, {
       method: 'POST',
       body: JSON.stringify({
         username,
@@ -130,7 +133,7 @@ export function registerUser(username, email, password) {
 export function fetchUserInfo() {
   return (dispatch) => {
     dispatch(requestAuth());
-    return fetch(dispatch, 'http://localhost:8000/user-info/', {
+    return fetch(dispatch, USER_INFO_ENDPOINT, {
       method: 'GET',
       credentials: 'include',
     }).then((response) => {
@@ -146,7 +149,7 @@ export function fetchUserInfo() {
 export function logout() {
   return (dispatch) => {
     dispatch(requestLogout());
-    return fetch(dispatch, 'http://localhost:8000/logout/', {
+    return fetch(dispatch, LOGOUT_ENDPOINT, {
       method: 'GET',
       credentials: 'include',
     }).then((response) => {
