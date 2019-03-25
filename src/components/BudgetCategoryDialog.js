@@ -261,6 +261,9 @@ class BudgetCategoryDialog extends Component {
       });
     });
 
+    const deleteConfirmMsg = 'Are you sure you want to delete this category?'
+      + ' All transactions associated with it with be deleted as well.';
+
     return (
       <div>
         <Dialog
@@ -328,7 +331,7 @@ class BudgetCategoryDialog extends Component {
         </Dialog>
         <ConfirmationDialog
           title="Deletion Confirmation"
-          description="Are you sure you want to delete this category?"
+          description={deleteConfirmMsg}
           handleOk={this.handleDelete}
           handleClose={this.handleCancelDelete}
           open={confirmOpen}
