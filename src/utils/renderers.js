@@ -3,5 +3,5 @@
  */
 
 export const moneyRenderer = row => (
-  `$${row.value}`
+  `$${row.value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 );

@@ -3,6 +3,7 @@ import 'react-table/react-table.css';
 import PropTypes from 'prop-types';
 
 import { moneyRenderer } from '../../utils/renderers';
+import { moneySorter } from '../../utils/sorters';
 import BaseTable from './BaseTable';
 
 
@@ -25,12 +26,14 @@ class ExpenseTable extends Component {
       className: 'money',
       Header: 'Limit',
       Cell: moneyRenderer,
+      sortMethod: moneySorter,
     },
     {
       accessor: 'spent',
       className: 'money',
       Header: 'Spent',
       Cell: moneyRenderer,
+      sortMethod: moneySorter,
     },
   ];
 

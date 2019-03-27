@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import BaseTable from './BaseTable';
 import { moneyRenderer } from '../../utils/renderers';
+import { moneySorter } from '../../utils/sorters';
 import EditTransactionDialog from '../../containers/EditTransactionDialog';
 
 
@@ -28,6 +29,7 @@ class TransactionTable extends Component {
         Header: 'Amount',
         className: 'money',
         Cell: moneyRenderer,
+        sortMethod: moneySorter,
       },
       {
         accessor: 'payee',
