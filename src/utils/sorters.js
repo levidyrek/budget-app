@@ -6,6 +6,10 @@ export const moneySorter = (a, b) => {
   return defaultSorter(parseFloat(a), parseFloat(b));
 };
 
+export const dateSorter = (a, b) => {
+  return defaultSorter(new Date(a), new Date(b));
+}
+
 const defaultSorter = (a, b) => {
   // force null and undefined to the bottom
   a = a === null || a === undefined ? -Infinity : a;

@@ -3,8 +3,8 @@ import 'react-table/react-table.css';
 import PropTypes from 'prop-types';
 
 import BaseTable from './BaseTable';
-import { moneyRenderer } from '../../utils/renderers';
-import { moneySorter } from '../../utils/sorters';
+import { dateRenderer, moneyRenderer } from '../../utils/renderers';
+import { dateSorter, moneySorter } from '../../utils/sorters';
 import EditTransactionDialog from '../../containers/EditTransactionDialog';
 
 
@@ -43,6 +43,8 @@ class TransactionTable extends Component {
       {
         accessor: 'date',
         Header: 'Date',
+        Cell: dateRenderer,
+        sortMethod: dateSorter,
       },
     ];
   }
