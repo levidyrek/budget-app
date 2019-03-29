@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import DetailsPanel from '../components/DetailsPanel';
+import { fetchBudgets, fetchSelectedBudget } from '../actions/budgets';
 
 
 const mapStateToProps = state => ({
@@ -9,4 +10,9 @@ const mapStateToProps = state => ({
   selectedBudget: state.selectedBudget,
 });
 
-export default withRouter(connect(mapStateToProps)(DetailsPanel));
+const mapDispatchToProps = dispatch => ({
+  fetchBudgets: () => dispatch(fetchBudgets()),
+  fetchSelectedBudget: (month, year) => fetchSelectedBudget(month, year),
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DetailsPanel));

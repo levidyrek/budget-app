@@ -7,7 +7,6 @@ import { withTheme } from '@material-ui/core/styles';
 
 import './stylesheets/DetailsPanel.css';
 import InfoPanel from './InfoPanel';
-import { fetchBudgets, fetchSelectedBudget } from '../actions/budgets';
 
 
 class DetailsPanel extends Component {
@@ -28,14 +27,14 @@ class DetailsPanel extends Component {
   }
 
   fetchDataIfNeeded = () => {
-    const { budgets, dispatch, selectedBudget } = this.props;
+    const { budgets, fetchBudgets, fetchSelectedBudget, selectedBudget } = this.props;
 
     // If budgets are have not been fetched or are being fetched, fetch them.
     if (!budgets.fetching && !budgets.items) {
-      dispatch(fetchBudgets());
+      fetchBudgets();
     } else if (budgets.items && !selectedBudget.fetching && selectedBudget.invalidated) {
       // If budgets have been fetched, but selected budget hasn't been, fetch it.
-      dispatch(fetchSelectedBudget(selectedBudget.month, selectedBudget.year));
+      fetchSelectedBudget(selectedBudget.month, selectedBudget.year);
     }
   }
 
@@ -85,7 +84,6 @@ DetailsPanel.propTypes = {
   }).isRequired,
   buttons: PropTypes.arrayOf(PropTypes.node),
   children: PropTypes.node.isRequired,
-  dispatch: PropTypes.func.isRequired,
   handleClickAdd: PropTypes.func.isRequired,
   mobileMode: PropTypes.bool.isRequired,
   selectedBudget: PropTypes.shape({

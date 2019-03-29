@@ -7,7 +7,6 @@ import NavBar from '../containers/NavBar';
 import TopBar from '../containers/TopBar';
 import Expenses from '../containers/Expenses';
 import Transactions from '../containers/Transactions';
-import { enableMobileMode } from '../actions/responsive';
 import DialogController from '../containers/DialogController';
 
 
@@ -30,9 +29,9 @@ class Budget extends Component {
   }
 
   updateWindowDimensions = () => {
-    const { dispatch } = this.props;
+    const { enableMobileMode } = this.props;
 
-    dispatch(enableMobileMode(window.innerWidth < MOBILE_WIDTH_BREAKPOINT));
+    enableMobileMode(window.innerWidth < MOBILE_WIDTH_BREAKPOINT);
   }
 
   render() {
@@ -58,7 +57,7 @@ class Budget extends Component {
 }
 
 Budget.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  enableMobileMode: PropTypes.func.isRequired,
   match: PropTypes.shape({
     path: PropTypes.string.isRequired,
   }).isRequired,

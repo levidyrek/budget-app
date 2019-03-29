@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Budget from '../components/Budget';
+import { enableMobileMode } from '../actions/responsive';
 
 
 const mapStateToProps = state => ({
@@ -8,4 +9,8 @@ const mapStateToProps = state => ({
   navbarEnabled: state.navbarEnabled,
 });
 
-export default withRouter(connect(mapStateToProps)(Budget));
+const mapDispatchToProps = dispatch => ({
+  enableMobileMode: (enable) => dispatch(enableMobileMode(enable)),
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Budget));
