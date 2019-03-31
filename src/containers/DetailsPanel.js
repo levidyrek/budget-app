@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchBudgets: () => dispatch(fetchBudgets()),
-  fetchSelectedBudget: (month, year) => fetchSelectedBudget(month, year),
+  fetchSelectedBudget: (month, year) => dispatch(fetchSelectedBudget(month, year)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DetailsPanel));
