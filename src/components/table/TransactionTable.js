@@ -72,7 +72,9 @@ class TransactionTable extends Component {
     const { editData } = this.state;
 
     return (
-      <div>
+      <div
+        className="tableWrapper"
+      >
         <BaseTable
           rows={rows}
           columns={this.getColumns()}

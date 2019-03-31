@@ -19,7 +19,8 @@
   position: relative;
 }
 
-.currentTable {
+.currentTable,
+.tableWrapper {
   height: 100%;
 }
 
@@ -29,10 +30,6 @@
 
 .InfoPanel {
   width: 100%;
-  flex: 1 1 auto;
-}
-
-.ExpenseTable {
   flex: 1 1 auto;
 }
 
