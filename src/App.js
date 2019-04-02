@@ -4,6 +4,7 @@ import {
 } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { indigo, red, teal } from '@material-ui/core/colors';
+import { detect } from 'detect-browser';
 
 import './App.css';
 import Budget from './containers/Budget';
@@ -19,9 +20,18 @@ const theme = createMuiTheme({
     error: red,
   },
 });
+const browser = detect();
 
 
 export default function App() {
+  if (browser && browser.name === 'ie') {
+    return (
+      <div className="browserWarning">
+        IE is not supported. For best results, use Chrome, Firefox, or Edge.
+      </div>
+    );
+  }
+
   return (
     <MuiThemeProvider theme={theme}>
       <Router>

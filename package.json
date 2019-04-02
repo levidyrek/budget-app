@@ -9,6 +9,7 @@
     "@material-ui/icons": "^3.0.1",
     "@material-ui/lab": "^3.0.0-alpha.30",
     "ajv": "^6.6.1",
+    "detect-browser": "^4.2.0",
     "email-validator": "^2.0.4",
     "isomorphic-fetch": "^2.2.1",
     "material-ui": "^0.20.2",
