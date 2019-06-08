@@ -5,9 +5,6 @@ services:
     user: "node"
     environment:
       - NODE_ENV=production
-    volumes:
-      - ./:/home/node/app
-      - /home/node/app/node_modules/
     ports:
       - "3000:3000"
     command: "npm start"
