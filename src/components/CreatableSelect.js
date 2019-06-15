@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import Creatable from 'react-select/lib/Creatable';
+import { components } from 'react-select';
 import NoSsr from '@material-ui/core/NoSsr';
 
 
@@ -145,8 +146,11 @@ function Menu(props) {
   );
 }
 
-const components = {
+const Input = props => <components.Input {...props} maxLength={30} />;
+
+const customComponents = {
   Control,
+  Input,
   Menu,
   NoOptionsMessage,
   Option,
@@ -174,7 +178,7 @@ const CreatableSelect = (props) => {
         <Creatable
           classes={classes}
           styles={selectStyles}
-          components={components}
+          components={customComponents}
           textFieldProps={{
             label,
             InputLabelProps: {
