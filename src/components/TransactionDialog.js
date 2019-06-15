@@ -42,7 +42,7 @@ const styles = () => ({
 class TransactionDialog extends Component {
   initialState = {
     pk: null,
-    amount: 0,
+    amount: '0',
     payee: '',
     category: '',
     date: '',
@@ -357,7 +357,7 @@ TransactionDialog.propTypes = {
   dialogText: PropTypes.string.isRequired,
   handleDelete: PropTypes.func,
   initData: PropTypes.shape({
-    amount: PropTypes.number.isRequired,
+    amount: PropTypes.string.isRequired,
     category: PropTypes.number.isRequired,
     date: PropTypes.string.isRequired,
     payee: PropTypes.string.isRequired,

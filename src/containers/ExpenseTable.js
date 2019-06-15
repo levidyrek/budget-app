@@ -14,8 +14,8 @@ function convertToCategoryRows(budget) {
       pk: category.pk,
       group: budget.budget_category_groups[category.group].name,
       category: category.category,
-      limit: parseFloat(category.limit),
-      spent: parseFloat(category.spent),
+      limit: category.limit,
+      spent: category.spent,
     });
   });
   return rows;

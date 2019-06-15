@@ -26,8 +26,8 @@ EditBudgetCategoryDialog.propTypes = {
     data: PropTypes.shape({
       category: PropTypes.string.isRequired,
       group: PropTypes.string.isRequired,
-      limit: PropTypes.number.isRequired,
-      spent: PropTypes.number.isRequired,
+      limit: PropTypes.string.isRequired,
+      spent: PropTypes.string.isRequired,
     }),
   }).isRequired,
   handleDelete: PropTypes.func.isRequired,

@@ -43,7 +43,7 @@ class BudgetCategoryDialog extends Component {
     pk: null,
     group: '',
     name: '',
-    limit: 0,
+    limit: '0',
     validate: {
       group: false,
       name: false,
@@ -354,7 +354,7 @@ BudgetCategoryDialog.propTypes = {
   initData: PropTypes.shape({
     category: PropTypes.string.isRequired,
     group: PropTypes.string.isRequired,
-    limit: PropTypes.number.isRequired,
+    limit: PropTypes.string.isRequired,
     pk: PropTypes.number,
   }),
   handleClose: PropTypes.func.isRequired,
@@ -368,7 +368,7 @@ BudgetCategoryDialog.defaultProps = {
   initData: {
     group: '',
     category: '',
-    limit: 0,
+    limit: '0',
   },
   handleDelete: null,
 };

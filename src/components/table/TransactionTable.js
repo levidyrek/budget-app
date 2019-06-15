@@ -52,7 +52,7 @@ class TransactionTable extends Component {
   handleRowClick = (rowData) => {
     this.setState({
       editData: {
-        amount: parseFloat(rowData.amount),
+        amount: rowData.amount,
         category: rowData.budget_category,
         date: rowData.date,
         payee: rowData.payee,
