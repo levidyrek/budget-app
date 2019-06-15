@@ -217,7 +217,7 @@ class BudgetCategoryDialog extends Component {
 
   render() {
     const {
-      budget, classes, dialogText, handleDelete, submitAction,
+      budget, classes, dialogText, handleDelete, mobileMode, submitAction,
     } = this.props;
     const {
       apiError, confirmOpen, error, group, limit, name,
@@ -267,6 +267,7 @@ class BudgetCategoryDialog extends Component {
     return (
       <div>
         <Dialog
+          fullScreen={mobileMode}
           open
           classes={{
             paper: classes.paper,
@@ -359,6 +360,7 @@ BudgetCategoryDialog.propTypes = {
   }),
   handleClose: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  mobileMode: PropTypes.bool.isRequired,
   month: PropTypes.string.isRequired,
   submitAction: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired,

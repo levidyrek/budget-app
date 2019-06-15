@@ -7,6 +7,7 @@ import { toggleDialog } from '../actions/dialogs';
 const mapStateToProps = state => ({
   budget: state.selectedBudget.budget,
   year: state.selectedBudget.year,
+  mobileMode: state.mobileMode,
   month: state.selectedBudget.month,
 });
 
